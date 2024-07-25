@@ -20,7 +20,7 @@ steps:
     args:
       - cp
       - backend/gpt-chat-reply.tar.gz
-      - gs://gcf-v2-uploads-848632256766-us-central1
+      - ${_BUCKET_NAME}
     waitFor: ['ZIP Function GPT-CHAT-REPLY']
 
   - id: Publish Function GPT-EXPLAIN-REPLY to bucket
@@ -28,7 +28,7 @@ steps:
     args:
       - cp
       - backend/gpt-explain-reply.tar.gz
-      - gs://gcf-v2-uploads-848632256766-us-central1
+      - ${_BUCKET_NAME}
     waitFor: ['ZIP Function GPT-EXPLAIN-REPLY']
 
 options:
