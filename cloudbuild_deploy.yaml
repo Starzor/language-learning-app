@@ -56,6 +56,8 @@ steps:
       - --max-instances=5
       - --memory=512MiB
       - --entry-point=gpt-chat-reply
+      - --trigger-http
+      - --service-account=${_SERVICE_ACCOUNT}
     dir: gpt-chat-reply/
     waitFor: ["Unzip Function GPT-CHAT-REPLY"]
 
@@ -73,6 +75,8 @@ steps:
       - --max-instances=5
       - --memory=512MiB
       - --entry-point=gpt-explain-reply
+      - --trigger-http
+      - --service-account=${_SERVICE_ACCOUNT}
     dir: gpt-explain-reply/
     waitFor: ["Unzip Function GPT-EXPLAIN-REPLY"]
 
