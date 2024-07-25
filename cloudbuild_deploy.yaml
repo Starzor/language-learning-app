@@ -12,7 +12,7 @@ steps:
     name: gcr.io/cloud-builders/gsutil
     args:
       - cp
-      - "${_BUCKET_PATH}/gpt-chat-reply.tar.gz"
+      - "${_BUCKET_NAME}/gpt-chat-reply.tar.gz"
       - ./
     dir: gpt-chat-reply/
     waitFor: ["Create folders for functions"]
@@ -21,7 +21,7 @@ steps:
     name: gcr.io/cloud-builders/gsutil
     args:
       - cp
-      - "${_BUCKET_PATH}/gpt-explain-reply.tar.gz"
+      - "${_BUCKET_NAME}/gpt-explain-reply.tar.gz"
       - ./
     dir: gpt-explain-reply/
     waitFor: ["Create folders for functions"]
