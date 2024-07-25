@@ -1,31 +1,35 @@
 steps:
   - id: ZIP Function GPT-CHAT-REPLY
-  name: bash
-  waitFor: ['-']
-  script: | cd backend/gpt-chat-reply \
-    && tar -czvf ../gpt-chat-reply.tar.gz * . \
-    && cd ../..
+    name: bash
+    waitFor: ['-']
+    script: |
+      cd backend/gpt-chat-reply
+      tar -czvf ../gpt-chat-reply.tar.gz * .
+      cd ../..
+
   - id: ZIP Function GPT-EXPLAIN-REPLY
-  name: bash
-  waitFor: ['-']
-  script: | cd backend/gpt-explain-reply \
-    && tar -czvf ../gpt-explain-reply.tar.gz * . \
-    && cd ../..
-    
+    name: bash
+    waitFor: ['-']
+    script: |
+      cd backend/gpt-explain-reply
+      tar -czvf ../gpt-explain-reply.tar.gz * .
+      cd ../..
+
   - id: Publish Function GPT-CHAT-REPLY to bucket
-  name: gcr.io/cloud-builders/gsutil
-  args:
-    - cp
-    - backend/gpt-chat-reply.tar.gz
-    - gs://gcf-v2-uploads-848632256766-us-central1
-  waitFor: ['ZIP Function GPT-CHAT-REPLY']
+    name: gcr.io/cloud-builders/gsutil
+    args:
+      - cp
+      - backend/gpt-chat-reply.tar.gz
+      - gs://gcf-v2-uploads-848632256766-us-central1
+    waitFor: ['ZIP Function GPT-CHAT-REPLY']
+
   - id: Publish Function GPT-EXPLAIN-REPLY to bucket
-  name: gcr.io/cloud-builders/gsutil
-  args:
-    - cp
-    - backend/gpt-explain-reply.tar.gz
-    - gs://gcf-v2-uploads-848632256766-us-central1
-  waitFor: ['ZIP Function GPT-EXPLAIN-REPLY']
+    name: gcr.io/cloud-builders/gsutil
+    args:
+      - cp
+      - backend/gpt-explain-reply.tar.gz
+      - gs://gcf-v2-uploads-848632256766-us-central1
+    waitFor: ['ZIP Function GPT-EXPLAIN-REPLY']
 
 options:
   logging: CLOUD_LOGGING_ONLY
