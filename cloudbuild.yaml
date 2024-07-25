@@ -6,8 +6,7 @@ steps:
   - deploy
   - gpt-chat-reply
   - --region=europe-west3
-  - --source=repo=https://source.developers.google.com/projects/gclearning-426207/repos/Starzor-language-learning-app
-  - --source-path=/backend/gpt-chat-reply
+  - --source=repo=https://source.developers.google.com/projects/gclearning-426207/repos/Starzor-language-learning-app/backend/gpt-chat-reply
   - --trigger-http
   - --runtime=python311
     
@@ -18,8 +17,7 @@ steps:
   - deploy
   - gpt-explain-reply
   - --region=europe-west3
-  - --source=repo=https://source.developers.google.com/projects/gclearning-426207/repos/Starzor-language-learning-app
-  - --source-path=/backend/gpt-explain-reply
+  - --source=https://source.developers.google.com/projects/gclearning-426207/repos/Starzor-language-learning-app/backend/gpt-explain-reply
   - --trigger-http
   - --runtime=python311
 options:
