@@ -1,0 +1,69 @@
+steps:
+  # CREATE FOLDERS FOR FUNCTIONS
+  - id: Create folders for functions
+  name: bash
+  script: |
+    mkdir gpt-chat-reply \
+    && mkdir gpt-explain-reply
+  waitFor["-"]
+
+  # RETRIEVE FUNCTIONS FROM BUCKET
+  - id: Retrieve function GPT-CHAT-REPLY from bucket
+  name: gcr.io/cloud-builders/gsutil
+  args:
+    - cp
+    - "${_BUCKET_PATH}gpt-chat-reply.tar.gz"
+    - ./
+  dir: gpt-chat-reply/
+  waitFor: ["Create folders for functions"]
+  - id: Retrieve function GPT-EXPLAIN-REPLY from bucket
+  name: gcr.io/cloud-builders/gsutil
+  args:
+    - cp
+    - "${_BUCKET_PATH}gpt-explain-reply.tar.gz"
+    - ./
+  dir: gpt-explain-reply/
+  waitFor: ["Create folders for functions"]
+
+# UNZIP RETRIVED FUNCTIONS
+  - id: Unzip Function GPT-CHAT-REPLY
+  name: bash
+  script: |
+    tar -xzf gpt-chat-reply.tar.gz
+  dir: gpt-chat-reply/
+  waitFor: ["Retrieve function GPT-CHAT-REPLY from bucket"]
+  - id: Unzip Function GPT-EXPLAIN-REPLY
+  name: bash
+  script: |
+    tar -xzf gpt-explain-reply.tar.gz
+  dir: gpt-explain-reply/
+  waitFor: ["Retrieve function GPT-EXPLAIN-REPLY from bucket"]
+
+# DEPLOY FUNCTIONS
+  - id: Deploy function GPT-CHAT-REPLY
+  name: gcr.io/google.com/cloudsdktool/cloud-sdk
+  args:
+    - gcloud
+    - functions
+    - deploy
+    - metadata-process
+    - --region=${_REGION}
+    - --source=.
+    - --gen2
+    - --runtime=python311
+    - --max-instances=5
+    - --memory=512MiB
+    - --entry-point=gpt-chat-reply
+
+
+
+
+
+
+
+
+
+
+
+
+  
