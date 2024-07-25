@@ -1,5 +1,5 @@
 steps:
-- name: 'gcr.io/google.com/cloudsdktool/cloud-sdk:485.0.0'
+- name: 'gcr.io/google.com/cloudsdktool/cloud-sdk:445.0.0'
   args:
   - gcloud
   - functions
@@ -10,7 +10,7 @@ steps:
   - --trigger-http
   - --runtime=python311
     
-- name: 'gcr.io/google.com/cloudsdktool/cloud-sdk:485.0.0'
+- name: 'gcr.io/google.com/cloudsdktool/cloud-sdk:445.0.0'
   args:
   - gcloud
   - functions
