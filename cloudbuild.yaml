@@ -9,7 +9,6 @@ steps:
   - --source=/backend/gpt-chat-reply
   - --trigger-http
   - --runtime=python311
-steps:
 - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
   args:
   - gcloud
@@ -20,3 +19,6 @@ steps:
   - --source=/backend/gpt-explain-reply
   - --trigger-http
   - --runtime=python311
+
+options:
+  logging: NONE
