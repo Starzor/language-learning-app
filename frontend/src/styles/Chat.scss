@@ -1,0 +1,125 @@
+$color-blanchedalmond: rgb(255, 235, 205);
+$color-dark-gray: rgb(41, 41, 41);
+$color-medium-gray: rgb(61, 61, 61);
+$color-outline: rgb(182, 167, 146);
+$color-light-gray: rgb(75, 75, 75);
+$color-button-bg: rgb(88, 88, 88);
+$color-button-hover-bg: rgb(107, 107, 107);
+
+.chatContainer {
+  color: $color-blanchedalmond;
+  background-color: $color-dark-gray;
+  border-radius: 10px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  width: 50%;
+  height: inherit;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  .chatSettings {
+    width: 100%;
+    display: flex;
+    justify-content: end;
+
+    .difficultySelect,
+    .languageSelect {
+      margin: 10px;
+      margin-left: 0px;
+      padding: 5px;
+      font-size: 14px;
+      color: $color-blanchedalmond;
+      background-color: $color-light-gray;
+      border-radius: 5px;
+      border: none;
+
+      option:hover,
+      option:checked {
+        box-shadow: 0 0 10px 100px $color-dark-gray inset !important;
+      }
+    }
+  }
+
+  .chatWelcome {
+    flex: 1;
+    align-content: center;
+  }
+
+  .chatMessages {
+    flex: 1;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+
+    .message {
+      margin: 25px;
+      background-color: $color-medium-gray;
+      padding: 12px;
+
+      p {
+        margin-top: 0;
+        margin-bottom: 0;
+      }
+    }
+
+    .bot {
+      border-radius: 0 25px 25px 25px;
+      align-self: flex-start;
+    }
+
+    .user {
+      border-radius: 25px 0 25px 25px;
+      align-self: flex-end;
+    }
+  }
+
+  .chatInput {
+    width: 100%;
+    margin-bottom: 20px;
+    display: flex;
+
+    input {
+      flex: 0.95;
+      height: 35px;
+      margin: 10px;
+      padding-left: 5px;
+      border: none;
+      border-radius: 10px;
+      background-color: $color-medium-gray;
+      color: $color-blanchedalmond;
+    }
+
+    input:focus {
+      outline: none;
+      outline: 2px solid $color-outline;
+    }
+
+    button {
+      margin: 10px;
+      margin-left: 0px;
+      flex: 0.05;
+    }
+  }
+
+  button {
+    background-color: $color-button-bg;
+    border-radius: 10px;
+    border: 1px solid $color-light-gray;
+    cursor: pointer;
+    padding: 5px;
+    font-size: 14px;
+    color: $color-blanchedalmond;
+  }
+
+  button:hover {
+    background-color: $color-button-hover-bg;
+  }
+
+  button:active {
+    position: relative;
+    top: 1px;
+    background-color: $color-light-gray;
+  }
+}
