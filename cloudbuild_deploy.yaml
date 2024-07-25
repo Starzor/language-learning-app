@@ -75,3 +75,7 @@ steps:
       - --entry-point=gpt-explain-reply
     dir: gpt-explain-reply/
     waitFor: ["Unzip Function GPT-EXPLAIN-REPLY"]
+
+
+options:
+  logging: CLOUD_LOGGING_ONLY
