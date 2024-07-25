@@ -20,6 +20,5 @@ steps:
   - --source=/backend/gpt-explain-reply
   - --trigger-http
   - --runtime=python311
-
 options:
-  logging: NONE
+  logging: CLOUD_LOGGING_ONLY
