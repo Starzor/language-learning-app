@@ -5,7 +5,7 @@ steps:
   - functions
   - deploy
   - gpt-chat-reply
-  - --region=europe-west2
+  - --region=europe-west3
   - --source=/backend/gpt-chat-reply
   - --trigger-http
   - --runtime=python311
@@ -15,7 +15,7 @@ steps:
   - functions
   - deploy
   - gpt-explain-reply
-  - --region=europe-west2
+  - --region=europe-west3
   - --source=/backend/gpt-explain-reply
   - --trigger-http
   - --runtime=python311
