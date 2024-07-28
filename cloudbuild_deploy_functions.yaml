@@ -1,5 +1,6 @@
 steps:
-  - name: gcr.io/google.com/cloudsdktool/cloud-sdk
+  - id: Deploy gpt-chat-reply function
+    name: gcr.io/google.com/cloudsdktool/cloud-sdk
     args:
       - gcloud
       - functions
@@ -15,7 +16,8 @@ steps:
       - '--allow-unauthenticated'
       - >-
         --set-secrets=GPT_API_KEY=projects/${_PROJECT_ID}/secrets/${_MY_SECRET}/versions/latest
-  - name: gcr.io/google.com/cloudsdktool/cloud-sdk
+  - id: Deploy gpt-explain-reply function
+    name: gcr.io/google.com/cloudsdktool/cloud-sdk
     args:
       - gcloud
       - functions
@@ -31,5 +33,6 @@ steps:
       - '--allow-unauthenticated'
       - >-
         --set-secrets=GPT_API_KEY=projects/${_PROJECT_ID}/secrets/${_MY_SECRET}/versions/latest
+
 options:
   logging: CLOUD_LOGGING_ONLY
