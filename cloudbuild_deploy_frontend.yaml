@@ -1,20 +1,28 @@
 steps:
-  - id: Prepare frontend deploy
-    name: 'bash'
-    script:
-      - git clone https://github.com/Starzor/language-learning-app.git
-      - cd frontend
-      - npm install
-      - npm run build
-      - rm public
-      - rm src
-      - rm README.md
-      - rm package-lock.json
-      - rm package.json
-      - rm tsconfig.json
-  
-  - id: Frontend deploy
-    name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
-    script:
-      - gcloud app deploy --quiet
-    waitFor: ['Prepare frontend deploy']
+  - name: 'node:20'
+    env:
+      - HOME=/workspace
+    args:
+      - '-c'
+      - |
+        git clone https://github.com/Starzor/language-learning-app.git &&
+        cd language-learning-app/frontend &&
+        npm install &&
+        npm run build &&
+        rm -rf public src README.md package-lock.json package.json tsconfig.json
+    id: Prepare frontend deploy
+    entrypoint: bash
+  - name: gcr.io/google.com/cloudsdktool/cloud-sdk
+    env:
+      - HOME=/workspace
+    args:
+      - '-c'
+      - |
+        cd /workspace/language-learning-app/frontend &&
+        gcloud app deploy --quiet
+    id: Frontend deploy
+    waitFor:
+      - Prepare frontend deploy
+    entrypoint: bash
+options:
+  logging: CLOUD_LOGGING_ONLY
