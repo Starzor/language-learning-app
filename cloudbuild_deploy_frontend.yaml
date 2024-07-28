@@ -1,12 +1,20 @@
 steps:
-  - id: Deploy frontend
+  - id: Prepare frontend deploy
+    name: 'bash'
+    script:
+      - git clone https://github.com/Starzor/language-learning-app.git
+      - cd frontend
+      - npm install
+      - npm run build
+      - rm public
+      - rm src
+      - rm README.md
+      - rm package-lock.json
+      - rm package.json
+      - rm tsconfig.json
+  
+  - id: Frontend deploy
     name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
-    entrypoint: 'bash'
-    args: ['-c', '
-      gcloud config set app/cloud_build_timeout 1600 && \
-      cd /frontend && \
-      npm install && \
-      npm run build && \
-      gcloud app deploy --quiet
-    ']
-    timeout: '1600s'
+    script:
+      - gcloud app deploy --quiet
+    waitFor: ['Prepare frontend deploy']
