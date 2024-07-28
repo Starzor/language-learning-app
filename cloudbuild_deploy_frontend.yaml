@@ -5,8 +5,7 @@ steps:
     args:
       - '-c'
       - |
-        git clone https://github.com/Starzor/language-learning-app.git &&
-        cd language-learning-app/frontend &&
+        cd frontend &&
         npm install &&
         npm run build &&
         rm -rf public src README.md package-lock.json package.json tsconfig.json
@@ -18,7 +17,7 @@ steps:
     args:
       - '-c'
       - |
-        cd /workspace/language-learning-app/frontend &&
+        cd frontend &&
         gcloud app deploy --quiet
     id: Frontend deploy
     waitFor:
