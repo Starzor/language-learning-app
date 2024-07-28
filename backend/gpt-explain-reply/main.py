@@ -4,7 +4,7 @@ from gpt_api_manager import generate_response
 import subprocess
 
 @functions_framework.http
-def get_explain_reply(request):
+def main(request):
     # Handle CORS preflight requests
     if request.method == 'OPTIONS':
         headers = {
