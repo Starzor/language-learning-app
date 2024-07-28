@@ -1,85 +1,35 @@
 steps:
-  # CREATE FOLDERS FOR FUNCTIONS
-  - id: Create folders for functions
-    name: bash
-    script: |
-      mkdir gpt-chat-reply \
-      && mkdir gpt-explain-reply
-    waitFor: ["-"]
-
-  # RETRIEVE FUNCTIONS FROM BUCKET
-  - id: Retrieve function GPT-CHAT-REPLY from bucket
-    name: gcr.io/cloud-builders/gsutil
-    args:
-      - cp
-      - "${_BUCKET_NAME}/gpt-chat-reply.tar.gz"
-      - ./
-    dir: gpt-chat-reply/
-    waitFor: ["Create folders for functions"]
-  
-  - id: Retrieve function GPT-EXPLAIN-REPLY from bucket
-    name: gcr.io/cloud-builders/gsutil
-    args:
-      - cp
-      - "${_BUCKET_NAME}/gpt-explain-reply.tar.gz"
-      - ./
-    dir: gpt-explain-reply/
-    waitFor: ["Create folders for functions"]
-
-  # UNZIP RETRIEVED FUNCTIONS
-  - id: Unzip Function GPT-CHAT-REPLY
-    name: bash
-    script: |
-      tar -xzf gpt-chat-reply.tar.gz
-    dir: gpt-chat-reply/
-    waitFor: ["Retrieve function GPT-CHAT-REPLY from bucket"]
-
-  - id: Unzip Function GPT-EXPLAIN-REPLY
-    name: bash
-    script: |
-      tar -xzf gpt-explain-reply.tar.gz
-    dir: gpt-explain-reply/
-    waitFor: ["Retrieve function GPT-EXPLAIN-REPLY from bucket"]
-
-  # DEPLOY FUNCTIONS
-  - id: Deploy function GPT-CHAT-REPLY
-    name: gcr.io/google.com/cloudsdktool/cloud-sdk
+  - name: gcr.io/google.com/cloudsdktool/cloud-sdk
     args:
       - gcloud
       - functions
       - deploy
       - gpt-chat-reply
-      - --region=${_REGION}
-      - --source=.
-      - --gen2
-      - --runtime=python311
-      - --max-instances=5
-      - --memory=512MiB
-      - --entry-point=gpt-chat-reply
-      - --trigger-http
-      - --service-account=${_SERVICE_ACCOUNT}
-    dir: gpt-chat-reply/
-    waitFor: ["Unzip Function GPT-CHAT-REPLY"]
-
-  - id: Deploy function GPT-EXPLAIN-REPLY
-    name: gcr.io/google.com/cloudsdktool/cloud-sdk
+      - '--region=${_REGION}'
+      - '--source=backend/gpt-chat-reply/'
+      - '--trigger-http'
+      - '--max-instances=5'
+      - '--entry-point=main'
+      - '--runtime=python311'
+      - '--gen2'
+      - '--allow-unauthenticated'
+      - >-
+        --set-secrets=GPT_API_KEY=projects/${_PROJECT_ID}/secrets/${_MY_SECRET}/versions/latest
+  - name: gcr.io/google.com/cloudsdktool/cloud-sdk
     args:
       - gcloud
       - functions
       - deploy
       - gpt-explain-reply
-      - --region=${_REGION}
-      - --source=.
-      - --gen2
-      - --runtime=python311
-      - --max-instances=5
-      - --memory=512MiB
-      - --entry-point=gpt-explain-reply
-      - --trigger-http
-      - --service-account=${_SERVICE_ACCOUNT}
-    dir: gpt-explain-reply/
-    waitFor: ["Unzip Function GPT-EXPLAIN-REPLY"]
-
-
+      - '--region=${_REGION}'
+      - '--source=backend/gpt-explain-reply/'
+      - '--trigger-http'
+      - '--max-instances=5'
+      - '--entry-point=main'
+      - '--runtime=python311'
+      - '--gen2'
+      - '--allow-unauthenticated'
+      - >-
+        --set-secrets=GPT_API_KEY=projects/${_PROJECT_ID}/secrets/${_MY_SECRET}/versions/latest
 options:
   logging: CLOUD_LOGGING_ONLY
