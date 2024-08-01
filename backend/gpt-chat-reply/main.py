@@ -41,7 +41,7 @@ def main(request):
                         "Message": "{message}",
                         "Behavior": "Pretend to be a Human called Alex.",
                         "Mistakes": "If there are any mistakes, in the message provided, you may point them out. If there are not mistakes, reply normally.",
-                        "Response structure": "You will also reply with a json, the field 'response' will be the reply to the message, and the field 'words' will split the sentence into individual words and for each word provide a {base_language} counterpart. Provide the json in plaintext.",
+                        "Response structure": "You will also reply with a json, the field 'response' will be the reply to the message, and the field 'words' will split the sentence into individual words and for each word provide a {base_language} counterpart. Provide the json without code formatting.",
                         "Additional Instructions":"Do no repeat the user's messages, properly come up with a reply.",
                     }} """
                    )
