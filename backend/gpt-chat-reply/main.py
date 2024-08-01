@@ -26,6 +26,7 @@ def main(request):
     # Extract query parameters
     message = request.args.get('message')
     language = request.args.get('language')
+    base_language = "Czech"
     difficulty = request.args.get('difficulty')
     history = request.args.get('history')
 
@@ -39,7 +40,8 @@ def main(request):
                         "History": "Message history serving as background context: {history}",
                         "Message": "{message}",
                         "Behavior": "Pretend to be a Human called Alex.",
-                        "Mistakes": "If there are any mistakes, in the message provided, you may point them out.",
+                        "Mistakes": "If there are any mistakes, in the message provided, you may point them out. If there are not mistakes, reply normally.",
+                        "Response structure": "You will also reply with a json, the field 'Response' will be the reply to the message, and the field 'words' will split the sentence into individual words and for each word provide a {base_language} counterpart.",
                         "Additional Instructions":"Do no repeat the user's messages, properly come up with a reply.",
                     }} """
                    )
