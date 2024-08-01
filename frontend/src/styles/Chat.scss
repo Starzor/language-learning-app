@@ -1,13 +1,14 @@
-$color-blanchedalmond: rgb(255, 235, 205);
+$color-whitesmoke: rgb(245, 245, 245);
 $color-dark-gray: rgb(41, 41, 41);
 $color-medium-gray: rgb(61, 61, 61);
 $color-outline: rgb(182, 167, 146);
 $color-light-gray: rgb(75, 75, 75);
 $color-button-bg: rgb(88, 88, 88);
 $color-button-hover-bg: rgb(107, 107, 107);
+$color-dark-cyan: rgb(50, 66, 64);
 
 .chatContainer {
-  color: $color-blanchedalmond;
+  color: $color-whitesmoke;
   background-color: $color-dark-gray;
   border-radius: 10px;
   margin-top: 20px;
@@ -29,7 +30,7 @@ $color-button-hover-bg: rgb(107, 107, 107);
       margin-left: 0px;
       padding: 5px;
       font-size: 14px;
-      color: $color-blanchedalmond;
+      color: $color-whitesmoke;
       background-color: $color-light-gray;
       border-radius: 5px;
       border: none;
@@ -44,6 +45,7 @@ $color-button-hover-bg: rgb(107, 107, 107);
   .chatWelcome {
     flex: 1;
     align-content: center;
+    margin: 20px;
   }
 
   .chatMessages {
@@ -55,7 +57,7 @@ $color-button-hover-bg: rgb(107, 107, 107);
 
     .message {
       margin: 25px;
-      background-color: $color-medium-gray;
+      max-width: 70%;
       padding: 12px;
 
       p {
@@ -66,11 +68,13 @@ $color-button-hover-bg: rgb(107, 107, 107);
 
     .bot {
       border-radius: 0 25px 25px 25px;
+      background-color: $color-medium-gray;
       align-self: flex-start;
     }
 
     .user {
       border-radius: 25px 0 25px 25px;
+      background-color: $color-dark-cyan;
       align-self: flex-end;
     }
   }
@@ -88,7 +92,7 @@ $color-button-hover-bg: rgb(107, 107, 107);
       border: none;
       border-radius: 10px;
       background-color: $color-medium-gray;
-      color: $color-blanchedalmond;
+      color: $color-whitesmoke;
     }
 
     input:focus {
@@ -110,7 +114,7 @@ $color-button-hover-bg: rgb(107, 107, 107);
     cursor: pointer;
     padding: 5px;
     font-size: 14px;
-    color: $color-blanchedalmond;
+    color: $color-whitesmoke;
   }
 
   button:hover {
@@ -121,5 +125,18 @@ $color-button-hover-bg: rgb(107, 107, 107);
     position: relative;
     top: 1px;
     background-color: $color-light-gray;
+  }
+}
+
+@media(max-width: 800px) {
+  .chatContainer {
+    border-radius: 10px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    width: 100%;
+    height: inherit;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
   }
 }
