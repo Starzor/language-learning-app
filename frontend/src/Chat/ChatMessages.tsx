@@ -1,9 +1,22 @@
+import { useEffect, useRef } from "react";
 import Message from "../models/Message";
 import "../styles/Chat.scss";
 import ReactMarkdown from "react-markdown";
 
 const ChatMessages = (props: any) => {
   const { messages, explainAnswer } = props;
+  const messagesEndRef = useRef<HTMLDivElement>(null);
+  
+  const scrollToBottom = () => {
+    if (messagesEndRef.current) {
+      messagesEndRef.current.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
+  useEffect(() => {
+    scrollToBottom();
+  }, [messages]);
+
   return (
     <div className="chatMessages">
       {messages.map((message: Message, index: number) => (
@@ -15,6 +28,7 @@ const ChatMessages = (props: any) => {
           {!message.isUser && !message.isExplanation && <button onClick={explainAnswer}>Explain</button>}
         </div>
       ))}
+      <div ref={messagesEndRef} />
     </div>
   );
 };

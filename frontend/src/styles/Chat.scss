@@ -1,11 +1,11 @@
 $color-whitesmoke: rgb(245, 245, 245);
 $color-dark-gray: rgb(41, 41, 41);
 $color-medium-gray: rgb(61, 61, 61);
-$color-outline: rgb(182, 167, 146);
+$color-outline: rgb(139, 101, 120);
 $color-light-gray: rgb(75, 75, 75);
 $color-button-bg: rgb(88, 88, 88);
 $color-button-hover-bg: rgb(107, 107, 107);
-$color-dark-cyan: rgb(50, 66, 64);
+$color-dark-red: rgb(66, 50, 58);
 
 .chatContainer {
   color: $color-whitesmoke;
@@ -56,8 +56,10 @@ $color-dark-cyan: rgb(50, 66, 64);
     overflow-y: auto;
 
     .message {
-      margin: 25px;
-      margin-bottom: 0px;
+      margin-right: 25px;
+      margin-left: 25px;
+      margin-top: 15px;
+      margin-bottom: 15px;
       max-width: 70%;
       padding: 12px;
       overflow-wrap: break-word;
@@ -76,7 +78,7 @@ $color-dark-cyan: rgb(50, 66, 64);
 
     .user {
       border-radius: 25px 0 25px 25px;
-      background-color: $color-dark-cyan;
+      background-color: $color-dark-red;
       align-self: flex-end;
     }
   }
