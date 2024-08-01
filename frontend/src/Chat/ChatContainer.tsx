@@ -8,12 +8,14 @@ import ChatLanguage from "./ChatLanguage";
 import ChatDifficulty from "./ChatDifficulty";
 import { getChatReply, getReplyExplanation } from "../api";
 import ExplanationRequest from "../models/ExplanationRequest";
+import ChatLoading from "./ChatLoading";
 
 const ChatContainer = () => {
   const [newMessage, setNewMessage] = useState<string>("");
   const [messages, setMessages] = useState<Array<Message>>([]);
   const [language, setLanguage] = useState<string>("Angličtina");
   const [difficulty, setDifficulty] = useState<string>("A1");
+  const [loading, setLoading] = useState<boolean>(false);
 
   const handleSuccessfulReply = (response: string, isExplanation: boolean) => {
     setMessages([
@@ -25,6 +27,7 @@ const ChatContainer = () => {
 
   const handleSendMessage = () => {
     if (newMessage.trim() == "") return;
+    setLoading(true);
     const request: ReplyRequest = {
       language: language,
       difficulty: difficulty,
@@ -40,18 +43,20 @@ const ChatContainer = () => {
     };
     getChatReply(request)
       .then((response) => handleSuccessfulReply(response, false))
-      .then(() => setNewMessage(""));
+      .then(() => setNewMessage(""))
+      .then(() => setLoading(false));
   };
 
   const explainAnswer = () => {
+    setLoading(true);
     const request: ExplanationRequest = {
       base_language: "Czech",
       language: language,
       message: messages[messages.length - 1].text,
     };
-    getReplyExplanation(request).then((response) =>
-      handleSuccessfulReply(response, true)
-    );
+    getReplyExplanation(request)
+      .then((response) => handleSuccessfulReply(response, true))
+      .then(() => setLoading(false));
   };
 
   return (
@@ -69,11 +74,14 @@ const ChatContainer = () => {
       {messages.length != 0 && (
         <ChatMessages messages={messages} explainAnswer={explainAnswer} />
       )}
-      <ChatInput
-        newMessage={newMessage}
-        setNewMessage={setNewMessage}
-        handleSendMessage={handleSendMessage}
-      />
+      {loading && <ChatLoading />}
+      {!loading && (
+        <ChatInput
+          newMessage={newMessage}
+          setNewMessage={setNewMessage}
+          handleSendMessage={handleSendMessage}
+        />
+      )}
     </div>
   );
 };
