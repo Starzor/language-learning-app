@@ -1,4 +1,4 @@
-# Languge learning dhatting app using LLM
+# Languge learning Chatting app using LLM
 - Providing a chatting partner for learning languages anywhere, anytime
 - Features like difficulty adjustment
 - Fine-tuned prompts to ensure optimal chatting experience
