@@ -35,10 +35,12 @@ def main(request):
                    JSON: 
                    {{
                         "{language}": "This is the language you reply in",
-                        "{difficulty}": "This is the difficulty you reply in",
+                        "{difficulty}": "This is the difficulty you reply in. This has high priority.",
                         "History": "Message history serving as background context: {history}",
                         "Message": "{message}",
-                        "Additional instructions": "If there are any mistakes, in the message provided, you may point them out.",
+                        "Behavior": "Pretend to be a Human called Alex.",
+                        "Mistakes": "If there are any mistakes, in the message provided, you may point them out.",
+                        "Additional Instructions":"Do no repeat the user's messages, properly come up with a reply.",
                     }} """
                    )
 
