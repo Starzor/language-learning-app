@@ -19,8 +19,8 @@ const ChatContainer = (props: any) => {
   const [loading, setLoading] = useState<boolean>(false);
 
   const handleSuccessfulReply = (response: string) => {
-    const gpt_response = JSON.parse(response)
-    setBagOfWords(gpt_response.words)
+    const gpt_response = JSON.parse(response);
+    setBagOfWords(gpt_response.words);
     setMessages([
       ...messages,
       { text: newMessage, isUser: true },
@@ -28,12 +28,16 @@ const ChatContainer = (props: any) => {
     ]);
   };
 
-  const handleSuccessfulExplanation = (response: string) => {
-    setMessages([
-      ...messages,
-      { text: response, isUser: false, isExplanation: true },
-    ]);
-  }
+  const handleSuccessfulExplanation = (response: string, index: number) => {
+    //@ts-ignore
+    const updatedMessages = messages.toSpliced(index + 1, 0, {
+      text: response,
+      isUser: false,
+      isExplanation: true,
+    });
+    updatedMessages[index].isExplained = true; 
+    setMessages(updatedMessages);
+  };
 
   const handleSendMessage = () => {
     if (newMessage.trim() == "") return;
@@ -57,17 +61,24 @@ const ChatContainer = (props: any) => {
       .then(() => setLoading(false));
   };
 
-  const explainAnswer = () => {
+  const explainAnswer = (index: number) => {
     setLoading(true);
     const request: ExplanationRequest = {
       base_language: "Czech",
       language: language,
-      message: messages[messages.length - 1].text,
+      message: messages[index].text,
     };
     getReplyExplanation(request)
-      .then((response) => handleSuccessfulExplanation(response))
+      .then((response) => handleSuccessfulExplanation(response, index))
       .then(() => setLoading(false));
   };
+
+  const toggleShowMessage = (index: number) => {
+    console.log(messages[index])
+    const updatedMessages = Array.of(...messages);
+    updatedMessages[index].isHidden = !messages[index].isHidden;
+    setMessages(updatedMessages);
+  }
 
   return (
     <div className="chatContainer">
@@ -82,7 +93,7 @@ const ChatContainer = (props: any) => {
         </div>
       )}
       {messages.length != 0 && (
-        <ChatMessages messages={messages} explainAnswer={explainAnswer} />
+        <ChatMessages messages={messages} explainAnswer={explainAnswer} toggleShowMessage={toggleShowMessage}/>
       )}
       {loading && <ChatLoading />}
       {!loading && (
