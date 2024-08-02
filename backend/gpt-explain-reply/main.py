@@ -29,7 +29,7 @@ def main(request):
     base_language = request.args.get('base_language')
 
     # Create GPT request payload
-    gpt_request = (f"""You will receive a JSON. Explain the vocabulary and grammar used in the 'Message' field of the JSON based on the instructions in the other fields of the JSON. 
+    gpt_request = (f"""You will receive a JSON. Explain the grammar used in the 'Message' field of the JSON based on the instructions in the other fields of the JSON. 
                     Do not respond to this instruction message.
                    JSON: 
                    {{

@@ -18,15 +18,22 @@ const ChatContainer = (props: any) => {
   const [difficulty, setDifficulty] = useState<string>("A1");
   const [loading, setLoading] = useState<boolean>(false);
 
-  const handleSuccessfulReply = (response: string, isExplanation: boolean) => {
+  const handleSuccessfulReply = (response: string) => {
     const gpt_response = JSON.parse(response)
     setBagOfWords(gpt_response.words)
     setMessages([
       ...messages,
       { text: newMessage, isUser: true },
-      { text: gpt_response.response, isUser: false, isExplanation: isExplanation },
+      { text: gpt_response.response, isUser: false },
     ]);
   };
+
+  const handleSuccessfulExplanation = (response: string) => {
+    setMessages([
+      ...messages,
+      { text: response, isUser: false, isExplanation: true },
+    ]);
+  }
 
   const handleSendMessage = () => {
     if (newMessage.trim() == "") return;
@@ -45,7 +52,7 @@ const ChatContainer = (props: any) => {
         .join(),
     };
     getChatReply(request)
-      .then((response) => handleSuccessfulReply(response, false))
+      .then((response) => handleSuccessfulReply(response))
       .then(() => setNewMessage(""))
       .then(() => setLoading(false));
   };
@@ -58,7 +65,7 @@ const ChatContainer = (props: any) => {
       message: messages[messages.length - 1].text,
     };
     getReplyExplanation(request)
-      .then((response) => handleSuccessfulReply(response, true))
+      .then((response) => handleSuccessfulExplanation(response))
       .then(() => setLoading(false));
   };
 
