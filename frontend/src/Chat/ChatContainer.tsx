@@ -10,7 +10,8 @@ import { getChatReply, getReplyExplanation } from "../api";
 import ExplanationRequest from "../models/ExplanationRequest";
 import ChatLoading from "./ChatLoading";
 
-const ChatContainer = () => {
+const ChatContainer = (props: any) => {
+  const { setBagOfWords } = props;
   const [newMessage, setNewMessage] = useState<string>("");
   const [messages, setMessages] = useState<Array<Message>>([]);
   const [language, setLanguage] = useState<string>("Angličtina");
@@ -18,10 +19,12 @@ const ChatContainer = () => {
   const [loading, setLoading] = useState<boolean>(false);
 
   const handleSuccessfulReply = (response: string, isExplanation: boolean) => {
+    const gpt_response = JSON.parse(response)
+    setBagOfWords(gpt_response.words)
     setMessages([
       ...messages,
       { text: newMessage, isUser: true },
-      { text: response, isUser: false, isExplanation: isExplanation },
+      { text: gpt_response.response, isUser: false, isExplanation: isExplanation },
     ]);
   };
 
