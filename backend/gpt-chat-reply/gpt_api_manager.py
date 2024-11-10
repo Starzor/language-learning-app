@@ -8,8 +8,8 @@ def generate_response(prompt, system_instructions) -> str:
         model="gpt-4o",
         messages=[
             {
-                "role": system_instructions,
-                "content": "",
+                "role": "system",
+                "content": system_instructions,
             },
             {                
                 "role": "user",
