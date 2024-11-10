@@ -38,8 +38,10 @@ def generate_response(prompt, system_instructions) -> str:
                                     "translated": {
                                         "type": "string"
                                     }
-                                }
-                            }
+                                },
+                                "required" : ["word", "translated"],
+                                "additionalProperties": False
+                            }                          
                         },
                         "translation": {
                             "type": "string"
