@@ -44,7 +44,9 @@ def generate_response(prompt, system_instructions) -> str:
                         "translation": {
                             "type": "string"
                         }
-                    }
+                    },
+                    "required" : ["response", "words", "translation"],
+                    "additionalProperties": False
                 }
             }
         }
