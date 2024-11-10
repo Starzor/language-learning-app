@@ -1,18 +1,9 @@
-$color-whitesmoke: rgb(245, 245, 245);
-$color-dark-gray: rgb(41, 41, 41);
-$color-medium-gray: rgb(61, 61, 61);
-$color-outline: rgb(139, 101, 120);
-$color-light-gray: rgb(75, 75, 75);
-$color-button-bg: rgb(88, 88, 88);
-$color-button-hover-bg: rgb(107, 107, 107);
-$color-dark-red: rgb(66, 50, 58);
+@import 'colors.scss';
 
 .chatContainer {
-  color: $color-whitesmoke;
-  background-color: $color-dark-gray;
-  border-radius: 10px;
-  margin-top: 20px;
-  margin-bottom: 20px;
+  background-color: $color-background;
+  border-left: 2px solid $color-gray-border;
+  border-right: 2px solid $color-gray-border;
   width: 50%;
   height: inherit;
   display: flex;
@@ -29,15 +20,16 @@ $color-dark-red: rgb(66, 50, 58);
       margin: 10px;
       margin-left: 0px;
       padding: 5px;
-      font-size: 14px;
-      color: $color-whitesmoke;
-      background-color: $color-light-gray;
-      border-radius: 5px;
+      font-size: 16px;
+      color: $color-main-text;
+      background-color: $color-secondary-background;
+      border-radius: 8px;
       border: none;
+      border: 2px solid $color-gray-border;
 
       option:hover,
       option:checked {
-        box-shadow: 0 0 10px 100px $color-dark-gray inset !important;
+        box-shadow: 0 0 10px 100px $color-background inset !important;
       }
     }
   }
@@ -72,13 +64,13 @@ $color-dark-red: rgb(66, 50, 58);
 
     .bot {
       border-radius: 0 25px 25px 25px;
-      background-color: $color-medium-gray;
+      background-color: $color-bot-message;
       align-self: flex-start;
     }
 
     .user {
       border-radius: 25px 0 25px 25px;
-      background-color: $color-dark-red;
+      background-color: $color-user-message;
       align-self: flex-end;
     }
   }
@@ -88,54 +80,54 @@ $color-dark-red: rgb(66, 50, 58);
     margin-bottom: 20px;
     display: flex;
 
-    input {
+    .messageInput {
       flex: 0.95;
       height: 35px;
       margin: 10px;
+      margin-right: 0;
       padding-left: 5px;
       border: none;
-      border-radius: 10px;
-      background-color: $color-medium-gray;
-      color: $color-whitesmoke;
+      border: 1px solid $color-textfield-border;
+      border-right: none;
+      border-top-left-radius: 8px;
+      border-bottom-left-radius: 8px;
+      background-color: $color-textfield-fill;
+      color: $color-main-text;
+      font-size: 14px;
     }
 
-    input:focus {
+    .messageInput:focus {
       outline: none;
-      outline: 2px solid $color-outline;
     }
 
-    button {
+    .sendButton {
       margin: 10px;
       margin-left: 0px;
       flex: 0.05;
     }
-  }
 
-  button {
-    background-color: $color-button-bg;
-    border-radius: 10px;
-    border: 1px solid $color-light-gray;
-    cursor: pointer;
-    padding: 5px;
-    font-size: 14px;
-    color: $color-whitesmoke;
-  }
+    .sendButton {
+      background-color: $color-textfield-fill;
+      border-top-right-radius: 8px;
+      border-bottom-right-radius: 8px;
+      border: 1px solid $color-textfield-border;
+      border-left: none;
+      cursor: pointer;
 
-  button:hover {
-    background-color: $color-button-hover-bg;
-  }
-
-  button:active {
-    position: relative;
-    top: 1px;
-    background-color: $color-light-gray;
+      font-size: 14px;
+      color: $color-main-text;
+    }
+  
+    .sendButton:hover {
+      background-color: $color-textfield-fill;
+    }
   }
 
   .loadingIcon {
     margin-bottom: 35px;
     transform-origin: center;
     animation: spinner_xeMo 0.6s linear infinite;
-    fill: crimson;
+    fill: $color-loading;
   }
   @keyframes spinner_xeMo {
     100% {

@@ -57,10 +57,7 @@ const ChatContainer = () => {
         <ChatDifficulty difficulty={difficulty} setDifficulty={setDifficulty} />
         <ChatLanguage language={language} setLanguage={setLanguage} />
       </div>
-      {messages.length != 0 && (
-        <ChatMessages messages={messages} 
-        />
-      )}
+        <ChatMessages messages={messages} />
       {loading && <ChatLoading />}
       {!loading && (
         <ChatInput

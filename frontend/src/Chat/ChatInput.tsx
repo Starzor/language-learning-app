@@ -1,5 +1,6 @@
 import { SetStateAction } from "react";
 import "../styles/Chat.scss";
+import "../images/send_icon.png";
 
 interface ChatInputProps {
   newMessage: string;
@@ -17,13 +18,16 @@ const ChatInput: React.FC<ChatInputProps> = ({newMessage, setNewMessage, handleS
     return (
         <div className="chatInput">
           <input
+            className="messageInput"
             type="text"
-            placeholder="Type a message..."
+            placeholder="Napište zprávu a stiskněte Enter..."
             value={newMessage}
             onChange={(event) => setNewMessage(event.target.value)}
             onKeyDown={(event) => handleEnterPress(event.key)}
           />
-          <button onClick={handleSendMessage}>Send</button>
+          <button onClick={handleSendMessage} className="sendButton">
+            <img src={require("../images/send_icon.png")}/>
+          </button>
         </div>
     )
 }
