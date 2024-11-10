@@ -21,7 +21,7 @@ const ChatContainer = () => {
     setMessages([
       ...messages,
       { text: newMessage, isUser: true },
-      { text: gpt_response.response, isUser: false, translation: gpt_response.translation },
+      { text: gpt_response.response, isUser: false, vocabulary: gpt_response.words, translation: gpt_response.translation },
     ]);
   };
 
@@ -39,9 +39,8 @@ const ChatContainer = () => {
       message: newMessage,
       history: messages
         .map((message) => {
-          if (message.isExplanation) return "";
           return message.isUser
-            ? `Bot: ${message.text}`
+            ? `System: ${message.text}`
             : `User: ${message.text}`;
         })
         .join(),

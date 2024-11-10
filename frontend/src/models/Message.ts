@@ -1,8 +1,11 @@
+interface WordPair {
+    word: string;
+    translated: string;
+}
+
 export interface Message {
     text: string;
     isUser: boolean;
-    isExplanation?: boolean;
-    isHidden?: boolean;
-    isExplained?: boolean;
+    vocabulary?: Array<WordPair>;
     translation?: string;
 }
