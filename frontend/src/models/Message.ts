@@ -8,4 +8,5 @@ export interface Message {
     isUser: boolean;
     vocabulary?: Array<WordPair>;
     translation?: string;
+    language?: string;
 }

@@ -1,4 +1,4 @@
-@import 'colors.scss';
+@import "colors.scss";
 
 .chatContainer {
   background-color: $color-background;
@@ -66,6 +66,24 @@
       border-radius: 0 25px 25px 25px;
       background-color: $color-bot-message;
       align-self: flex-start;
+
+      button {
+        height: 20px;
+        background-color: $color-bot-message-button;
+        border: 1px solid $color-bot-message-button-border;
+        border-radius: 10px;
+        padding-left: 15px;
+        padding-right: 15px;
+        margin: 5px;
+        margin-bottom: 0;
+        color: $color-main-text;
+        text-align: center;
+        cursor: pointer;
+      }
+
+      button:hover {
+        background-color: $color-bot-message-button-border;
+      }
     }
 
     .user {
@@ -117,7 +135,7 @@
       font-size: 14px;
       color: $color-main-text;
     }
-  
+
     .sendButton:hover {
       background-color: $color-textfield-fill;
     }
@@ -136,7 +154,7 @@
   }
 }
 
-@media(max-width: 800px) {
+@media (max-width: 800px) {
   .chatContainer {
     border-radius: 10px;
     margin-top: 20px;

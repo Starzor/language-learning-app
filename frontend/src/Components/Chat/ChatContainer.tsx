@@ -9,7 +9,15 @@ import { getChatReply } from "../../api";
 import ChatLoading from "./ChatLoading";
 import "../../styles/Chat.scss";
 
-const ChatContainer = () => {
+interface ChatContainerProps {
+  onTranslateClick?: any;
+  onVocabularyClick?: any;
+}
+
+const ChatContainer: React.FC<ChatContainerProps> = ({
+  onTranslateClick,
+  onVocabularyClick,
+}) => {
   const [newMessage, setNewMessage] = useState<string>("");
   const [messages, setMessages] = useState<Array<Message>>([]);
   const [language, setLanguage] = useState<string>("Angličtina");
@@ -21,16 +29,19 @@ const ChatContainer = () => {
     setMessages([
       ...messages,
       { text: newMessage, isUser: true },
-      { text: gpt_response.response, isUser: false, vocabulary: gpt_response.words, translation: gpt_response.translation },
+      {
+        text: gpt_response.response,
+        isUser: false,
+        vocabulary: gpt_response.words,
+        translation: gpt_response.translation,
+        language: language
+      },
     ]);
   };
 
   const handleSendMessage = () => {
     if (newMessage.trim() == "") return;
-    setMessages([
-      ...messages,
-      { text: newMessage, isUser: true },
-    ]);
+    setMessages([...messages, { text: newMessage, isUser: true }]);
     setNewMessage("");
     setLoading(true);
     const request: ReplyRequest = {
@@ -56,7 +67,11 @@ const ChatContainer = () => {
         <ChatDifficulty difficulty={difficulty} setDifficulty={setDifficulty} />
         <ChatLanguage language={language} setLanguage={setLanguage} />
       </div>
-        <ChatMessages messages={messages} />
+      <ChatMessages
+        messages={messages}
+        onTranslateClick={onTranslateClick}
+        onVocabularyClick={onVocabularyClick}
+      />
       {loading && <ChatLoading />}
       {!loading && (
         <ChatInput
