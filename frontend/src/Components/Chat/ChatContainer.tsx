@@ -1,13 +1,13 @@
 import { useState } from "react";
 import ChatMessages from "./ChatMessages";
 import ChatInput from "./ChatInput";
-import { Message } from "../models/Message";
-import { ReplyRequest } from "../models/ReplyRequest";
-import "../styles/Chat.scss";
+import { Message } from "../../models/Message";
+import { ReplyRequest } from "../../models/ReplyRequest";
 import ChatLanguage from "./ChatLanguage";
 import ChatDifficulty from "./ChatDifficulty";
-import { getChatReply } from "../api";
+import { getChatReply } from "../../api";
 import ChatLoading from "./ChatLoading";
+import "../../styles/Chat.scss";
 
 const ChatContainer = () => {
   const [newMessage, setNewMessage] = useState<string>("");

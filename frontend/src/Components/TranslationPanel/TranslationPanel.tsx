@@ -1,4 +1,4 @@
-import "../styles/TranslationPanel.scss";
+import "../../styles/TranslationPanel.scss";
 
 const TranslationPanel = () => {
   return (

@@ -1,7 +1,7 @@
-import ChatContainer from "./Chat/ChatContainer";
-import ControlPanel from "./ControlPanel/ControlPanel";
+import ChatContainer from "./Components/Chat/ChatContainer";
+import ControlPanel from "./Components/ControlPanel/ControlPanel";
 import "./styles/App.scss";
-import TranslationPanel from "./TranslationPanel/TranslationPanel";
+import TranslationPanel from "./Components/TranslationPanel/TranslationPanel";
 
 const App = () => {
   return (

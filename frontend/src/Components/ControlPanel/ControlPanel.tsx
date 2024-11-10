@@ -1,4 +1,4 @@
-import "../styles/ControlPanel.scss"
+import "../../styles/ControlPanel.scss"
 
 const ControlPanel = () => {
   return (

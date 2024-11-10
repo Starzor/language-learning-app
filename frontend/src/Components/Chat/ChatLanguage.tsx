@@ -1,6 +1,6 @@
-import "../styles/Chat.scss";
-import { LANGUAGE_LIST } from "../constants";
+import { LANGUAGE_LIST } from "../../constants";
 import { SetStateAction } from "react";
+import "../../styles/Chat.scss";
 
 interface ChatLanguageProps {
   language: string;

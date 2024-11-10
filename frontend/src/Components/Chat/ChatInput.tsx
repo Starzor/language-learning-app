@@ -1,6 +1,5 @@
 import { SetStateAction } from "react";
-import "../styles/Chat.scss";
-import "../images/send_icon.png";
+import "../../styles/Chat.scss";
 
 interface ChatInputProps {
   newMessage: string;
@@ -26,7 +25,7 @@ const ChatInput: React.FC<ChatInputProps> = ({newMessage, setNewMessage, handleS
             onKeyDown={(event) => handleEnterPress(event.key)}
           />
           <button onClick={handleSendMessage} className="sendButton">
-            <img src={require("../images/send_icon.png")}/>
+            <img src={require("../../images/send_icon.png")}/>
           </button>
         </div>
     )

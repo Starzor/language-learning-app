@@ -1,6 +1,6 @@
-import "../styles/Chat.scss";
-import { DIFFICULTY_LIST } from "../constants";
+import { DIFFICULTY_LIST } from "../../constants";
 import { SetStateAction } from "react";
+import "../../styles/Chat.scss";
 
 interface ChatDifficultyProps {
   difficulty: string;

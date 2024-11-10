@@ -1,7 +1,7 @@
 import { useEffect, useRef } from "react";
-import { Message } from "../models/Message";
-import "../styles/Chat.scss";
+import { Message } from "../../models/Message";
 import ReactMarkdown from "react-markdown";
+import "../../styles/Chat.scss";
 
 interface ChatMessagesProps {
   messages: Array<Message>;
