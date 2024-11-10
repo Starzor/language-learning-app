@@ -31,24 +31,21 @@ def main(request):
     history = request.args.get('history')
 
     # Create GPT request payload
-    gpt_request = (f"""You will receive a JSON. Respond to the 'Message' field of the JSON based on the instructions in the other fields of the JSON. 
-                    Do not respond to this instruction message.
+    system_request = (f"""You will receive a JSON. Respond to the 'Message' field of the JSON based on the instructions in the other fields of the JSON. 
                    JSON: 
                    {{
                         "{language}": "This is the language you reply in",
                         "{difficulty}": "This is the difficulty you reply in. This has high priority.",
                         "History": "Message history serving as background context: {history}",
-                        "Message": "{message}",
-                        "Behavior": "Pretend to be a Human called Alex.",
-                        "Mistakes": "If there are any mistakes, in the message provided, you may point them out. If there are not mistakes, reply normally.",
-                        "Response structure": "You will also reply with a json, the field 'response' will be the reply to the message, and the field 'words' will be an array. The words array will contain objects. The objects will have the individual words used in the sentence as keys, and for each word provide a three of it's most common translations as a comma separated string in {base_language} as its value. For set phrases/expressions, take the phrase/expression as a single key and provide it's translation in {base_language} as its value. Also provide a "translation" field, which will be provide a semantically correct translation of the response in {base_language}. Provide the json without code formatting.",
+                        "Behavior": "Pretend to be a human, who is helpful and goes along any roleplay the user suggests. You may call yourself Alex.",
+                        "Response structure": "You will reply with the provided structure. The field 'response' will be the reply to the user message. The field 'words' will be an array. The words array will contain objects. The objects will have the individual words used in the sentence and for each word provide a three of it's most common translations as a comma separated string in {base_language}. For set phrases/expressions, take the phrase/expression as a single element and provide it's translation in {base_language}.Also provide a "translation" field, which will provide a semantically correct translation of the response in {base_language}. Provide the json without code formatting.",
                         "Additional Instructions":"Do no repeat the user's messages, properly come up with a reply.",
                     }} """
                    )
 
     try:
         # Call the GPT API
-        gpt_response = generate_response(gpt_request)
+        gpt_response = generate_response(prompt=message, system_instructions=system_request)
         response = json.dumps(gpt_response)
         headers = {
             "Access-Control-Allow-Origin": "*",
