@@ -1,10 +1,14 @@
 import { useEffect, useRef } from "react";
-import Message from "../models/Message";
+import { Message } from "../models/Message";
 import "../styles/Chat.scss";
 import ReactMarkdown from "react-markdown";
 
-const ChatMessages = (props: any) => {
-  const { messages, explainAnswer, toggleShowMessage } = props;
+interface ChatMessagesProps {
+  messages: Array<Message>;
+}
+
+const ChatMessages: React.FC<ChatMessagesProps> = ({messages}) => {
+
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
   const scrollToBottom = () => {
@@ -27,26 +31,6 @@ const ChatMessages = (props: any) => {
               className={message.isUser ? "user message" : "bot message"}
             >
               <ReactMarkdown>{message.text}</ReactMarkdown>
-              {!message.isUser && !message.isExplanation && (
-                <>
-                  {!message.isExplained && (
-                    <button onClick={() => explainAnswer(index)}>
-                      Explain
-                    </button>
-                  )}
-
-                  {message.isExplained && !messages[index + 1].isHidden && (
-                    <button onClick={() => toggleShowMessage(index + 1)}>
-                      Hide Explanation
-                    </button>
-                  )}
-                  {message.isExplained && messages[index + 1].isHidden && (
-                    <button onClick={() => toggleShowMessage(index + 1)}>
-                      Show Explanation
-                    </button>
-                  )}
-                </>
-              )}
             </div>
           )
       )}

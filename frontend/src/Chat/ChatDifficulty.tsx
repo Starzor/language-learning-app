@@ -1,8 +1,13 @@
 import "../styles/Chat.scss";
 import { DIFFICULTY_LIST } from "../constants";
+import { SetStateAction } from "react";
 
-const ChatDifficulty = (props: any) => {
-  const { difficulty, setDifficulty } = props;
+interface ChatDifficultyProps {
+  difficulty: string;
+  setDifficulty: React.Dispatch<SetStateAction<string>>;
+}
+
+const ChatDifficulty: React.FC<ChatDifficultyProps> = ({difficulty, setDifficulty}) => {
   return (
     <select value={difficulty} onChange={(event) => setDifficulty(event.target.value)} className="difficultySelect">
       {DIFFICULTY_LIST.map((diff) => (

@@ -1,6 +1,6 @@
 import axios, { AxiosResponse } from "axios";
-import ReplyRequest from "./models/ReplyRequest";
-import ExplanationRequest from "./models/ExplanationRequest";
+import { ReplyRequest }from "./models/ReplyRequest";
+import { ExplanationRequest } from "./models/ExplanationRequest";
 
 const url = "https://europe-west3-gclearning-426207.cloudfunctions.net";
 

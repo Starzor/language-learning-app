@@ -3,5 +3,3 @@ export interface ExplanationRequest {
     language: string;
     message: string;
  }
- 
- export default ExplanationRequest

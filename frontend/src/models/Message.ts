@@ -4,6 +4,5 @@ export interface Message {
     isExplanation?: boolean;
     isHidden?: boolean;
     isExplained?: boolean;
+    translation?: string;
 }
-
-export default Message

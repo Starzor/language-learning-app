@@ -1,14 +1,19 @@
+import { SetStateAction } from "react";
 import "../styles/Chat.scss";
 
-const ChatInput = (props: any) => {
-  
+interface ChatInputProps {
+  newMessage: string;
+  setNewMessage: React.Dispatch<SetStateAction<string>>;
+  handleSendMessage: any;
+}
+
+const ChatInput: React.FC<ChatInputProps> = ({newMessage, setNewMessage, handleSendMessage}) => {
     const handleEnterPress = (key: any) => {
       if (key == "Enter") {
         handleSendMessage()
       }
     }
 
-    const { newMessage, setNewMessage, handleSendMessage } = props
     return (
         <div className="chatInput">
           <input

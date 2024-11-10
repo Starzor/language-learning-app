@@ -4,5 +4,3 @@ export interface ReplyRequest {
    message: string;
    history: string;
 }
-
-export default ReplyRequest

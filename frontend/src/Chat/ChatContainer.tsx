@@ -1,17 +1,15 @@
 import { useState } from "react";
 import ChatMessages from "./ChatMessages";
 import ChatInput from "./ChatInput";
-import Message from "../models/Message";
-import ReplyRequest from "../models/ReplyRequest";
+import { Message } from "../models/Message";
+import { ReplyRequest } from "../models/ReplyRequest";
 import "../styles/Chat.scss";
 import ChatLanguage from "./ChatLanguage";
 import ChatDifficulty from "./ChatDifficulty";
-import { getChatReply, getReplyExplanation } from "../api";
-import ExplanationRequest from "../models/ExplanationRequest";
+import { getChatReply } from "../api";
 import ChatLoading from "./ChatLoading";
 
-const ChatContainer = (props: any) => {
-  const { setBagOfWords } = props;
+const ChatContainer = () => {
   const [newMessage, setNewMessage] = useState<string>("");
   const [messages, setMessages] = useState<Array<Message>>([]);
   const [language, setLanguage] = useState<string>("Angličtina");
@@ -20,27 +18,20 @@ const ChatContainer = (props: any) => {
 
   const handleSuccessfulReply = (response: string) => {
     const gpt_response = JSON.parse(response);
-    setBagOfWords(gpt_response.words);
     setMessages([
       ...messages,
       { text: newMessage, isUser: true },
-      { text: gpt_response.response, isUser: false },
+      { text: gpt_response.response, isUser: false, translation: gpt_response.translation },
     ]);
-  };
-
-  const handleSuccessfulExplanation = (response: string, index: number) => {
-    //@ts-ignore
-    const updatedMessages = messages.toSpliced(index + 1, 0, {
-      text: response,
-      isUser: false,
-      isExplanation: true,
-    });
-    updatedMessages[index].isExplained = true; 
-    setMessages(updatedMessages);
   };
 
   const handleSendMessage = () => {
     if (newMessage.trim() == "") return;
+    setMessages([
+      ...messages,
+      { text: newMessage, isUser: true },
+    ]);
+    setNewMessage("");
     setLoading(true);
     const request: ReplyRequest = {
       language: language,
@@ -57,28 +48,8 @@ const ChatContainer = (props: any) => {
     };
     getChatReply(request)
       .then((response) => handleSuccessfulReply(response))
-      .then(() => setNewMessage(""))
       .then(() => setLoading(false));
   };
-
-  const explainAnswer = (index: number) => {
-    setLoading(true);
-    const request: ExplanationRequest = {
-      base_language: "Czech",
-      language: language,
-      message: messages[index].text,
-    };
-    getReplyExplanation(request)
-      .then((response) => handleSuccessfulExplanation(response, index))
-      .then(() => setLoading(false));
-  };
-
-  const toggleShowMessage = (index: number) => {
-    console.log(messages[index])
-    const updatedMessages = Array.of(...messages);
-    updatedMessages[index].isHidden = !messages[index].isHidden;
-    setMessages(updatedMessages);
-  }
 
   return (
     <div className="chatContainer">
@@ -86,14 +57,9 @@ const ChatContainer = (props: any) => {
         <ChatDifficulty difficulty={difficulty} setDifficulty={setDifficulty} />
         <ChatLanguage language={language} setLanguage={setLanguage} />
       </div>
-      {messages.length == 0 && (
-        <div className="chatWelcome">
-          Vítejte v chatovací aplikaci na výuku jazyků. V pravém horním rohu si
-          vyberte obtížnost a jazyk a můžete začít.
-        </div>
-      )}
       {messages.length != 0 && (
-        <ChatMessages messages={messages} explainAnswer={explainAnswer} toggleShowMessage={toggleShowMessage}/>
+        <ChatMessages messages={messages} 
+        />
       )}
       {loading && <ChatLoading />}
       {!loading && (

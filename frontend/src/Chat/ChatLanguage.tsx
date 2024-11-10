@@ -1,8 +1,13 @@
 import "../styles/Chat.scss";
 import { LANGUAGE_LIST } from "../constants";
+import { SetStateAction } from "react";
 
-const ChatLanguage = (props: any) => {
-  const { language, setLanguage } = props;
+interface ChatLanguageProps {
+  language: string;
+  setLanguage: React.Dispatch<SetStateAction<string>>;
+}
+
+const ChatLanguage: React.FC<ChatLanguageProps> = ({ language, setLanguage}) => {
   return (
     <select value={language} onChange={(event) => setLanguage(event.target.value)} className="languageSelect">
       {LANGUAGE_LIST.map((lang) => (
