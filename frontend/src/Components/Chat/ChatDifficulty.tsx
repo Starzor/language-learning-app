@@ -9,7 +9,7 @@ interface ChatDifficultyProps {
 
 const ChatDifficulty: React.FC<ChatDifficultyProps> = ({difficulty, setDifficulty}) => {
   return (
-    <select value={difficulty} onChange={(event) => setDifficulty(event.target.value)} className="difficultySelect">
+    <select value={difficulty} onChange={(event) => setDifficulty(event.target.value)} className="difficultySelect headingText">
       {DIFFICULTY_LIST.map((diff) => (
         <option key={diff} value={diff}>{diff}</option>
       ))}

@@ -1,14 +1,19 @@
+$color-main-purple: #6B618F;
+$color-whitesmoke: #E4E4E7;
+
+$color-word-highlight: #70B8B8;
 $color-main-text: #E4E4E7;
+$color-secondary-text: #A6A6A9;
 $color-background: #1E1E24;
 $color-secondary-background: #23232A;
 $color-gray-border: #373B47;
 $color-bot-message: #514761;
 $color-bot-message-button: #5A4A78;
 $color-bot-message-button-border: #7A6995;
-$color-user-message: #6B618F;
+$color-user-message: $color-main-purple;
 $color-textfield-fill: #2B2B33;
 $color-textfield-text: #7D7D85;
 $color-textfield-border: #3C445A;
 $color-textfield-outline: #7A6995;
 $color-send-icon-fill: #7D7D85;
-$color-loading: #6B618F;
+$color-loading: $color-main-purple;

@@ -1,7 +1,40 @@
-@import 'colors.scss';
+@import "colors.scss";
 
-.TranslationPanel {
-    background-color: $color-secondary-background;
-    width: 25%;
-    height: 100%;
+.translationPanel {
+  background-color: $color-secondary-background;
+  width: 25%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+
+  .tabList {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+
+    .tabButton {
+      background-color: transparent;
+      color: $color-secondary-text;
+      font-family: Arial, Helvetica, sans-serif;
+      margin-left: 30px;
+      padding-left: 20px;
+      padding-right: 20px;
+      border: none;
+      border-top: 5px solid $color-textfield-border;      
+    }
+
+    .active {
+      color: $color-main-text;
+      border-top: 5px solid $color-main-purple;
+    }
+  }
+
+  .translationPanelInnerContainer {
+    margin: 30px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
 }

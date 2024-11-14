@@ -9,7 +9,7 @@ interface ChatLanguageProps {
 
 const ChatLanguage: React.FC<ChatLanguageProps> = ({ language, setLanguage}) => {
   return (
-    <select value={language} onChange={(event) => setLanguage(event.target.value)} className="languageSelect">
+    <select value={language} onChange={(event) => setLanguage(event.target.value)} className="languageSelect headingText">
       {LANGUAGE_LIST.map((lang) => (
         <option key={lang} value={lang}>{lang}</option>
       ))}

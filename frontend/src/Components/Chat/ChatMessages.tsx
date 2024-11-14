@@ -33,12 +33,22 @@ const ChatMessages: React.FC<ChatMessagesProps> = ({
           key={index}
           className={message.isUser ? "user message" : "bot message"}
         >
-          <ReactMarkdown>{message.text}</ReactMarkdown>
+          <ReactMarkdown className="commonText">{message.text}</ReactMarkdown>
           {!message.isUser && (
-            <button onClick={() => onTranslateClick(message)}>Přeložit</button>
+            <button
+              className="helperText"
+              onClick={() => onTranslateClick(message)}
+            >
+              Přeložit
+            </button>
           )}
           {!message.isUser && (
-            <button onClick={() => onVocabularyClick(message)}>Slovník</button>
+            <button
+              className="helperText"
+              onClick={() => onVocabularyClick(message)}
+            >
+              Slovník
+            </button>
           )}
         </div>
       ))}

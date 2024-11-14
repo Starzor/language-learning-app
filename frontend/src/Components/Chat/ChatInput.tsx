@@ -17,7 +17,7 @@ const ChatInput: React.FC<ChatInputProps> = ({newMessage, setNewMessage, handleS
     return (
         <div className="chatInput">
           <input
-            className="messageInput"
+            className="messageInput helperText"
             type="text"
             placeholder="Napište zprávu a stiskněte Enter..."
             value={newMessage}

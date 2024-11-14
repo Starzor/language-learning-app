@@ -20,12 +20,11 @@
       margin: 10px;
       margin-left: 0px;
       padding: 5px;
-      font-size: 16px;
-      color: $color-main-text;
       background-color: $color-secondary-background;
       border-radius: 8px;
       border: none;
       border: 2px solid $color-gray-border;
+      cursor: pointer;
 
       option:hover,
       option:checked {
@@ -110,8 +109,6 @@
       border-top-left-radius: 8px;
       border-bottom-left-radius: 8px;
       background-color: $color-textfield-fill;
-      color: $color-main-text;
-      font-size: 14px;
     }
 
     .messageInput:focus {
@@ -131,14 +128,8 @@
       border: 1px solid $color-textfield-border;
       border-left: none;
       cursor: pointer;
-
-      font-size: 14px;
-      color: $color-main-text;
     }
 
-    .sendButton:hover {
-      background-color: $color-textfield-fill;
-    }
   }
 
   .loadingIcon {

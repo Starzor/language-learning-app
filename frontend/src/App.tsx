@@ -29,6 +29,8 @@ const App = () => {
       <TranslationPanel
         translationMessage={translationMessage}
         translationOrVocab={translationOrVocab}
+        onTranslateClick={handleTranslationClick}
+        onVocabularyClick={handleVocabularyClick}
       />
     </div>
   );

@@ -10,14 +10,14 @@ const TranslationView: React.FC<TranslationViewProps> = ({
   translationMessage,
 }) => {
   return (
-    <div>
-      <p>Původní text v {translationMessage.language}:</p>
-      <div>
-        <p>{translationMessage?.text}</p>
+    <div className="translationPanelInnerContainer">
+      <p className="headingText">Původní text v {translationMessage.language}:</p>
+      <div className="commonTextContainer">
+        <p className="commonText">{translationMessage?.text}</p>
       </div>
-      <p>Přeložený text v Češtině:</p>
-      <div>
-        <p>{translationMessage?.translation}</p>
+      <p className="headingText">Přeložený text v Češtině:</p>
+      <div className="commonTextContainer">
+        <p className="commonText">{translationMessage?.translation}</p>
       </div>
     </div>
   );

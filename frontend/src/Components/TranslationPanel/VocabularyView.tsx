@@ -10,12 +10,12 @@ const VocabularyView: React.FC<VocabularyViewProps> = ({
   translationMessage,
 }) => {
   return (
-    <div>
-      <p>Slovník:</p>
-      <div>
-        {translationMessage.vocabulary?.map((pair) => (
-          <p>
-            <span>{pair.word}</span>
+    <div className="translationPanelInnerContainer">
+      <p className="headingText">Slovník:</p>
+      <div className="commonTextContainer">
+        {translationMessage.vocabulary?.map((pair, index) => (
+          <p key={index} className="commonText">
+            <span className="highlightedText">{pair.word}</span> -{" "}
             {pair.translated}
           </p>
         ))}

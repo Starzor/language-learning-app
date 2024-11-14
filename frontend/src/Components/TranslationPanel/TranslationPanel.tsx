@@ -6,15 +6,31 @@ import VocabularyView from "./VocabularyView";
 
 interface TranslationPanelProps {
   translationMessage?: Message;
-  translationOrVocab?: string;
+  translationOrVocab?: string;  
 }
 
 const TranslationPanel: React.FC<TranslationPanelProps> = ({
   translationMessage,
-  translationOrVocab,
+  translationOrVocab
 }) => {
   return (
-    <div className="TranslationPanel">
+    <div className="translationPanel">
+      <div className="tabList">
+        <div
+          className={`tabButton headingText ${
+            translationOrVocab == "translation" ? "active" : ""
+          }`}
+        >
+          Překlad
+        </div>
+        <div
+          className={`tabButton headingText ${
+            translationOrVocab == "vocabulary" ? "active" : ""
+          }`}
+        >
+          Slovník
+        </div>
+      </div>
       {translationMessage &&
         ((translationOrVocab == "translation" && (
           <TranslationView translationMessage={translationMessage} />
