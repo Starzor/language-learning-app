@@ -13,12 +13,14 @@ interface ChatContainerProps {
   onTranslateClick?: any;
   onVocabularyClick?: any;
   onCorrectionClick?: any;
+  onClickReset?: any;
 }
 
 const ChatContainer: React.FC<ChatContainerProps> = ({
   onTranslateClick,
   onVocabularyClick,
   onCorrectionClick,
+  onClickReset
 }) => {
   const [newMessage, setNewMessage] = useState<string>("");
   const [messages, setMessages] = useState<Array<Message>>([]);
@@ -68,11 +70,26 @@ const ChatContainer: React.FC<ChatContainerProps> = ({
       .then(() => setLoading(false));
   };
 
+  const resetChat = () => {
+    setMessages([]);
+    onClickReset();
+  }
+
   return (
     <div className="chatContainer">
       <div className="chatSettings">
-        <ChatDifficulty difficulty={difficulty} setDifficulty={setDifficulty} />
-        <ChatLanguage language={language} setLanguage={setLanguage} />
+        <div className="chatSettingsLeft">
+          <button className="resetChat" onClick={resetChat}>
+            <img src={require("../../images/restart.png")} />
+          </button>
+        </div>
+        <div className="chatSettingsRight">
+          <ChatDifficulty
+            difficulty={difficulty}
+            setDifficulty={setDifficulty}
+          />
+          <ChatLanguage language={language} setLanguage={setLanguage} />
+        </div>
       </div>
       <ChatMessages
         messages={messages}

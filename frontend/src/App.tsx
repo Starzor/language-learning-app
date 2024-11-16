@@ -10,6 +10,12 @@ const App = () => {
   const [translationOrVocab, setTranslationOrVocab] = useState<string>("");
   const [controlMessage, setControlMessage] = useState<Message>();
 
+  const resetMessages = () => {
+    setTranslationMessage(undefined);
+    setTranslationOrVocab("");
+    setControlMessage(undefined);
+  }
+
   const handleTranslationClick = (message: Message) => {
     setTranslationOrVocab("translation");
     setTranslationMessage(message);
@@ -27,6 +33,7 @@ const App = () => {
         onTranslateClick={handleTranslationClick}
         onVocabularyClick={handleVocabularyClick}
         onCorrectionClick={setControlMessage}
+        onClickReset={resetMessages}
       />
       <TranslationPanel
         translationMessage={translationMessage}
