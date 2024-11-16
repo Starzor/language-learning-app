@@ -42,7 +42,7 @@ const ChatContainer: React.FC<ChatContainerProps> = ({
       translation: messageResponse.translation,
       language: language,
     };
-    setMessages([...messages, newSystemMessage, newUserMessage]);
+    setMessages([...messages, newUserMessage, newSystemMessage]);
     onCorrectionClick(newUserMessage);
   };
 

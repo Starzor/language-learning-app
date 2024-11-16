@@ -1,5 +1,5 @@
-@import "./Colors.scss";
-@import "./TextStyles.scss";
+@use "./Colors.scss" as colors;
+@use "./TextStyles.scss";
 
 .App {
   width: inherit;
@@ -7,5 +7,5 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  color: $color-whitesmoke;
+  color: colors.$color-whitesmoke;
 }

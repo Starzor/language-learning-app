@@ -1,9 +1,9 @@
-@import "./Colors.scss";
+@use "./Colors.scss" as colors;
 
 .chatContainer {
-  background-color: $color-background;
-  border-left: 2px solid $color-gray-border;
-  border-right: 2px solid $color-gray-border;
+  background-color: colors.$color-background;
+  border-left: 2px solid colors.$color-gray-border;
+  border-right: 2px solid colors.$color-gray-border;
   width: 50%;
   height: inherit;
   display: flex;
@@ -20,15 +20,15 @@
       margin: 10px;
       margin-left: 0px;
       padding: 5px;
-      background-color: $color-secondary-background;
+      background-color: colors.$color-secondary-background;
       border-radius: 8px;
       border: none;
-      border: 2px solid $color-gray-border;
+      border: 2px solid colors.$color-gray-border;
       cursor: pointer;
 
       option:hover,
       option:checked {
-        box-shadow: 0 0 10px 100px $color-background inset !important;
+        box-shadow: 0 0 10px 100px colors.$color-background inset !important;
       }
     }
   }
@@ -64,7 +64,7 @@
         margin-bottom: 0;
         text-align: center;
         cursor: pointer;
-        color: $color-main-text;
+        color: colors.$color-main-text;
       }
 
       p {
@@ -75,32 +75,32 @@
 
     .bot {
       border-radius: 0 25px 25px 25px;
-      background-color: $color-bot-message;
+      background-color: colors.$color-bot-message;
       align-self: flex-start;
 
       button {
-        background-color: $color-bot-message-button;
-        border: 1px solid $color-bot-message-button-border;
-        color: $color-main-text;
+        background-color: colors.$color-bot-message-button;
+        border: 1px solid colors.$color-bot-message-button-border;
+        color: colors.$color-main-text;
       }
 
       button:hover {
-        background-color: $color-bot-message-button-border;
+        background-color: colors.$color-bot-message-button-border;
       }
     }
 
     .user {
       border-radius: 25px 0 25px 25px;
-      background-color: $color-user-message;
+      background-color: colors.$color-user-message;
       align-self: flex-end;
 
       button {
-        background-color: $color-user-message-button;
-        border: 1px solid $color-user-message-button-border;
+        background-color: colors.$color-user-message-button;
+        border: 1px solid colors.$color-user-message-button-border;
       }
 
       button:hover {
-        background-color: $color-user-message-button-border;
+        background-color: colors.$color-user-message-button-border;
       }
     }
   }
@@ -117,11 +117,11 @@
       margin-right: 0;
       padding-left: 5px;
       border: none;
-      border: 1px solid $color-textfield-border;
+      border: 1px solid colors.$color-textfield-border;
       border-right: none;
       border-top-left-radius: 8px;
       border-bottom-left-radius: 8px;
-      background-color: $color-textfield-fill;
+      background-color: colors.$color-textfield-fill;
     }
 
     .messageInput:focus {
@@ -135,10 +135,10 @@
     }
 
     .sendButton {
-      background-color: $color-textfield-fill;
+      background-color: colors.$color-textfield-fill;
       border-top-right-radius: 8px;
       border-bottom-right-radius: 8px;
-      border: 1px solid $color-textfield-border;
+      border: 1px solid colors.$color-textfield-border;
       border-left: none;
       cursor: pointer;
     }
@@ -148,7 +148,7 @@
     margin-bottom: 35px;
     transform-origin: center;
     animation: spinner_xeMo 0.6s linear infinite;
-    fill: $color-loading;
+    fill: colors.$color-loading;
   }
   @keyframes spinner_xeMo {
     100% {
