@@ -1,7 +1,7 @@
-@use "./Colors.scss" as colors;
+@import "./colors.scss";
 
 .sidePanel {
-    background-color: colors.$color-secondary-background;
+    background-color: $color-secondary-background;
     width: 25%;
     height: 100%;
     display: flex;
@@ -15,18 +15,18 @@
   
       .tabButton {
         background-color: transparent;
-        color: colors.$color-secondary-text;
+        color: $color-secondary-text;
         font-family: Arial, Helvetica, sans-serif;
         margin-left: 30px;
         padding-left: 20px;
         padding-right: 20px;
         border: none;
-        border-top: 5px solid colors.$color-textfield-border;      
+        border-top: 5px solid $color-textfield-border;      
       }
   
       .active {
-        color: colors.$color-main-text;
-        border-top: 5px solid colors.$color-main-purple;
+        color: $color-main-text;
+        border-top: 5px solid $color-main-purple;
       }
     }
   
@@ -39,8 +39,8 @@
     }
 
     .sidePanelTextContainer {
-        background-color: colors.$color-background;
-        border: 2px solid colors.$color-gray-border;
+        background-color: $color-background;
+        border: 2px solid $color-gray-border;
         border-radius: 20px;
         padding-left: 20px;
         padding-right: 20px;

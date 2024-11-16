@@ -1,7 +1,7 @@
-@use "./Colors.scss" as colors;
+@import "./colors.scss";
 
 .helperText {
-    color: colors.$color-main-text;
+    color: $color-main-text;
     font-size: 14px;
     font-family: "Nunito", sans-serif !important;
     font-optical-sizing: auto;
@@ -10,7 +10,7 @@
   }
   
   .commonText {
-    color: colors.$color-main-text;
+    color: $color-main-text;
     font-size: 16px;
     font-family: "Nunito", sans-serif !important;
     font-optical-sizing: auto;
@@ -19,11 +19,11 @@
   }
   
   .highlightedText {
-    color: colors.$color-word-highlight;
+    color: $color-word-highlight;
   }
   
   .headingText {
-    color: colors.$color-main-text;
+    color: $color-main-text;
     font-size: 18px;
     font-family: "Nunito", sans-serif !important;
     font-optical-sizing: auto;
@@ -36,9 +36,9 @@
   }
 
 .corrected {
-  color: colors.$color-correct;
+  color: $color-correct;
 }
 
 .incorrect {
-  color: colors.$color-incorrect;
+  color: $color-incorrect;
 }
