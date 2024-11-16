@@ -9,4 +9,6 @@ export interface Message {
     vocabulary?: Array<WordPair>;
     translation?: string;
     language?: string;
+    correction?: string;
+    incorrectText?: string;
 }

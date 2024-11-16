@@ -1,4 +1,4 @@
-@import "colors.scss";
+@import "Colors.scss";
 
 .chatContainer {
   background-color: $color-background;
@@ -55,6 +55,18 @@
       padding: 12px;
       overflow-wrap: break-word;
 
+      button {
+        height: 22px;
+        border-radius: 10px;
+        padding-left: 15px;
+        padding-right: 15px;
+        margin: 5px;
+        margin-bottom: 0;
+        text-align: center;
+        cursor: pointer;
+        color: $color-main-text;
+      }
+
       p {
         margin-top: 0;
         margin-bottom: 0;
@@ -67,17 +79,9 @@
       align-self: flex-start;
 
       button {
-        height: 20px;
         background-color: $color-bot-message-button;
         border: 1px solid $color-bot-message-button-border;
-        border-radius: 10px;
-        padding-left: 15px;
-        padding-right: 15px;
-        margin: 5px;
-        margin-bottom: 0;
         color: $color-main-text;
-        text-align: center;
-        cursor: pointer;
       }
 
       button:hover {
@@ -89,6 +93,15 @@
       border-radius: 25px 0 25px 25px;
       background-color: $color-user-message;
       align-self: flex-end;
+
+      button {
+        background-color: $color-user-message-button;
+        border: 1px solid $color-user-message-button-border;
+      }
+
+      button:hover {
+        background-color: $color-user-message-button-border;
+      }
     }
   }
 
@@ -129,7 +142,6 @@
       border-left: none;
       cursor: pointer;
     }
-
   }
 
   .loadingIcon {

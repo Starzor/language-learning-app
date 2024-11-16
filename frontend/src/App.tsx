@@ -1,13 +1,14 @@
 import ChatContainer from "./Components/Chat/ChatContainer";
 import ControlPanel from "./Components/ControlPanel/ControlPanel";
-import "./styles/App.scss";
 import TranslationPanel from "./Components/TranslationPanel/TranslationPanel";
 import { Message } from "./models/Message";
 import { useState } from "react";
+import "./styles/App.scss";
 
 const App = () => {
   const [translationMessage, setTranslationMessage] = useState<Message>();
   const [translationOrVocab, setTranslationOrVocab] = useState<string>("");
+  const [controlMessage, setControlMessage] = useState<Message>();
 
   const handleTranslationClick = (message: Message) => {
     setTranslationOrVocab("translation");
@@ -21,16 +22,15 @@ const App = () => {
 
   return (
     <div className="App">
-      <ControlPanel />
+      <ControlPanel controlMessage={controlMessage}/>
       <ChatContainer
         onTranslateClick={handleTranslationClick}
         onVocabularyClick={handleVocabularyClick}
+        onCorrectionClick={setControlMessage}
       />
       <TranslationPanel
         translationMessage={translationMessage}
         translationOrVocab={translationOrVocab}
-        onTranslateClick={handleTranslationClick}
-        onVocabularyClick={handleVocabularyClick}
       />
     </div>
   );

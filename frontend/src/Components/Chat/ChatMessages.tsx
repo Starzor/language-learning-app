@@ -7,12 +7,14 @@ interface ChatMessagesProps {
   messages: Array<Message>;
   onTranslateClick?: any;
   onVocabularyClick?: any;
+  onCorrectionClick?: any;
 }
 
 const ChatMessages: React.FC<ChatMessagesProps> = ({
   messages,
   onTranslateClick,
   onVocabularyClick,
+  onCorrectionClick,
 }) => {
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
@@ -48,6 +50,17 @@ const ChatMessages: React.FC<ChatMessagesProps> = ({
               onClick={() => onVocabularyClick(message)}
             >
               Slovník
+            </button>
+          )}
+          {message.isUser && (
+            <button
+              className="helperText"
+              onClick={() => {
+                onCorrectionClick(message);
+                console.log(message);
+              }}
+            >
+              Kontrola
             </button>
           )}
         </div>

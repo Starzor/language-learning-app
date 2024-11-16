@@ -12,11 +12,13 @@ import "../../styles/Chat.scss";
 interface ChatContainerProps {
   onTranslateClick?: any;
   onVocabularyClick?: any;
+  onCorrectionClick?: any;
 }
 
 const ChatContainer: React.FC<ChatContainerProps> = ({
   onTranslateClick,
   onVocabularyClick,
+  onCorrectionClick,
 }) => {
   const [newMessage, setNewMessage] = useState<string>("");
   const [messages, setMessages] = useState<Array<Message>>([]);
@@ -24,19 +26,24 @@ const ChatContainer: React.FC<ChatContainerProps> = ({
   const [difficulty, setDifficulty] = useState<string>("A1");
   const [loading, setLoading] = useState<boolean>(false);
 
-  const handleSuccessfulReply = (response: string) => {
-    const gpt_response = JSON.parse(response);
-    setMessages([
-      ...messages,
-      { text: newMessage, isUser: true },
-      {
-        text: gpt_response.response,
-        isUser: false,
-        vocabulary: gpt_response.words,
-        translation: gpt_response.translation,
-        language: language
-      },
-    ]);
+  const handleSuccessfulReply = (response: Array<string>) => {
+    const messageResponse = JSON.parse(response[0]);
+    const correctionResponse = JSON.parse(response[1]);
+    const newUserMessage = {
+      text: newMessage,
+      isUser: true,
+      correction: correctionResponse.correction,
+      incorrectText: correctionResponse.original,
+    };
+    const newSystemMessage = {
+      text: messageResponse.response,
+      isUser: false,
+      vocabulary: messageResponse.words,
+      translation: messageResponse.translation,
+      language: language,
+    };
+    setMessages([...messages, newSystemMessage, newUserMessage]);
+    onCorrectionClick(newUserMessage);
   };
 
   const handleSendMessage = () => {
@@ -71,6 +78,7 @@ const ChatContainer: React.FC<ChatContainerProps> = ({
         messages={messages}
         onTranslateClick={onTranslateClick}
         onVocabularyClick={onVocabularyClick}
+        onCorrectionClick={onCorrectionClick}
       />
       {loading && <ChatLoading />}
       {!loading && (

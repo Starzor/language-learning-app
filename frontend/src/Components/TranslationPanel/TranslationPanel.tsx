@@ -1,8 +1,8 @@
 import React from "react";
 import { Message } from "../../models/Message";
-import "../../styles/TranslationPanel.scss";
 import TranslationView from "./TranslationView";
 import VocabularyView from "./VocabularyView";
+import "../../styles/SidePanel.scss";
 
 interface TranslationPanelProps {
   translationMessage?: Message;
@@ -14,7 +14,7 @@ const TranslationPanel: React.FC<TranslationPanelProps> = ({
   translationOrVocab
 }) => {
   return (
-    <div className="translationPanel">
+    <div className="sidePanel">
       <div className="tabList">
         <div
           className={`tabButton headingText ${

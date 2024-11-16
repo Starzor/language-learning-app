@@ -10,7 +10,13 @@ export const getChatReply = async (request: ReplyRequest): Promise<any> => {
       params: request,
     });
     console.log(response.data);
-    return response.data;
+
+    const correctionResponse: AxiosResponse = await axios.get(`${url}/gpt-message-correction`, {
+      params: request,
+    });
+    console.log(correctionResponse.data);
+
+    return [response.data, correctionResponse.data];
   } catch (error) {
     if (axios.isAxiosError(error)) {
       console.error("Error fetching chat reply:", error.response?.data || error.message);

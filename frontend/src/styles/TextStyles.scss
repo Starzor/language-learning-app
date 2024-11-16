@@ -1,0 +1,42 @@
+.helperText {
+    color: $color-main-text;
+    font-size: 14px;
+    font-family: "Nunito", sans-serif !important;
+    font-optical-sizing: auto;
+    font-weight: 500;
+    font-style: normal;
+  }
+  
+  .commonText {
+    color: $color-main-text;
+    font-size: 16px;
+    font-family: "Nunito", sans-serif !important;
+    font-optical-sizing: auto;
+    font-weight: 500;
+    font-style: normal;
+  }
+  
+  .highlightedText {
+    color: $color-word-highlight;
+  }
+  
+  .headingText {
+    color: $color-main-text;
+    font-size: 18px;
+    font-family: "Nunito", sans-serif !important;
+    font-optical-sizing: auto;
+    font-weight: 600;
+    font-style: normal;
+  }
+  
+  option {
+    font-weight: 400;
+  }
+
+.corrected {
+  color: $color-correct;
+}
+
+.incorrect {
+  color: $color-incorrect;
+}

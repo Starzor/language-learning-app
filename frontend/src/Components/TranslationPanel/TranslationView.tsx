@@ -1,6 +1,6 @@
 import React from "react";
 import { Message } from "../../models/Message";
-import "../../styles/TranslationPanel.scss";
+import "../../styles/SidePanel.scss";
 
 interface TranslationViewProps {
   translationMessage: Message;
@@ -10,13 +10,13 @@ const TranslationView: React.FC<TranslationViewProps> = ({
   translationMessage,
 }) => {
   return (
-    <div className="translationPanelInnerContainer">
+    <div className="sidePanelInnerContainer">
       <p className="headingText">Původní text v {translationMessage.language}:</p>
-      <div className="commonTextContainer">
+      <div className="sidePanelTextContainer">
         <p className="commonText">{translationMessage?.text}</p>
       </div>
       <p className="headingText">Přeložený text v Češtině:</p>
-      <div className="commonTextContainer">
+      <div className="sidePanelTextContainer">
         <p className="commonText">{translationMessage?.translation}</p>
       </div>
     </div>
