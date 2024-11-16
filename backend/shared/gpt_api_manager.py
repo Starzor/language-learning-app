@@ -1,10 +1,9 @@
 from openai import OpenAI
-from helpers import response_schema;
 import os
 
 client = OpenAI(api_key=os.environ.get("GPT_API_KEY"))
 
-def generate_response(prompt, system_instructions) -> str:
+def generate_response(prompt, system_instructions, response_schema) -> str:
     chat_completion = client.chat.completions.create(
         model="gpt-4o-mini",
         messages=[

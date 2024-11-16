@@ -1,4 +1,11 @@
 steps:
+  - id: Distributing shared components
+    name: bash
+    script: |
+      cd backend && cd .. \
+      && cp -R backend/shared backend/gpt-chat-reply/shared \
+      && cp -R backend/shared backend/gpt-message-correction/shared
+    waitFor: ['-']
   - id: Deploy gpt-chat-reply function
     name: gcr.io/google.com/cloudsdktool/cloud-sdk
     args:
@@ -16,6 +23,7 @@ steps:
       - '--allow-unauthenticated'
       - >-
         --set-secrets=GPT_API_KEY=projects/${_PROJECT_ID}/secrets/${_MY_SECRET}/versions/latest
+    waitFor: ['Distributing shared components']
   - id: Deploy gpt-explain-reply function
     name: gcr.io/google.com/cloudsdktool/cloud-sdk
     args:
@@ -33,6 +41,24 @@ steps:
       - '--allow-unauthenticated'
       - >-
         --set-secrets=GPT_API_KEY=projects/${_PROJECT_ID}/secrets/${_MY_SECRET}/versions/latest
-
+    waitFor: ['Distributing shared components']
+  - id: Deploy gpt-message-correction function
+    name: gcr.io/google.com/cloudsdktool/cloud-sdk
+    args:
+      - gcloud
+      - functions
+      - deploy
+      - gpt-message-correction
+      - '--region=${_REGION}'
+      - '--source=backend/gpt-message-correction/'
+      - '--trigger-http'
+      - '--max-instances=5'
+      - '--entry-point=main'
+      - '--runtime=python311'
+      - '--gen2'
+      - '--allow-unauthenticated'
+      - >-
+        --set-secrets=GPT_API_KEY=projects/${_PROJECT_ID}/secrets/${_MY_SECRET}/versions/latest
+    waitFor: ['Distributing shared components']
 options:
   logging: CLOUD_LOGGING_ONLY

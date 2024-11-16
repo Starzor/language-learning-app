@@ -9,8 +9,8 @@ shared_dir = os.path.join(current_dir, "shared")
 sys.path.append(shared_dir)
 
 from gpt_api_manager import generate_response
-from system_prompts import get_system_prompt
-from schemas import message_response_schema
+from system_prompts import get_check_message_prompt
+from schemas import correction_schema
 
 @functions_framework.http
 def main(request):
@@ -32,13 +32,11 @@ def main(request):
 
     language = request.args.get("language")
     message = request.args.get("message")
-    difficulty = request.args.get("difficulty")
-    history = request.args.get("history")
-
-    system_request = get_system_prompt(language=language, difficulty=difficulty, history=history)
+    
+    system_request = get_check_message_prompt(language=language)
     
     try:
-        gpt_response = generate_response(prompt=message, system_instructions=system_request, response_schema=message_response_schema)
+        gpt_response = generate_response(prompt=message, system_instructions=system_request, response_schema=correction_schema)
 
         response = json.dumps(gpt_response)
         headers = {
