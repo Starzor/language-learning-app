@@ -5,11 +5,12 @@ import { Message } from "../../models/Message";
 import { ReplyRequest } from "../../models/ReplyRequest";
 import ChatLanguage from "./ChatLanguage";
 import ChatDifficulty from "./ChatDifficulty";
-import { getChatReply } from "../../api";
+import { getChatReply, getTestResults } from "../../api";
 import ChatLoading from "./ChatLoading";
 import "../../styles/Chat.scss";
 import { TestData } from "../../models/TestData";
 import { LANGUAGE_MAP } from "../../constants";
+import { TestEvaluationRequest } from "../../models/TestEvaluationRequest";
 
 interface ChatContainerProps {
   onTranslateClick?: any;
@@ -103,7 +104,11 @@ const ChatContainer: React.FC<ChatContainerProps> = ({
       .filter((message) => message.isUser)
       .map((message) => message.text);
 
-    console.log(answers);
+    const testEvaluationRequest: TestEvaluationRequest = {
+      answers: answers,
+      test: testData,
+    };
+    getTestResults(testEvaluationRequest).then(value => setDifficulty(value));
     setIsTesting(false);
     resetChat();
   };

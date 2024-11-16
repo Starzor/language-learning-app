@@ -4,6 +4,8 @@ import os
 client = OpenAI(api_key=os.environ.get("GPT_API_KEY"))
 
 def generate_response(prompt, system_instructions, response_schema) -> str:
+    print(prompt)
+    print(system_instructions)
     chat_completion = client.chat.completions.create(
         model="gpt-4o-mini",
         messages=[

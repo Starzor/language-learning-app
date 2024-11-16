@@ -14,3 +14,8 @@ def get_check_message_prompt(language: str):
     return (f"""
                 You will receive a user message in {language}. If the message contains any sort of grammatical mistake or a typo, you will enter the corrected message into the 'correction' field. For the corrected words, format them into an html span with the className 'corrected'. Also return the original sentence with the incorrect words formatted into an html span 'incorrect' If there are no mistakes, leave the 'correction' field empty.
             """)
+
+def get_test_prompt(test: str):
+    return f""" 
+                Evaluate the user's answers to the questions in the following json: {test}. Return only the CEFR level from A1-C2 which is the most adequate for the user's answers.
+            """

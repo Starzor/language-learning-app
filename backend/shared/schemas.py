@@ -55,3 +55,21 @@ correction_schema = {
             }
         }
     }
+
+test_response_schema = {
+    "type": "json_schema",
+        "json_schema": {
+            "name": "chat_response",
+            "strict": True,
+            "schema": {
+                "type": "object",
+                "properties": {
+                    "CEFR": {
+                        "type": "string"
+                    },
+                },
+                "required" : ["CEFR"],
+                "additionalProperties": False
+            }
+        }
+    }
