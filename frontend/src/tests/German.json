@@ -1,0 +1,72 @@
+{
+  "test": [
+    {
+      "question": "Schreibe 2-3 Sätze über dein Lieblingshobby.",
+      "type": "writing",
+      "level": "A1-A2",
+      "explanation_cz": "Napište 2–3 věty o svém oblíbeném koníčku."
+    },
+    {
+      "question": "Verbinde die Sätze mit einer Konjunktion: 'Ich mag Kaffee. Ich trinke ihn nicht jeden Tag.'",
+      "type": "grammar",
+      "level": "A2-B1",
+      "explanation_cz": "Spojte věty pomocí spojky: „Mám rád kávu. Nepiji ji každý den.“"
+    },
+    {
+      "question": "Korrigiere den Fehler in diesem Satz: 'Er kann nicht gut zu kochen.'",
+      "type": "grammar",
+      "level": "A2-B1",
+      "explanation_cz": "Opravte chybu v této větě: „On neumí dobře vařit.“"
+    },
+    {
+      "question": "Schreibe eine kurze Nachricht (3-4 Sätze), um einen Freund zu einem Ausflug am Wochenende einzuladen.",
+      "type": "writing",
+      "level": "B1-B2",
+      "explanation_cz": "Napište krátkou zprávu (3–4 věty), ve které pozvete přítele na výlet o víkendu."
+    },
+    {
+      "question": "Ergänze die Lücken mit den richtigen Präpositionen: 'Das Buch liegt _____ dem Tisch. Ich interessiere mich _____ Geschichte.'",
+      "type": "grammar",
+      "level": "A1-A2",
+      "explanation_cz": "Doplňte mezery správnými předložkami: „Kniha leží _____ na stole. Zajímám se o _____ historii.“"
+    },
+    {
+      "question": "Schreibe den Satz im Passiv um: 'Der Koch bereitete ein leckeres Essen zu.'",
+      "type": "grammar",
+      "level": "B1",
+      "explanation_cz": "Převeďte tuto větu do trpného rodu: „Kuchař připravil chutné jídlo.“"
+    },
+    {
+      "question": "Schreibe deine Meinung (3-4 Sätze) darüber, ob das Lernen von Fremdsprachen wichtig ist.",
+      "type": "writing",
+      "level": "B2-C1",
+      "explanation_cz": "Napište svůj názor (3–4 věty) na to, zda je důležité učit se cizí jazyky."
+    },
+    {
+      "question": "Finde den grammatikalischen Fehler und korrigiere ihn: 'Wenn er wird kommen, beginnen wir das Meeting.'",
+      "type": "grammar",
+      "level": "B2",
+      "explanation_cz": "Najděte gramatickou chybu a opravte ji: „Pokud přijde, zahájíme schůzku.“"
+    },
+    {
+      "question": "Formuliere den Satz in der indirekten Rede um: 'Er sagte: \"Ich kann das Auto reparieren.\"'",
+      "type": "grammar",
+      "level": "B1-B2",
+      "explanation_cz": "Převeďte tuto větu do nepřímé řeči: „Řekl: ‚Mohu opravit auto.‘“"
+    },
+    {
+      "question": "Schreibe einen kurzen Absatz (5-6 Sätze) über einen Vorteil des Reisens.",
+      "type": "writing",
+      "level": "B2-C2",
+      "explanation_cz": "Napište krátký odstavec (5–6 vět) o jedné výhodě cestování."
+    }
+  ],
+  "evaluation": {
+    "A1": "Uživatel ukazuje základní schopnosti tvořit jednoduché věty s omezenou slovní zásobou a častými chybami.",
+    "A2": "Uživatel dokáže psát krátké odstavce a používat základní gramatiku s určitou přesností.",
+    "B1": "Uživatel prokazuje schopnost psát složitější věty a odstavce s občasnými gramatickými nebo strukturálními chybami.",
+    "B2": "Uživatel píše s dobrou kontrolou nad gramatikou, slovní zásobou a strukturou, i když se občas vyskytnou chyby.",
+    "C1": "Uživatel vytváří dobře strukturované, koherentní texty s minimálními chybami, ukazuje širokou slovní zásobu a pokročilé gramatické znalosti.",
+    "C2": "Uživatel prokazuje téměř rodilou úroveň jazyka, vytváří jasné, stručné a gramaticky správné texty."
+  }
+}

@@ -1,0 +1,72 @@
+{
+  "test": [
+    {
+      "question": "Écris 2-3 phrases sur ton activité préférée.",
+      "type": "writing",
+      "level": "A1-A2",
+      "explanation_cz": "Napište 2–3 věty o své oblíbené aktivitě."
+    },
+    {
+      "question": "Relie les phrases avec une conjonction : 'J'aime le café. Je n'en bois pas tous les jours.'",
+      "type": "grammar",
+      "level": "A2-B1",
+      "explanation_cz": "Spojte věty pomocí spojky: „Mám rád kávu. Nepiji ji každý den.“"
+    },
+    {
+      "question": "Corrige l'erreur dans cette phrase : 'Il ne savent pas bien cuisiner.'",
+      "type": "grammar",
+      "level": "A2-B1",
+      "explanation_cz": "Opravte chybu v této větě: „Neumějí dobře vařit.“"
+    },
+    {
+      "question": "Écris un message court (3-4 phrases) pour inviter un ami à une fête ce week-end.",
+      "type": "writing",
+      "level": "B1-B2",
+      "explanation_cz": "Napište krátkou zprávu (3–4 věty) a pozvěte přítele na večírek tento víkend."
+    },
+    {
+      "question": "Complète les espaces avec les prépositions correctes : 'Le livre est _____ la table. Je suis intéressé _____ apprendre le français.'",
+      "type": "grammar",
+      "level": "A1-A2",
+      "explanation_cz": "Doplňte mezery správnými předložkami: „Kniha je _____ na stole. Mám zájem o _____ studium francouzštiny.“"
+    },
+    {
+      "question": "Réécris cette phrase à la voix passive : 'Le chef a préparé un repas délicieux.'",
+      "type": "grammar",
+      "level": "B1",
+      "explanation_cz": "Převeďte tuto větu do trpného rodu: „Šéfkuchař připravil chutné jídlo.“"
+    },
+    {
+      "question": "Donne ton avis (3-4 phrases) sur l'importance d'apprendre une langue étrangère.",
+      "type": "writing",
+      "level": "B2-C1",
+      "explanation_cz": "Napište svůj názor (3–4 věty) o důležitosti učení se cizím jazykům."
+    },
+    {
+      "question": "Identifie l'erreur grammaticale et corrige-la : 'Si elle viendra, nous commencerons la réunion.'",
+      "type": "grammar",
+      "level": "B2",
+      "explanation_cz": "Najděte gramatickou chybu a opravte ji: „Pokud přijde, zahájíme schůzku.“"
+    },
+    {
+      "question": "Transforme cette phrase au discours indirect : 'Il a dit : \"Je vais au marché.\"'",
+      "type": "grammar",
+      "level": "B1-B2",
+      "explanation_cz": "Převeďte tuto větu do nepřímé řeči: „Řekl: ‚Jdu na trh.‘“"
+    },
+    {
+      "question": "Écris un court paragraphe (5-6 phrases) sur un avantage de voyager dans d'autres pays.",
+      "type": "writing",
+      "level": "B2-C2",
+      "explanation_cz": "Napište krátký odstavec (5–6 vět) o jedné výhodě cestování do jiných zemí."
+    }
+  ],
+  "evaluation": {
+    "A1": "Uživatel ukazuje základní schopnosti tvořit jednoduché věty s omezenou slovní zásobou a častými chybami.",
+    "A2": "Uživatel dokáže psát krátké odstavce a používat základní gramatiku s určitou přesností.",
+    "B1": "Uživatel prokazuje schopnost psát složitější věty a odstavce s občasnými gramatickými nebo strukturálními chybami.",
+    "B2": "Uživatel píše s dobrou kontrolou nad gramatikou, slovní zásobou a strukturou, i když se občas vyskytnou chyby.",
+    "C1": "Uživatel vytváří dobře strukturované, koherentní texty s minimálními chybami, ukazuje širokou slovní zásobu a pokročilé gramatické znalosti.",
+    "C2": "Uživatel prokazuje téměř rodilou úroveň jazyka, vytváří jasné, stručné a gramaticky správné texty."
+  }
+}

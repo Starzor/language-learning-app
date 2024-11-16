@@ -1,0 +1,72 @@
+{
+  "test": [
+    {
+      "question": "Escribe 2-3 frases sobre tu actividad favorita.",
+      "type": "writing",
+      "level": "A1-A2",
+      "explanation_cz": "Napište 2–3 věty o své oblíbené aktivitě."
+    },
+    {
+      "question": "Une las siguientes frases con una conjunción: 'Me gusta el café. No lo tomo todos los días.'",
+      "type": "grammar",
+      "level": "A2-B1",
+      "explanation_cz": "Spojte následující věty pomocí spojky: „Mám rád kávu. Nepiji ji každý den.“"
+    },
+    {
+      "question": "Corrige el error en esta frase: 'Ella no saben cocinar bien.'",
+      "type": "grammar",
+      "level": "A2-B1",
+      "explanation_cz": "Opravte chybu v této větě: „Ona neumí dobře vařit.“"
+    },
+    {
+      "question": "Escribe un mensaje breve (3-4 frases) invitando a un amigo a salir este fin de semana.",
+      "type": "writing",
+      "level": "B1-B2",
+      "explanation_cz": "Napište krátkou zprávu (3–4 věty) a pozvěte přítele na víkend."
+    },
+    {
+      "question": "Completa los espacios en blanco con las preposiciones correctas: 'El libro está _____ la mesa. Estoy interesado _____ aprender español.'",
+      "type": "grammar",
+      "level": "A1-A2",
+      "explanation_cz": "Doplňte mezery správnými předložkami: „Kniha je _____ na stole. Zajímám se o _____ učení se španělštiny.“"
+    },
+    {
+      "question": "Reescribe esta frase en voz pasiva: 'El chef preparó una comida deliciosa.'",
+      "type": "grammar",
+      "level": "B1",
+      "explanation_cz": "Převeďte tuto větu do trpného rodu: „Šéfkuchař připravil chutné jídlo.“"
+    },
+    {
+      "question": "Escribe tu opinión (3-4 frases) sobre si aprender idiomas es útil en la vida.",
+      "type": "writing",
+      "level": "B2-C1",
+      "explanation_cz": "Napište svůj názor (3–4 věty) o tom, zda je užitečné učit se jazyky v životě."
+    },
+    {
+      "question": "Identifica el error gramatical y corrígelo: 'Si ella vendrá, empezaremos la reunión.'",
+      "type": "grammar",
+      "level": "B2",
+      "explanation_cz": "Najděte gramatickou chybu a opravte ji: „Pokud přijde, zahájíme schůzku.“"
+    },
+    {
+      "question": "Transforma esta frase en estilo indirecto: 'Ella dijo: \"Voy al mercado.\"'",
+      "type": "grammar",
+      "level": "B1-B2",
+      "explanation_cz": "Převeďte tuto větu do nepřímé řeči: „Řekla: ‚Jdu na trh.‘“"
+    },
+    {
+      "question": "Escribe un breve párrafo (5-6 frases) sobre una ventaja de viajar a otros países.",
+      "type": "writing",
+      "level": "B2-C2",
+      "explanation_cz": "Napište krátký odstavec (5–6 vět) o výhodě cestování do jiných zemí."
+    }
+  ],
+  "evaluation": {
+    "A1": "Uživatel ukazuje základní schopnosti tvořit jednoduché věty s omezenou slovní zásobou a častými chybami.",
+    "A2": "Uživatel dokáže psát krátké odstavce a používat základní gramatiku s určitou přesností.",
+    "B1": "Uživatel prokazuje schopnost psát složitější věty a odstavce s občasnými gramatickými nebo strukturálními chybami.",
+    "B2": "Uživatel píše s dobrou kontrolou nad gramatikou, slovní zásobou a strukturou, i když se občas vyskytnou chyby.",
+    "C1": "Uživatel vytváří dobře strukturované, koherentní texty s minimálními chybami, ukazuje širokou slovní zásobu a pokročilé gramatické znalosti.",
+    "C2": "Uživatel prokazuje téměř rodilou úroveň jazyka, vytváří jasné, stručné a gramaticky správné texty."
+  }
+}

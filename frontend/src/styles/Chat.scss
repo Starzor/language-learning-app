@@ -12,6 +12,7 @@
 
   .chatSettings {
     width: 100%;
+    height: 50px;
     display: flex;
     justify-content: space-between;
 
@@ -31,6 +32,26 @@
         option:checked {
           box-shadow: 0 0 10px 100px $color-background inset !important;
         }
+      }
+
+      .testButton {
+        outline: none;
+        border: none;
+        background-color: $color-test-button;
+        border: 2px solid $color-test-button-border;
+        border-radius: 8px;
+        margin: 10px;
+        margin-left: 0px;
+        padding: 5px;
+        cursor: pointer;
+      }
+
+      .testButton:hover {
+        outline: 1px solid $color-test-button-border;
+      }
+
+      .testButton:active {
+        background-color: $color-test-button-border;
       }
     }
 
@@ -98,6 +119,10 @@
       }
 
       button:hover {
+        outline: 1px solid $color-bot-message-button-border;
+      }
+
+      button:active {
         background-color: $color-bot-message-button-border;
       }
     }
@@ -113,6 +138,10 @@
       }
 
       button:hover {
+        outline: 1px solid $color-user-message-button-border;
+      }
+
+      button:active {
         background-color: $color-user-message-button-border;
       }
     }

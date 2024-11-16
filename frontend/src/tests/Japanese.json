@@ -1,0 +1,73 @@
+{
+    "test": [
+      {
+        "question": "あなたの好きな趣味について2〜3文を書いてください。",
+        "type": "writing",
+        "level": "A1-A2",
+        "explanation_cz": "Napište 2–3 věty o svém oblíbeném koníčku."
+      },
+      {
+        "question": "以下の文を接続詞を使ってつなげてください：「私はコーヒーが好きです。でも毎日は飲みません。」",
+        "type": "grammar",
+        "level": "A2-B1",
+        "explanation_cz": "Spojte věty pomocí spojky: „Mám rád kávu. Nepiji ji každý den.“"
+      },
+      {
+        "question": "この文の間違いを直してください：「彼は料理を作るのが好きではありません。」",
+        "type": "grammar",
+        "level": "A2-B1",
+        "explanation_cz": "Opravte chybu v této větě: „Nemá rád vaření.“"
+      },
+      {
+        "question": "友達に週末のイベントに誘う短いメッセージ（3〜4文）を書いてください。",
+        "type": "writing",
+        "level": "B1-B2",
+        "explanation_cz": "Napište krátkou zprávu (3–4 věty), ve které pozvete přítele na víkendovou akci."
+      },
+      {
+        "question": "空欄に正しい助詞を入れてください：「本は机の_____置いてあります。私は日本語を勉強することに_____興味があります。」",
+        "type": "grammar",
+        "level": "A1-A2",
+        "explanation_cz": "Doplňte mezery správnými částicemi: „Kniha leží _____ na stole. Mám zájem o _____ studium japonštiny.“"
+      },
+      {
+        "question": "この文を受動態に書き換えてください：「シェフが美味しい料理を作りました。」",
+        "type": "grammar",
+        "level": "B1",
+        "explanation_cz": "Převeďte tuto větu do trpného rodu: „Šéfkuchař uvařil chutné jídlo.“"
+      },
+      {
+        "question": "外国語を学ぶ重要性について、3〜4文で自分の意見を書いてください。",
+        "type": "writing",
+        "level": "B2-C1",
+        "explanation_cz": "Napište 3–4 věty o tom, proč je důležité učit se cizí jazyky."
+      },
+      {
+        "question": "文法的な誤りを見つけて修正してください：「彼女が来るなら、私たちは会議を始めます。」",
+        "type": "grammar",
+        "level": "B2",
+        "explanation_cz": "Najděte a opravte gramatickou chybu ve větě: „Když přijde, začneme schůzi.“"
+      },
+      {
+        "question": "次の文を間接話法に書き換えてください：「彼は『私は映画を見ます』と言いました。」",
+        "type": "grammar",
+        "level": "B1-B2",
+        "explanation_cz": "Převeďte tuto větu do nepřímé řeči: „Řekl: ‚Podívám se na film.‘“"
+      },
+      {
+        "question": "旅行の利点について5〜6文の短い段落を書いてください。",
+        "type": "writing",
+        "level": "B2-C2",
+        "explanation_cz": "Napište krátký odstavec (5–6 vět) o výhodách cestování."
+      }
+    ],
+    "evaluation": {
+      "A1": "Uživatel ukazuje základní schopnosti tvořit jednoduché věty s omezenou slovní zásobou a častými chybami.",
+      "A2": "Uživatel dokáže psát krátké odstavce a používat základní gramatiku s určitou přesností.",
+      "B1": "Uživatel prokazuje schopnost psát složitější věty a odstavce s občasnými gramatickými nebo strukturálními chybami.",
+      "B2": "Uživatel píše s dobrou kontrolou nad gramatikou, slovní zásobou a strukturou, i když se občas vyskytnou chyby.",
+      "C1": "Uživatel vytváří dobře strukturované, koherentní texty s minimálními chybami, ukazuje širokou slovní zásobu a pokročilé gramatické znalosti.",
+      "C2": "Uživatel prokazuje téměř rodilou úroveň jazyka, vytváří jasné, stručné a gramaticky správné texty."
+    }
+  }
+  

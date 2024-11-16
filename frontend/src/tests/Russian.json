@@ -1,0 +1,72 @@
+{
+  "test": [
+    {
+      "question": "Напишите 2-3 предложения о вашем любимом занятии.",
+      "type": "writing",
+      "level": "A1-A2",
+      "explanation_cz": "Napište 2–3 věty o svém oblíbeném koníčku."
+    },
+    {
+      "question": "Соедините предложения с помощью союза: 'Я люблю кофе. Я не пью его каждый день.'",
+      "type": "grammar",
+      "level": "A2-B1",
+      "explanation_cz": "Spojte věty pomocí spojky: „Mám rád kávu. Nepiji ji každý den.“"
+    },
+    {
+      "question": "Исправьте ошибку в этом предложении: 'Он не любят готовить.'",
+      "type": "grammar",
+      "level": "A2-B1",
+      "explanation_cz": "Opravte chybu v této větě: „On nemá rád vaření.“"
+    },
+    {
+      "question": "Напишите короткое сообщение (3-4 предложения), пригласив друга на прогулку в выходные.",
+      "type": "writing",
+      "level": "B1-B2",
+      "explanation_cz": "Napište krátkou zprávu (3–4 věty), ve které pozvete přítele na procházku o víkendu."
+    },
+    {
+      "question": "Заполните пропуски подходящими предлогами: 'Книга лежит _____ столе. Я интересуюсь _____ искусством.'",
+      "type": "grammar",
+      "level": "A1-A2",
+      "explanation_cz": "Doplňte mezery správnými předložkami: „Kniha leží _____ na stole. Zajímám se o _____ umění.“"
+    },
+    {
+      "question": "Перепишите предложение в страдательном залоге: 'Повар приготовил вкусное блюдо.'",
+      "type": "grammar",
+      "level": "B1",
+      "explanation_cz": "Převeďte tuto větu do trpného rodu: „Kuchař připravil chutné jídlo.“"
+    },
+    {
+      "question": "Напишите свое мнение (3-4 предложения) о важности изучения иностранных языков.",
+      "type": "writing",
+      "level": "B2-C1",
+      "explanation_cz": "Napište svůj názor (3–4 věty) na důležitost učení se cizím jazykům."
+    },
+    {
+      "question": "Найдите грамматическую ошибку и исправьте её: 'Если она придёт, мы будем начинать собрание.'",
+      "type": "grammar",
+      "level": "B2",
+      "explanation_cz": "Najděte gramatickou chybu a opravte ji: „Pokud přijde, zahájíme schůzku.“"
+    },
+    {
+      "question": "Преобразуйте это предложение в косвенную речь: 'Он сказал: \"Я могу помочь.\"'",
+      "type": "grammar",
+      "level": "B1-B2",
+      "explanation_cz": "Převeďte tuto větu do nepřímé řeči: „Řekl: ‚Mohu pomoci.‘“"
+    },
+    {
+      "question": "Напишите короткий абзац (5-6 предложений) о преимуществах путешествий.",
+      "type": "writing",
+      "level": "B2-C2",
+      "explanation_cz": "Napište krátký odstavec (5–6 vět) o výhodách cestování."
+    }
+  ],
+  "evaluation": {
+    "A1": "Uživatel ukazuje základní schopnosti tvořit jednoduché věty s omezenou slovní zásobou a častými chybami.",
+    "A2": "Uživatel dokáže psát krátké odstavce a používat základní gramatiku s určitou přesností.",
+    "B1": "Uživatel prokazuje schopnost psát složitější věty a odstavce s občasnými gramatickými nebo strukturálními chybami.",
+    "B2": "Uživatel píše s dobrou kontrolou nad gramatikou, slovní zásobou a strukturou, i když se občas vyskytnou chyby.",
+    "C1": "Uživatel vytváří dobře strukturované, koherentní texty s minimálními chybami, ukazuje širokou slovní zásobu a pokročilé gramatické znalosti.",
+    "C2": "Uživatel prokazuje téměř rodilou úroveň jazyka, vytváří jasné, stručné a gramaticky správné texty."
+  }
+}

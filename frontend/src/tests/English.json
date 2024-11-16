@@ -1,0 +1,72 @@
+{
+  "test": [
+    {
+      "question": "Write 2-3 sentences describing your favorite hobby.",
+      "type": "writing",
+      "level": "A1-A2",
+      "explanation_cz": "Napište 2–3 věty o svém oblíbeném koníčku."
+    },
+    {
+      "question": "Combine the sentences using a conjunction: 'I like coffee. I don't drink it every day.'",
+      "type": "grammar",
+      "level": "A2-B1",
+      "explanation_cz": "Spojte věty pomocí spojky: „Mám rád kávu. Nepiji ji každý den.“"
+    },
+    {
+      "question": "Correct the error in this sentence: 'She don't likes playing soccer.'",
+      "type": "grammar",
+      "level": "A2-B1",
+      "explanation_cz": "Opravte chybu v této větě: „Ona nemá ráda hraní fotbalu.“"
+    },
+    {
+      "question": "Write a 3-4 sentence email to a friend inviting them to a party.",
+      "type": "writing",
+      "level": "B1-B2",
+      "explanation_cz": "Napište e-mail o 3–4 větách příteli, ve kterém ho pozvete na večírek."
+    },
+    {
+      "question": "Fill in the blanks with appropriate prepositions: 'The cat is _____ the chair. He is good _____ cooking.'",
+      "type": "grammar",
+      "level": "A1-A2",
+      "explanation_cz": "Doplňte mezery správnými předložkami: „Kočka je _____ na židli. On je dobrý _____ ve vaření.“"
+    },
+    {
+      "question": "Rewrite this sentence in passive voice: 'The dog chased the ball.'",
+      "type": "grammar",
+      "level": "B1",
+      "explanation_cz": "Převeďte tuto větu do trpného rodu: „Pes honil míč.“"
+    },
+    {
+      "question": "Write a short opinion (3-4 sentences) on whether online learning is better than traditional classes.",
+      "type": "writing",
+      "level": "B2-C1",
+      "explanation_cz": "Napište krátký názor (3–4 věty) na to, zda je online výuka lepší než tradiční vyučování."
+    },
+    {
+      "question": "Identify the grammatical error and correct it: 'If she will come, we will start the meeting.'",
+      "type": "grammar",
+      "level": "B2",
+      "explanation_cz": "Najděte gramatickou chybu a opravte ji: „Pokud přijde, zahájíme schůzku.“"
+    },
+    {
+      "question": "Change the following into reported speech: 'He said, \"I can fix the car.\"'",
+      "type": "grammar",
+      "level": "B1-B2",
+      "explanation_cz": "Převeďte následující větu do nepřímé řeči: „Řekl: ‚Mohu opravit auto.‘“"
+    },
+    {
+      "question": "Write a short paragraph (5-6 sentences) discussing one advantage of learning a second language.",
+      "type": "writing",
+      "level": "B2-C2",
+      "explanation_cz": "Napište krátký odstavec (5–6 vět) o jedné výhodě učení se druhému jazyku."
+    }
+  ],
+  "evaluation": {
+    "A1": "Uživatel ukazuje základní schopnosti tvořit jednoduché věty s omezenou slovní zásobou a častými chybami.",
+    "A2": "Uživatel dokáže psát krátké odstavce a používat základní gramatiku s určitou přesností.",
+    "B1": "Uživatel prokazuje schopnost psát složitější věty a odstavce s občasnými gramatickými nebo strukturálními chybami.",
+    "B2": "Uživatel píše s dobrou kontrolou nad gramatikou, slovní zásobou a strukturou, i když se občas vyskytnou chyby.",
+    "C1": "Uživatel vytváří dobře strukturované, koherentní texty s minimálními chybami, ukazuje širokou slovní zásobu a pokročilé gramatické znalosti.",
+    "C2": "Uživatel prokazuje téměř rodilou úroveň jazyka, vytváří jasné, stručné a gramaticky správné texty."
+  }
+}

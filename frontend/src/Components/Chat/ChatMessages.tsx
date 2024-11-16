@@ -5,6 +5,7 @@ import "../../styles/Chat.scss";
 
 interface ChatMessagesProps {
   messages: Array<Message>;
+  isTesting: boolean;
   onTranslateClick?: any;
   onVocabularyClick?: any;
   onCorrectionClick?: any;
@@ -12,6 +13,7 @@ interface ChatMessagesProps {
 
 const ChatMessages: React.FC<ChatMessagesProps> = ({
   messages,
+  isTesting,
   onTranslateClick,
   onVocabularyClick,
   onCorrectionClick,
@@ -36,23 +38,24 @@ const ChatMessages: React.FC<ChatMessagesProps> = ({
           className={message.isUser ? "user message" : "bot message"}
         >
           <ReactMarkdown className="commonText">{message.text}</ReactMarkdown>
-          {!message.isUser && (
-            <button
-              className="helperText"
-              onClick={() => onTranslateClick(message)}
-            >
-              Přeložit
-            </button>
+          {!message.isUser && !isTesting && (
+            <>
+              <button
+                className="helperText"
+                onClick={() => onTranslateClick(message)}
+              >
+                Přeložit
+              </button>
+
+              <button
+                className="helperText"
+                onClick={() => onVocabularyClick(message)}
+              >
+                Slovník
+              </button>
+            </>
           )}
-          {!message.isUser && (
-            <button
-              className="helperText"
-              onClick={() => onVocabularyClick(message)}
-            >
-              Slovník
-            </button>
-          )}
-          {message.isUser && (
+          {message.isUser && !isTesting && (
             <button
               className="helperText"
               onClick={() => {
