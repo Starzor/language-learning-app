@@ -1,26 +1,21 @@
-import { SetStateAction, useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import ChatMessages from "./ChatMessages";
 import ChatInput from "./ChatInput";
 import { Message } from "../../models/Message";
 import { ReplyRequest } from "../../models/ReplyRequest";
-import ChatLanguage from "./ChatLanguage";
-import ChatDifficulty from "./ChatDifficulty";
 import { getChatReply, getTestResults } from "../../api";
-import ChatLoading from "./ChatLoading";
 import "../../styles/Chat.scss";
 import { TestData } from "../../models/TestData";
 import { LANGUAGE_MAP } from "../../constants";
 import { TestEvaluationRequest } from "../../models/TestEvaluationRequest";
-import Modal from "react-modal";
+import ConfirmationModal from "../Modal/ConfirmationModal";
+import ChatSettings from "./ChatSettings";
 
 interface ChatContainerProps {
   onTranslateClick?: any;
   onVocabularyClick?: any;
   onCorrectionClick?: any;
   onClickReset?: any;
-  isTesting: boolean;
-  setIsTesting: React.Dispatch<SetStateAction<boolean>>;
-  setIsTestModalOpen: React.Dispatch<SetStateAction<boolean>>;
 }
 
 const ChatContainer: React.FC<ChatContainerProps> = ({
@@ -28,9 +23,6 @@ const ChatContainer: React.FC<ChatContainerProps> = ({
   onVocabularyClick,
   onCorrectionClick,
   onClickReset,
-  isTesting,
-  setIsTesting,
-  setIsTestModalOpen
 }) => {
   const [newMessage, setNewMessage] = useState<string>("");
   const [messages, setMessages] = useState<Array<Message>>([]);
@@ -38,6 +30,8 @@ const ChatContainer: React.FC<ChatContainerProps> = ({
   const [difficulty, setDifficulty] = useState<string>("A1");
   const [loading, setLoading] = useState<boolean>(false);
   const [isResetModalOpen, setIsResetModalOpen] = useState<boolean>(false);
+  const [isTestModalOpen, setIsTestModalOpen] = useState<boolean>(false);
+  const [isTesting, setIsTesting] = useState<boolean>(false);
   const messagesRef = useRef(messages);
 
   const handleSuccessfulReply = (response: Array<string>) => {
@@ -61,11 +55,15 @@ const ChatContainer: React.FC<ChatContainerProps> = ({
   };
 
   const handleSendMessage = () => {
-    if (newMessage.trim() == "") return;
+    if (newMessage.trim() == "") {
+      return;
+    }
     setMessages([...messagesRef.current, { text: newMessage, isUser: true }]);
     setNewMessage("");
     // If is testing we don't need to run the next part of code which handles HTTP request to API
-    if (isTesting) return;
+    if (isTesting) {
+      return;
+    }
     setLoading(true);
     const request: ReplyRequest = {
       language: language,
@@ -84,13 +82,8 @@ const ChatContainer: React.FC<ChatContainerProps> = ({
       .then(() => setLoading(false));
   };
 
-  const resetChat = () => {
-    setMessages([]);
-    onClickReset();
-    setIsResetModalOpen(false);
-  };
-
   const handleLanguageTest = async () => {
+    setIsTestModalOpen(false);
     resetChat();
     setIsTesting(true);
     const testData: TestData = await import(
@@ -116,7 +109,7 @@ const ChatContainer: React.FC<ChatContainerProps> = ({
       answers: answers,
       test: testData,
     };
-    getTestResults(testEvaluationRequest).then(value => setDifficulty(value));
+    getTestResults(testEvaluationRequest).then((value) => setDifficulty(value));
     setIsTesting(false);
     resetChat();
   };
@@ -138,65 +131,39 @@ const ChatContainer: React.FC<ChatContainerProps> = ({
     });
   };
 
+  const resetChat = () => {
+    setMessages([]);
+    onClickReset();
+    setIsResetModalOpen(false);
+  };
+
   useEffect(() => {
     messagesRef.current = messages;
   }, [messages]);
 
-  useEffect(() => {
-    if (isTesting) {
-      handleLanguageTest();
-    }
-  }, [isTesting])
-
   return (
     <div className="chatContainer">
-      <Modal
+      <ConfirmationModal
+        labelText="Opravdu chcete konverzaci resetovat?"
         isOpen={isResetModalOpen}
-        className="reactModal"
-        overlayClassName="reactModalOverlay"
-      >
-        <p className="commonText centerText">
-          Opravdu chcete resetovat konverzaci?
-        </p>
-        <div>
-          <button
-            className="commonText"
-            onClick={() => setIsResetModalOpen(false)}
-          >
-            Ne
-          </button>
-          <button
-            className="commonText lightPurpleText"
-            onClick={resetChat}
-          >
-            Ano
-          </button>
-        </div>
-      </Modal>
-      <div className="chatSettings">
-        {!isTesting && (
-          <>
-            <div className="chatSettingsLeft">
-              <button className="resetChat" onClick={() => setIsResetModalOpen(true)}>
-                <img src={require("../../images/restart.png")} />
-              </button>
-            </div>
-            <div className="chatSettingsRight">
-              <button
-                className="testButton headingText"
-                onClick={() => setIsTestModalOpen(true)}
-              >
-                Test jazyku
-              </button>
-              <ChatDifficulty
-                difficulty={difficulty}
-                setDifficulty={setDifficulty}
-              />
-              <ChatLanguage language={language} setLanguage={setLanguage} />
-            </div>
-          </>
-        )}
-      </div>
+        onClickConfirm={resetChat}
+        onClickClose={() => setIsResetModalOpen(false)}
+      />
+      <ConfirmationModal
+        labelText="Opravdu chcete provést test pro určení úrovně jazyku?"
+        isOpen={isTestModalOpen}
+        onClickConfirm={handleLanguageTest}
+        onClickClose={() => setIsTestModalOpen(false)}
+      />
+      <ChatSettings
+        language={language}
+        isTesting={isTesting}
+        difficulty={difficulty}
+        onLanguageChange={setLanguage}
+        onDifficultyChange={setDifficulty}
+        onTestClick={() => setIsTestModalOpen(true)}
+        onResetClick={() => setIsResetModalOpen(true)}
+      />
       <ChatMessages
         messages={messages}
         isTesting={isTesting}
@@ -204,14 +171,12 @@ const ChatContainer: React.FC<ChatContainerProps> = ({
         onVocabularyClick={onVocabularyClick}
         onCorrectionClick={onCorrectionClick}
       />
-      {loading && <ChatLoading />}
-      {!loading && (
-        <ChatInput
-          newMessage={newMessage}
-          setNewMessage={setNewMessage}
-          handleSendMessage={handleSendMessage}
-        />
-      )}
+      <ChatInput
+        loading={loading}
+        newMessage={newMessage}
+        setNewMessage={setNewMessage}
+        handleSendMessage={handleSendMessage}
+      />
     </div>
   );
 };
