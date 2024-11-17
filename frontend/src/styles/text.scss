@@ -17,7 +17,7 @@
     font-weight: 500;
     font-style: normal;
   }
-  
+
   .highlightedText {
     color: $color-word-highlight;
   }
@@ -41,4 +41,12 @@
 
 .incorrect {
   color: $color-incorrect;
+}
+
+.lightPurpleText {
+  color: $color-user-message-button-border;
+}
+
+.centerText {
+  text-align: center;
 }

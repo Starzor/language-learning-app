@@ -1,0 +1,48 @@
+@import "./colors.scss";
+
+.reactModalOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba($color-background, 0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  .reactModal {
+    background-color: $color-secondary-background;
+    border: 2px solid $color-gray-border;
+    border-radius: 20px;
+    position: relative;
+    width: 250px;
+    height: 150px;
+    outline: none;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+
+    button {
+      margin-bottom: 30px;
+      margin-left: 20px;
+      margin-right: 20px;
+      padding: 8px;
+      padding-right: 20px;
+      padding-left: 20px;
+      background-color: $color-secondary-background;
+      border-radius: 8px;
+      border: none;
+      border: 2px solid $color-gray-border;
+      cursor: pointer;
+    }
+    button:hover {
+        border: 2px solid $color-test-button-border;
+    }
+
+    button:active {
+      background-color: $color-gray-border;;
+    }
+  }
+}

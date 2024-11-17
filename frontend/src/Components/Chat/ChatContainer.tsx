@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { SetStateAction, useEffect, useRef, useState } from "react";
 import ChatMessages from "./ChatMessages";
 import ChatInput from "./ChatInput";
 import { Message } from "../../models/Message";
@@ -17,6 +17,9 @@ interface ChatContainerProps {
   onVocabularyClick?: any;
   onCorrectionClick?: any;
   onClickReset?: any;
+  isTesting: boolean;
+  setIsTesting: React.Dispatch<SetStateAction<boolean>>;
+  setIsTestModalOpen: React.Dispatch<SetStateAction<boolean>>;
 }
 
 const ChatContainer: React.FC<ChatContainerProps> = ({
@@ -24,13 +27,15 @@ const ChatContainer: React.FC<ChatContainerProps> = ({
   onVocabularyClick,
   onCorrectionClick,
   onClickReset,
+  isTesting,
+  setIsTesting,
+  setIsTestModalOpen
 }) => {
   const [newMessage, setNewMessage] = useState<string>("");
   const [messages, setMessages] = useState<Array<Message>>([]);
   const [language, setLanguage] = useState<string>("Angličtina");
   const [difficulty, setDifficulty] = useState<string>("A1");
   const [loading, setLoading] = useState<boolean>(false);
-  const [isTesting, setIsTesting] = useState<boolean>(false);
   const messagesRef = useRef(messages);
 
   const handleSuccessfulReply = (response: Array<string>) => {
@@ -134,6 +139,12 @@ const ChatContainer: React.FC<ChatContainerProps> = ({
     messagesRef.current = messages;
   }, [messages]);
 
+  useEffect(() => {
+    if (isTesting) {
+      handleLanguageTest();
+    }
+  }, [isTesting])
+
   return (
     <div className="chatContainer">
       <div className="chatSettings">
@@ -147,7 +158,7 @@ const ChatContainer: React.FC<ChatContainerProps> = ({
             <div className="chatSettingsRight">
               <button
                 className="testButton headingText"
-                onClick={handleLanguageTest}
+                onClick={() => setIsTestModalOpen(true)}
               >
                 Test jazyku
               </button>
