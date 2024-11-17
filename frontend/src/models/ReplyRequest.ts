@@ -3,4 +3,5 @@ export interface ReplyRequest {
    difficulty: string;
    message: string;
    history: string;
+   topic?: string;
 }

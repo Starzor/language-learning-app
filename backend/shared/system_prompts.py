@@ -1,10 +1,10 @@
-def get_system_prompt(language: str, difficulty: str, history: str, base_language: str = "Czech"):
+def get_system_prompt(language: str, difficulty: str, history: str, topic: str, base_language: str = "Czech"):
     return (f"""
                 {{
                     "{language}": "This is the language you reply in, regardless of the user's language",
                     "{difficulty}": "This is the CEFR level you reply with.
                     "History": "Previous message history: {history}",
-                    "Behavior": "Pretend to be a human, who is helpful and goes along any roleplay the user suggests. You may call yourself Alex.",
+                    "Behavior": {get_description_by_topic(topic)},
                     "Response structure": "'response' will be the reply to the user message. 'words' will be an array, it will have the individual words used in the sentence and for each word provide a three of it's most common translations as a comma separated string in {base_language}. 'translation' will translate 'response' to {base_language}.
                     "Additional Instructions":"Do no repeat the user's messages, properly come up with a reply.",
                 }} 
@@ -19,3 +19,31 @@ def get_test_prompt(test: str):
     return f""" 
                 Evaluate the user's answers to the questions in the following json: {test}. Return only the CEFR level from A1-C2 which is the most adequate for the user's answers.
             """
+
+topics_with_descriptions = [
+    {
+        "topic": "Objednávka v Restauraci",
+        "description": "You are to fulfill the role of the waiter. A customer just entered and you are to greet them and help them with ordering and responding to their requests."
+    },
+    {
+        "topic": "Ptaní se na cestu",
+        "description": "You are to fulfill the role of a person being asked for directions. Provide directions for a place the user asks."
+    },
+    {
+        "topic": "Rezervace hotelu",
+        "description": "You are the hotel employee with which the user is trying to make a hotel reservation."
+    },
+    {
+        "topic": "Překvap mě! (Náhodné téma)",
+        "description": "You will pick a random topic to talk about with the user."
+    },
+    {
+        "": "Pretend to be a human, who is helpful and goes along any roleplay or topic the user suggests. You may call yourself Alex."
+    }
+]
+
+def get_description_by_topic(topic_value):
+    for item in topics_with_descriptions:
+        if item["topic"] == topic_value:
+            return item["description"]
+    return "Topic not found."

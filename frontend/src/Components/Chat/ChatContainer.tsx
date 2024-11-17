@@ -3,13 +3,15 @@ import ChatMessages from "./ChatMessages";
 import ChatInput from "./ChatInput";
 import { Message } from "../../models/Message";
 import { ReplyRequest } from "../../models/ReplyRequest";
-import { getChatReply, getTestResults } from "../../api";
+import { getChatReply, getTestResults, getTopicConversation } from "../../api";
 import "../../styles/Chat.scss";
 import { TestData } from "../../models/TestData";
-import { LANGUAGE_MAP } from "../../constants";
+import { LANGUAGE_MAP, TOPICS } from "../../constants";
 import { TestEvaluationRequest } from "../../models/TestEvaluationRequest";
 import ConfirmationModal from "../Modal/ConfirmationModal";
 import ChatSettings from "./ChatSettings";
+import ChatWelcome from "./ChatWelcome";
+import { TopicConversationRequest } from "../../models/TopicConversationRequest";
 
 interface ChatContainerProps {
   onTranslateClick?: any;
@@ -28,6 +30,7 @@ const ChatContainer: React.FC<ChatContainerProps> = ({
   const [messages, setMessages] = useState<Array<Message>>([]);
   const [language, setLanguage] = useState<string>("Angličtina");
   const [difficulty, setDifficulty] = useState<string>("A1");
+  const [topic, setTopic] = useState<string>("");
   const [loading, setLoading] = useState<boolean>(false);
   const [isResetModalOpen, setIsResetModalOpen] = useState<boolean>(false);
   const [isTestModalOpen, setIsTestModalOpen] = useState<boolean>(false);
@@ -69,6 +72,7 @@ const ChatContainer: React.FC<ChatContainerProps> = ({
       language: language,
       difficulty: difficulty,
       message: newMessage,
+      topic: topic,
       history: messages
         .map((message) => {
           return message.isUser
@@ -137,6 +141,32 @@ const ChatContainer: React.FC<ChatContainerProps> = ({
     setIsResetModalOpen(false);
   };
 
+  const handleClickTopic = (topic: string) => {
+    setTopic(topic);
+    setLoading(true);
+    const request: TopicConversationRequest = {
+      language: language,
+      difficulty: difficulty,
+      topic: topic,
+    };
+
+    getTopicConversation(request).then((data) =>
+    {
+      const parsedData = JSON.parse(data);
+      setMessages([
+        ...messagesRef.current,
+        {
+          text: parsedData.response,
+          isUser: false,
+          vocabulary: parsedData.words,
+          translation: parsedData.translation,
+          language: language,
+        },
+      ])
+    }
+    ).then(() => setLoading(false));
+  };
+
   useEffect(() => {
     messagesRef.current = messages;
   }, [messages]);
@@ -164,13 +194,18 @@ const ChatContainer: React.FC<ChatContainerProps> = ({
         onTestClick={() => setIsTestModalOpen(true)}
         onResetClick={() => setIsResetModalOpen(true)}
       />
-      <ChatMessages
-        messages={messages}
-        isTesting={isTesting}
-        onTranslateClick={onTranslateClick}
-        onVocabularyClick={onVocabularyClick}
-        onCorrectionClick={onCorrectionClick}
-      />
+      {messages.length == 0 && !loading && (
+        <ChatWelcome topics={TOPICS} onTopicClick={handleClickTopic} />
+      )}
+      {(messages.length > 0 || loading) && (
+        <ChatMessages
+          messages={messages}
+          isTesting={isTesting}
+          onTranslateClick={onTranslateClick}
+          onVocabularyClick={onVocabularyClick}
+          onCorrectionClick={onCorrectionClick}
+        />
+      )}
       <ChatInput
         loading={loading}
         newMessage={newMessage}

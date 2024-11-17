@@ -70,7 +70,36 @@
   .chatWelcome {
     flex: 1;
     align-content: center;
-    margin: 20px;
+
+    .topicContainer {
+      width: 100%;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      align-items: start;
+
+      button {
+        color: $color-secondary-text;
+        background-color: $color-background;
+        border: 2px solid $color-gray-border;
+        margin: 10px;
+        border-radius: 20px;
+        padding-top: 5px;
+        padding-bottom: 5px;
+        padding-left: 20px;
+        padding-right: 20px;
+        width: fit-content;
+        cursor: pointer;
+      }
+      
+      button:hover {
+        border: 2px solid $color-test-button-border;
+      }
+
+      button:active {
+        background-color: $color-gray-border;
+      }
+    }
   }
 
   .chatMessages {
