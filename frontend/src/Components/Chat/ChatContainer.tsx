@@ -11,6 +11,7 @@ import "../../styles/Chat.scss";
 import { TestData } from "../../models/TestData";
 import { LANGUAGE_MAP } from "../../constants";
 import { TestEvaluationRequest } from "../../models/TestEvaluationRequest";
+import Modal from "react-modal";
 
 interface ChatContainerProps {
   onTranslateClick?: any;
@@ -36,6 +37,7 @@ const ChatContainer: React.FC<ChatContainerProps> = ({
   const [language, setLanguage] = useState<string>("Angličtina");
   const [difficulty, setDifficulty] = useState<string>("A1");
   const [loading, setLoading] = useState<boolean>(false);
+  const [isResetModalOpen, setIsResetModalOpen] = useState<boolean>(false);
   const messagesRef = useRef(messages);
 
   const handleSuccessfulReply = (response: Array<string>) => {
@@ -85,6 +87,7 @@ const ChatContainer: React.FC<ChatContainerProps> = ({
   const resetChat = () => {
     setMessages([]);
     onClickReset();
+    setIsResetModalOpen(false);
   };
 
   const handleLanguageTest = async () => {
@@ -147,11 +150,34 @@ const ChatContainer: React.FC<ChatContainerProps> = ({
 
   return (
     <div className="chatContainer">
+      <Modal
+        isOpen={isResetModalOpen}
+        className="reactModal"
+        overlayClassName="reactModalOverlay"
+      >
+        <p className="commonText centerText">
+          Opravdu chcete resetovat konverzaci?
+        </p>
+        <div>
+          <button
+            className="commonText"
+            onClick={() => setIsResetModalOpen(false)}
+          >
+            Ne
+          </button>
+          <button
+            className="commonText lightPurpleText"
+            onClick={resetChat}
+          >
+            Ano
+          </button>
+        </div>
+      </Modal>
       <div className="chatSettings">
         {!isTesting && (
           <>
             <div className="chatSettingsLeft">
-              <button className="resetChat" onClick={resetChat}>
+              <button className="resetChat" onClick={() => setIsResetModalOpen(true)}>
                 <img src={require("../../images/restart.png")} />
               </button>
             </div>
