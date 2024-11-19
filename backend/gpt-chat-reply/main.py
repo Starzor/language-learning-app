@@ -35,8 +35,9 @@ def main(request):
     difficulty = request.args.get("difficulty")
     history = request.args.get("history")
     topic = request.args.get("topic")
+    words = request.args.get("words")
 
-    system_request = get_system_prompt(language=language, difficulty=difficulty, history=history, topic=topic)
+    system_request = get_system_prompt(language=language, difficulty=difficulty, history=history, topic=topic, words=words)
     
     try:
         gpt_response = generate_response(prompt=message, system_instructions=system_request, response_schema=message_response_schema)

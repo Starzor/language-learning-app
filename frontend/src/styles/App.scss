@@ -9,3 +9,37 @@
   justify-content: center;
   color: $color-whitesmoke;
 }
+
+.checkboxButton {
+  width: 20px;
+  height: 20px;
+  min-width: 20px;
+  min-height: 20px;
+  margin-right: 10px;
+  outline: none;
+  background-color: $color-secondary-background;
+  border: 2px solid $color-gray-border;
+  border-radius: 4px;
+}
+
+.checkboxButton:hover {
+  border: 2px solid $color-user-message-button-border;
+}
+
+.activeCheckboxButton {
+  border: none;
+  background-color: transparent;
+  background-image: url("../images/checkbox_active.png");
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+
+.activeCheckboxButton:hover {
+  border: none;
+}
+
+.vocabularyRow {
+  display: flex;
+  flex-direction: row;
+  margin-top: 15px;
+}

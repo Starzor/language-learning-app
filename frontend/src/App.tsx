@@ -1,7 +1,7 @@
 import ChatContainer from "./Components/Chat/ChatContainer";
 import ControlPanel from "./Components/ControlPanel/ControlPanel";
 import TranslationPanel from "./Components/TranslationPanel/TranslationPanel";
-import { Message } from "./models/Message";
+import { Message, WordPair } from "./models/Message";
 import { useEffect, useState } from "react";
 import Modal from "react-modal";
 import "./styles/Modal.scss";
@@ -11,6 +11,7 @@ const App = () => {
   const [translationMessage, setTranslationMessage] = useState<Message>();
   const [translationOrVocab, setTranslationOrVocab] = useState<string>("");
   const [controlMessage, setControlMessage] = useState<Message>();
+  const [newWords, setNewWords] = useState<Array<WordPair>>([]);
 
   const resetMessages = () => {
     setTranslationMessage(undefined);
@@ -28,6 +29,14 @@ const App = () => {
     setTranslationMessage(message);
   };
 
+  const handleNewWordToggle = (wordPair: WordPair) => {
+    if (newWords.map(entry => entry.word).includes(wordPair.word)) {
+      setNewWords(newWords.filter((entry) => entry.word != wordPair.word));
+      return;
+    }
+    setNewWords([...newWords, wordPair]);
+  };
+
   useEffect(() => {
     Modal.setAppElement(".App");
   }, []);
@@ -40,10 +49,13 @@ const App = () => {
         onVocabularyClick={handleVocabularyClick}
         onCorrectionClick={setControlMessage}
         onClickReset={resetMessages}
+        newWords={newWords}
       />
       <TranslationPanel
+        handleNewWordToggle={handleNewWordToggle}
         translationMessage={translationMessage}
         translationOrVocab={translationOrVocab}
+        newWords={newWords}
       />
     </div>
   );

@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import ChatMessages from "./ChatMessages";
 import ChatInput from "./ChatInput";
-import { Message } from "../../models/Message";
+import { Message, WordPair } from "../../models/Message";
 import { ReplyRequest } from "../../models/ReplyRequest";
 import { getChatReply, getTestResults, getTopicConversation } from "../../api";
 import "../../styles/Chat.scss";
@@ -18,6 +18,7 @@ interface ChatContainerProps {
   onVocabularyClick?: any;
   onCorrectionClick?: any;
   onClickReset?: any;
+  newWords?: Array<WordPair>;
 }
 
 const ChatContainer: React.FC<ChatContainerProps> = ({
@@ -25,6 +26,7 @@ const ChatContainer: React.FC<ChatContainerProps> = ({
   onVocabularyClick,
   onCorrectionClick,
   onClickReset,
+  newWords
 }) => {
   const [newMessage, setNewMessage] = useState<string>("");
   const [messages, setMessages] = useState<Array<Message>>([]);
@@ -73,6 +75,7 @@ const ChatContainer: React.FC<ChatContainerProps> = ({
       difficulty: difficulty,
       message: newMessage,
       topic: topic,
+      words: newWords ? `[${newWords.map(pair => pair.word).join(",")}]` : "[]",
       history: messages
         .map((message) => {
           return message.isUser
@@ -150,21 +153,21 @@ const ChatContainer: React.FC<ChatContainerProps> = ({
       topic: topic,
     };
 
-    getTopicConversation(request).then((data) =>
-    {
-      const parsedData = JSON.parse(data);
-      setMessages([
-        ...messagesRef.current,
-        {
-          text: parsedData.response,
-          isUser: false,
-          vocabulary: parsedData.words,
-          translation: parsedData.translation,
-          language: language,
-        },
-      ])
-    }
-    ).then(() => setLoading(false));
+    getTopicConversation(request)
+      .then((data) => {
+        const parsedData = JSON.parse(data);
+        setMessages([
+          ...messagesRef.current,
+          {
+            text: parsedData.response,
+            isUser: false,
+            vocabulary: parsedData.words,
+            translation: parsedData.translation,
+            language: language,
+          },
+        ]);
+      })
+      .then(() => setLoading(false));
   };
 
   useEffect(() => {

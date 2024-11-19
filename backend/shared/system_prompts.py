@@ -1,10 +1,11 @@
-def get_system_prompt(language: str, difficulty: str, history: str, topic: str, base_language: str = "Czech"):
+def get_system_prompt(language: str, difficulty: str, topic: str, history: str = "", words: str = "", base_language: str = "Czech"):
     return (f"""
                 {{
                     "{language}": "This is the language you reply in, regardless of the user's language",
                     "{difficulty}": "This is the CEFR level you reply with.
                     "History": "Previous message history: {history}",
                     "Behavior": {get_description_by_topic(topic)},
+                    "{words}": "The user is unfamiliar with these. Try to use them more.",
                     "Response structure": "'response' will be the reply to the user message. 'words' will be an array, it will have the individual words used in the sentence and for each word provide a three of it's most common translations as a comma separated string in {base_language}. 'translation' will translate 'response' to {base_language}.
                     "Additional Instructions":"Do no repeat the user's messages, properly come up with a reply.",
                 }} 

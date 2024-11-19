@@ -3,5 +3,6 @@ export interface ReplyRequest {
    difficulty: string;
    message: string;
    history: string;
+   words: string;
    topic?: string;
 }

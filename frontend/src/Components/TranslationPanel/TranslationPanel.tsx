@@ -1,17 +1,21 @@
 import React from "react";
-import { Message } from "../../models/Message";
+import { Message, WordPair } from "../../models/Message";
 import TranslationView from "./TranslationView";
 import VocabularyView from "./VocabularyView";
 import "../../styles/SidePanel.scss";
 
 interface TranslationPanelProps {
   translationMessage?: Message;
-  translationOrVocab?: string;  
+  translationOrVocab?: string;
+  handleNewWordToggle: (wordPair: WordPair) => void;
+  newWords: Array<WordPair>;
 }
 
 const TranslationPanel: React.FC<TranslationPanelProps> = ({
   translationMessage,
-  translationOrVocab
+  translationOrVocab,
+  handleNewWordToggle,
+  newWords
 }) => {
   return (
     <div className="sidePanel">
@@ -36,7 +40,11 @@ const TranslationPanel: React.FC<TranslationPanelProps> = ({
           <TranslationView translationMessage={translationMessage} />
         )) ||
           (translationOrVocab == "vocabulary" && (
-            <VocabularyView translationMessage={translationMessage} />
+            <VocabularyView
+              translationMessage={translationMessage}
+              handleNewWordToggle={handleNewWordToggle}
+              newWords={newWords}
+            />
           )))}
     </div>
   );

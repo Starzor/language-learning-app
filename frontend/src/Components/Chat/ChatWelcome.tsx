@@ -13,8 +13,8 @@ const ChatWelcome: React.FC<ChatWelcomeProps> = ({ topics, onTopicClick }) => {
         Začněte psát nebo si vyberte z témat níže
       </h2>
       <div className="topicContainer">
-        {topics.map((topic) => (
-          <button className="helperText" onClick={() => onTopicClick(topic)}>
+        {topics.map((topic, index) => (
+          <button key={index} className="helperText" onClick={() => onTopicClick(topic)}>
             {topic}
           </button>
         ))}
