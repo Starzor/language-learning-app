@@ -4,6 +4,7 @@ import { ReplyRequest }from "./models/ReplyRequest";
 import { ExplanationRequest } from "./models/ExplanationRequest";
 import { TestEvaluationRequest } from "./models/TestEvaluationRequest";
 import { TopicConversationRequest } from "./models/TopicConversationRequest";
+import { ReformTextRequest } from "./models/ReformTextRequest";
 
 const url = "https://europe-west3-gclearning-426207.cloudfunctions.net";
 
@@ -33,6 +34,24 @@ export const getChatReply = async (request: ReplyRequest): Promise<any> => {
 export const getTopicConversation = async (request: TopicConversationRequest) => {
   try {
     const response: AxiosResponse = await axios.get(`${url}/gpt-topic-conversation`, {
+      params: request,
+    });
+    console.log(response.data);
+
+    return response.data;
+  } catch (error) {
+    if (axios.isAxiosError(error)) {
+      console.error("Error fetching chat reply:", error.response?.data || error.message);
+    } else {
+      console.error("Unexpected error:", error);
+    }
+    throw error; 
+  }
+}
+
+export const getReformedText = async (request: ReformTextRequest) => {
+  try {
+    const response: AxiosResponse = await axios.get(`${url}/gpt-reform-text`, {
       params: request,
     });
     console.log(response.data);

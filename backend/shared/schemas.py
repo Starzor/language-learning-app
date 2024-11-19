@@ -73,3 +73,21 @@ test_response_schema = {
             }
         }
     }
+
+text_reform_schema = {
+    "type": "json_schema",
+        "json_schema": {
+            "name": "chat_response",
+            "strict": True,
+            "schema": {
+                "type": "object",
+                "properties": {
+                    "reformed_sentence": {
+                        "type": "string"
+                    },
+                },
+                "required" : ["reformed_sentence"],
+                "additionalProperties": False
+            }
+        }
+    }

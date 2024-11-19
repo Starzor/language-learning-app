@@ -6,7 +6,8 @@ steps:
       && cp -R backend/shared backend/gpt-chat-reply/shared \
       && cp -R backend/shared backend/gpt-message-correction/shared \
       && cp -R backend/shared backend/gpt-language-test/shared \
-      && cp -R backend/shared backend/gpt-topic-conversation/shared
+      && cp -R backend/shared backend/gpt-topic-conversation/shared \
+      && cp -R backend/shared backend/gpt-reform-text/shared
     waitFor: ['-']
   - id: Deploy gpt-chat-reply function
     name: gcr.io/google.com/cloudsdktool/cloud-sdk
@@ -89,6 +90,23 @@ steps:
       - gpt-topic-conversation
       - '--region=${_REGION}'
       - '--source=backend/gpt-topic-conversation/'
+      - '--trigger-http'
+      - '--max-instances=5'
+      - '--entry-point=main'
+      - '--runtime=python311'
+      - '--gen2'
+      - '--allow-unauthenticated'
+      - >-
+        --set-secrets=GPT_API_KEY=projects/${_PROJECT_ID}/secrets/${_MY_SECRET}/versions/latest
+  - id: Deploy gpt-reform-text function
+    name: gcr.io/google.com/cloudsdktool/cloud-sdk
+    args:
+      - gcloud
+      - functions
+      - deploy
+      - gpt-reform-text
+      - '--region=${_REGION}'
+      - '--source=backend/gpt-reform-text/'
       - '--trigger-http'
       - '--max-instances=5'
       - '--entry-point=main'

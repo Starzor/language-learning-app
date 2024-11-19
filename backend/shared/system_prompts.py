@@ -38,10 +38,17 @@ topics_with_descriptions = [
         "topic": "Překvap mě! (Náhodné téma)",
         "description": "You will pick a random topic to talk about with the user."
     },
-    {
-        "": "Pretend to be a human, who is helpful and goes along any roleplay or topic the user suggests. You may call yourself Alex."
+    {   "topic": "empty",
+        "description": "Pretend to be a human, who is helpful and goes along any roleplay or topic the user suggests. You may call yourself Alex."
     }
 ]
+
+def get_reform_prompt():
+    return (f"""
+                {{
+                    "Reformulate the user's message to be more syntactically and grammatically correct and easier to understand.",
+                }} 
+            """)
 
 def get_description_by_topic(topic_value):
     for item in topics_with_descriptions:

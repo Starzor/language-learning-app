@@ -1,9 +1,14 @@
-import { useEffect, useRef, useState } from "react";
+import { SetStateAction, useEffect, useRef, useState } from "react";
 import ChatMessages from "./ChatMessages";
 import ChatInput from "./ChatInput";
 import { Message, WordPair } from "../../models/Message";
 import { ReplyRequest } from "../../models/ReplyRequest";
-import { getChatReply, getTestResults, getTopicConversation } from "../../api";
+import {
+  getChatReply,
+  getReformedText,
+  getTestResults,
+  getTopicConversation,
+} from "../../api";
 import "../../styles/Chat.scss";
 import { TestData } from "../../models/TestData";
 import { LANGUAGE_MAP, TOPICS } from "../../constants";
@@ -12,27 +17,32 @@ import ConfirmationModal from "../Modal/ConfirmationModal";
 import ChatSettings from "./ChatSettings";
 import ChatWelcome from "./ChatWelcome";
 import { TopicConversationRequest } from "../../models/TopicConversationRequest";
+import { ReformTextRequest } from "../../models/ReformTextRequest";
 
 interface ChatContainerProps {
   onTranslateClick?: any;
   onVocabularyClick?: any;
   onCorrectionClick?: any;
+  onReformClick?: any;
   onClickReset?: any;
   newWords?: Array<WordPair>;
+  setIsLoadingReform: React.Dispatch<SetStateAction<boolean>>;
 }
 
 const ChatContainer: React.FC<ChatContainerProps> = ({
   onTranslateClick,
   onVocabularyClick,
   onCorrectionClick,
+  onReformClick,
   onClickReset,
-  newWords
+  newWords,
+  setIsLoadingReform,
 }) => {
   const [newMessage, setNewMessage] = useState<string>("");
   const [messages, setMessages] = useState<Array<Message>>([]);
   const [language, setLanguage] = useState<string>("Angličtina");
   const [difficulty, setDifficulty] = useState<string>("A1");
-  const [topic, setTopic] = useState<string>("");
+  const [topic, setTopic] = useState<string>("empty");
   const [loading, setLoading] = useState<boolean>(false);
   const [isResetModalOpen, setIsResetModalOpen] = useState<boolean>(false);
   const [isTestModalOpen, setIsTestModalOpen] = useState<boolean>(false);
@@ -75,7 +85,9 @@ const ChatContainer: React.FC<ChatContainerProps> = ({
       difficulty: difficulty,
       message: newMessage,
       topic: topic,
-      words: newWords ? `[${newWords.map(pair => pair.word).join(",")}]` : "[]",
+      words: newWords
+        ? `[${newWords.map((pair) => pair.word).join(",")}]`
+        : "[]",
       history: messages
         .map((message) => {
           return message.isUser
@@ -170,6 +182,28 @@ const ChatContainer: React.FC<ChatContainerProps> = ({
       .then(() => setLoading(false));
   };
 
+  const handleGetReformedText = (message: Message, id: number) => {
+    setIsLoadingReform(true);
+    if (!message.reformed) {
+      const reformRequest: ReformTextRequest = {
+        text: message.text,
+      };
+      getReformedText(reformRequest).then((response) => {
+        const reformedSentence = JSON.parse(response).reformed_sentence;
+        const newMessage: Message = {
+          ...message,
+          reformed: reformedSentence,
+        };
+        setMessages((prevMessages) =>
+          prevMessages.map((item, index) => (index === id ? newMessage : item))
+        );
+        onReformClick(newMessage);
+      });
+    } else {
+      onReformClick(message);
+    }
+  };
+
   useEffect(() => {
     messagesRef.current = messages;
   }, [messages]);
@@ -207,6 +241,7 @@ const ChatContainer: React.FC<ChatContainerProps> = ({
           onTranslateClick={onTranslateClick}
           onVocabularyClick={onVocabularyClick}
           onCorrectionClick={onCorrectionClick}
+          onReformClick={handleGetReformedText}
         />
       )}
       <ChatInput

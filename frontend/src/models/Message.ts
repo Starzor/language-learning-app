@@ -11,4 +11,5 @@ export interface Message {
     language?: string;
     correction?: string;
     incorrectText?: string;
+    reformed?: string;
 }
