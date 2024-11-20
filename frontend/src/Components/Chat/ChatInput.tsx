@@ -1,4 +1,4 @@
-import { SetStateAction } from "react";
+import { SetStateAction, useRef } from "react";
 import "../../styles/Chat.scss";
 import ChatLoading from "./ChatLoading";
 
@@ -15,10 +15,20 @@ const ChatInput: React.FC<ChatInputProps> = ({
   setNewMessage,
   handleSendMessage,
 }) => {
+  const textareaRef = useRef<HTMLTextAreaElement>(null);
   const handleEnterPress = (key: any) => {
     if (key == "Enter") {
       handleSendMessage();
     }
+  };
+
+  const handleInput = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
+    const textarea = textareaRef.current;
+    if (textarea) {
+      textarea.style.height = "auto";
+      textarea.style.height = `${textarea.scrollHeight}px`;
+    }
+    setNewMessage(event.target.value);
   };
 
   return (
@@ -26,12 +36,12 @@ const ChatInput: React.FC<ChatInputProps> = ({
       {" "}
       {!loading && (
         <div className="chatInput">
-          <input
+          <textarea
+            ref={textareaRef}
             className="messageInput helperText"
-            type="text"
             placeholder="Napište zprávu a stiskněte Enter..."
             value={newMessage}
-            onChange={(event) => setNewMessage(event.target.value)}
+            onChange={handleInput}
             onKeyDown={(event) => handleEnterPress(event.key)}
           />
           <button onClick={handleSendMessage} className="sendButton">

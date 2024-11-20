@@ -8,7 +8,7 @@ interface ChatWelcomeProps {
 const ChatWelcome: React.FC<ChatWelcomeProps> = ({ topics, onTopicClick }) => {
   return (
     <div className="chatWelcome">
-      <h1 className="titleText centerText">
+      <h1 className="titleText">
         Vítejte v Chatovací aplikaci pro výuku jazyků
       </h1>
       <Heading center>Začněte psát nebo si vyberte z témat níže</Heading>
