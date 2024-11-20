@@ -1,6 +1,6 @@
 import { SetStateAction, useRef } from "react";
 import "../../styles/Chat.scss";
-import ChatLoading from "./ChatLoading";
+import Loading from "../Reusable/Loading";
 
 interface ChatInputProps {
   loading: boolean;
@@ -49,7 +49,7 @@ const ChatInput: React.FC<ChatInputProps> = ({
           </button>
         </div>
       )}
-      {loading && <ChatLoading />}
+      {loading && <Loading />}
     </>
   );
 };

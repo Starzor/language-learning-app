@@ -1,9 +1,11 @@
 import { useEffect, useState } from "react";
 import { Message } from "../../models/Message";
 import "../../styles/Reusable/TabList.scss";
+import "../../styles/SidePanel.scss";
 import TabList from "../Reusable/TabList";
 import ControlView from "./ControlView";
 import ReformView from "./ReformView";
+import Loading from "../Reusable/Loading";
 
 interface ControlPanelProps {
   controlMessage?: Message;
@@ -30,6 +32,11 @@ const ControlPanel: React.FC<ControlPanelProps> = ({
       )}
       {controlMessage && controlOrReform == "Reformulace" && (
         <ReformView reformMessage={controlMessage} />
+      )}
+      {!controlMessage && controlOrReform == "Reformulace" && (
+        <div className="loadingContainer">
+          <Loading width={100} height={100}/>
+        </div>
       )}
     </div>
   );

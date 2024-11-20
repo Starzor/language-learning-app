@@ -24,6 +24,7 @@ interface ChatContainerProps {
   onVocabularyClick?: any;
   onCorrectionClick?: any;
   onReformClick?: any;
+  setReformMessage: React.Dispatch<SetStateAction<Message | undefined>>;
   onClickReset?: any;
   newWords?: Array<WordPair>;
   setIsLoadingReform: React.Dispatch<SetStateAction<boolean>>;
@@ -36,6 +37,7 @@ const ChatContainer: React.FC<ChatContainerProps> = ({
   onReformClick,
   onClickReset,
   newWords,
+  setReformMessage,
   setIsLoadingReform,
 }) => {
   const [newMessage, setNewMessage] = useState<string>("");
@@ -183,6 +185,8 @@ const ChatContainer: React.FC<ChatContainerProps> = ({
   };
 
   const handleGetReformedText = (message: Message, id: number) => {
+    onReformClick("Reformulace");
+    setReformMessage(undefined);
     setIsLoadingReform(true);
     if (!message.reformed) {
       const reformRequest: ReformTextRequest = {
@@ -197,10 +201,10 @@ const ChatContainer: React.FC<ChatContainerProps> = ({
         setMessages((prevMessages) =>
           prevMessages.map((item, index) => (index === id ? newMessage : item))
         );
-        onReformClick(newMessage);
+        setReformMessage(newMessage);
       });
     } else {
-      onReformClick(message);
+      setReformMessage(message);
     }
   };
 

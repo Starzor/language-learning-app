@@ -41,6 +41,14 @@ option {
   font-weight: 400;
 }
 
+.corrected {
+  color: $color-correct;
+}
+
+.incorrect {
+  color: $color-incorrect;
+}
+
 .lightPurpleText {
   color: $color-user-message-button-border;
 }

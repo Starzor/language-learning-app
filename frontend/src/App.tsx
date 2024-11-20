@@ -36,12 +36,6 @@ const App = () => {
     setControlMessage(message);
   };
 
-  const handleReformClick = (message: Message) => {
-    setControlOrReform("Reformulace");
-    setControlMessage(message);
-    console.log(message);
-  };
-
   const handleNewWordToggle = (wordPair: WordPair) => {
     if (newWords.map((entry) => entry.word).includes(wordPair.word)) {
       setNewWords(newWords.filter((entry) => entry.word != wordPair.word));
@@ -65,7 +59,8 @@ const App = () => {
         onTranslateClick={handleTranslationClick}
         onVocabularyClick={handleVocabularyClick}
         onCorrectionClick={handleControlClick}
-        onReformClick={handleReformClick}
+        onReformClick={setControlOrReform}
+        setReformMessage={setControlMessage}
         onClickReset={resetMessages}
         setIsLoadingReform={setIsLoadingReform}
         newWords={newWords}

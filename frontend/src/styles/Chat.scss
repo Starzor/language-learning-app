@@ -216,12 +216,6 @@
     }
   }
 
-  .loadingIcon {
-    margin-bottom: 35px;
-    transform-origin: center;
-    animation: spinner_xeMo 0.6s linear infinite;
-    fill: $color-loading;
-  }
   @keyframes spinner_xeMo {
     100% {
       transform: rotate(360deg);
