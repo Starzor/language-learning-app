@@ -22,22 +22,22 @@ const App = () => {
   };
 
   const handleTranslationClick = (message: Message) => {
-    setTranslationOrVocab("translation");
+    setTranslationOrVocab("Překlad");
     setTranslationMessage(message);
   };
 
   const handleVocabularyClick = (message: Message) => {
-    setTranslationOrVocab("vocabulary");
+    setTranslationOrVocab("Slovník");
     setTranslationMessage(message);
   };
 
   const handleControlClick = (message: Message) => {
-    setControlOrReform("control");
+    setControlOrReform("Kontrola");
     setControlMessage(message);
   };
 
   const handleReformClick = (message: Message) => {
-    setControlOrReform("reform");
+    setControlOrReform("Reformulace");
     setControlMessage(message);
     console.log(message);
   };

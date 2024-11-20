@@ -1,7 +1,7 @@
 import { useEffect, useRef } from "react";
 import { Message } from "../../models/Message";
-import ReactMarkdown from "react-markdown";
 import "../../styles/Chat.scss";
+import Paragraph from "../Reusable/Paragraph";
 
 interface ChatMessagesProps {
   messages: Array<Message>;
@@ -39,7 +39,7 @@ const ChatMessages: React.FC<ChatMessagesProps> = ({
           key={index}
           className={message.isUser ? "user message" : "bot message"}
         >
-          <ReactMarkdown className="commonText">{message.text}</ReactMarkdown>
+          <Paragraph>{message.text}</Paragraph>
           {!message.isUser && !isTesting && (
             <>
               <button

@@ -1,4 +1,5 @@
 import Modal from "react-modal";
+import Paragraph from "../Reusable/Paragraph";
 
 interface ModalProps {
   labelText: string;
@@ -19,7 +20,7 @@ const ConfirmationModal: React.FC<ModalProps> = ({
       className="reactModal"
       overlayClassName="reactModalOverlay"
     >
-      <p className="commonText centerText">{labelText}</p>
+      <Paragraph center>{labelText}</Paragraph>
       <div>
         <button className="commonText" onClick={onClickClose}>
           Ne

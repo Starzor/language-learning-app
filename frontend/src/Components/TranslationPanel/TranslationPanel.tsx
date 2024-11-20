@@ -1,8 +1,9 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Message, WordPair } from "../../models/Message";
 import TranslationView from "./TranslationView";
 import VocabularyView from "./VocabularyView";
 import "../../styles/SidePanel.scss";
+import TabList from "../Reusable/TabList";
 
 interface TranslationPanelProps {
   translationMessage?: Message;
@@ -15,31 +16,23 @@ const TranslationPanel: React.FC<TranslationPanelProps> = ({
   translationMessage,
   translationOrVocab,
   handleNewWordToggle,
-  newWords
+  newWords,
 }) => {
+  const [activeId, setActiveId] = useState<number>();
+  const tabs: Array<string> = ["Překlad", "Slovník"];
+
+  useEffect(() => {
+    setActiveId(tabs.findIndex((tab) => tab == translationOrVocab));
+  }, [translationOrVocab]);
+
   return (
     <div className="sidePanel">
-      <div className="tabList">
-        <div
-          className={`tabButton headingText ${
-            translationOrVocab == "translation" ? "active" : ""
-          }`}
-        >
-          Překlad
-        </div>
-        <div
-          className={`tabButton headingText ${
-            translationOrVocab == "vocabulary" ? "active" : ""
-          }`}
-        >
-          Slovník
-        </div>
-      </div>
+      <TabList tabs={tabs} activeId={activeId} />
       {translationMessage &&
-        ((translationOrVocab == "translation" && (
+        ((translationOrVocab == "Překlad" && (
           <TranslationView translationMessage={translationMessage} />
         )) ||
-          (translationOrVocab == "vocabulary" && (
+          (translationOrVocab == "Slovník" && (
             <VocabularyView
               translationMessage={translationMessage}
               handleNewWordToggle={handleNewWordToggle}

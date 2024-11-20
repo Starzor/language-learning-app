@@ -1,94 +1,35 @@
+import { useEffect, useState } from "react";
 import { Message } from "../../models/Message";
-import "../../styles/SidePanel.scss";
+import "../../styles/Reusable/TabList.scss";
+import TabList from "../Reusable/TabList";
+import ControlView from "./ControlView";
+import ReformView from "./ReformView";
 
 interface ControlPanelProps {
   controlMessage?: Message;
   controlOrReform?: string;
-  isLoadingReform: boolean
+  isLoadingReform: boolean;
 }
 
 const ControlPanel: React.FC<ControlPanelProps> = ({
   controlMessage,
   controlOrReform,
 }) => {
+  const tabs: Array<string> = ["Kontrola", "Reformulace"];
+  const [activeId, setActiveId] = useState<number>();
+
+  useEffect(() => {
+    setActiveId(tabs.findIndex((tab) => tab == controlOrReform));
+  }, [controlOrReform]);
+
   return (
     <div className="sidePanel">
-      <div className="tabList">
-        <div
-          className={`tabButton headingText ${
-            controlMessage && controlOrReform == "control" && "active"
-          }`}
-        >
-          Kontrola
-        </div>
-        <div
-          className={`tabButton headingText ${
-            controlMessage && controlOrReform == "reform" && "active"
-          }`}
-        >
-          Reformulace
-        </div>
-      </div>
-      {controlMessage && controlOrReform == "control" && (
-        <div className="sidePanelInnerContainer">
-          {controlMessage.correction != "" && (
-            <>
-              <p className="headingText">Původní text:</p>
-              <div className="sidePanelTextContainer">
-                <p
-                  className="commonText"
-                  dangerouslySetInnerHTML={{
-                    __html: controlMessage.incorrectText
-                      ? controlMessage.incorrectText
-                      : "",
-                  }}
-                ></p>
-              </div>
-              <p className="headingText">Opravený text:</p>
-              <div className="sidePanelTextContainer">
-                <p
-                  className="commonText"
-                  dangerouslySetInnerHTML={{
-                    __html: controlMessage.correction
-                      ? controlMessage.correction
-                      : "",
-                  }}
-                ></p>
-              </div>
-            </>
-          )}
-          {!controlMessage.correction && controlOrReform == "control" && (
-            <p className="commonText">Žádná chyba nenalezena...</p>
-          )}
-        </div>
+      <TabList tabs={tabs} activeId={activeId} />
+      {controlMessage && controlOrReform == "Kontrola" && (
+        <ControlView controlMessage={controlMessage} />
       )}
-      {controlMessage && controlOrReform == "reform" && (
-        <div className="sidePanelInnerContainer">
-          <p className="headingText">Původní text:</p>
-          <div className="sidePanelTextContainer">
-            <p
-              className="commonText"
-              dangerouslySetInnerHTML={{
-                __html: controlMessage.text,
-              }}
-            ></p>
-          </div>
-          {controlMessage.reformed && (
-            <>
-              <p className="headingText">Reformulovaný text:</p>
-              <div className="sidePanelTextContainer">
-                <p
-                  className="commonText"
-                  dangerouslySetInnerHTML={{
-                    __html: controlMessage.reformed
-                      ? controlMessage.reformed
-                      : "",
-                  }}
-                ></p>
-              </div>
-            </>
-          )}
-        </div>
+      {controlMessage && controlOrReform == "Reformulace" && (
+        <ReformView reformMessage={controlMessage} />
       )}
     </div>
   );

@@ -1,0 +1,31 @@
+@import "../colors.scss";
+
+$checkbox-image: url("../../images/checkbox_active.png");
+
+.checkboxButton {
+  width: 20px;
+  height: 20px;
+  min-width: 20px;
+  min-height: 20px;
+  margin-right: 10px;
+  outline: none;
+  background-color: $color-secondary-background;
+  border: 2px solid $color-gray-border;
+  border-radius: 4px;
+}
+
+.checkboxButton:hover {
+  border: 2px solid $color-user-message-button-border;
+}
+
+.checkboxButton.active {
+  border: none;
+  background-color: transparent;
+  background-image: $checkbox-image;
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+
+.checkboxButton.active:hover {
+  border: none;
+}

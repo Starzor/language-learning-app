@@ -1,0 +1,28 @@
+@import "../colors.scss";
+
+.tabList {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+
+  .tab {
+    background-color: transparent;
+    margin: 0;
+    margin-left: 30px;
+    padding-left: 20px;
+    padding-right: 20px;
+    border: none;
+    border-top: 5px solid $color-textfield-border;
+    color: $color-secondary-text;
+    font-size: 20px;
+    font-family: "Nunito", sans-serif !important;
+    font-optical-sizing: auto;
+    font-weight: 600;
+    font-style: normal;
+  }
+
+  .tab.active {
+    color: $color-main-text;
+    border-top: 5px solid $color-main-purple;
+  }
+}

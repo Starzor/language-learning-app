@@ -1,0 +1,56 @@
+@import "../colors.scss";
+
+.paragraph {
+  font-family: "Nunito", sans-serif !important;
+  font-optical-sizing: auto;
+  font-weight: 500;
+  font-style: normal;
+}
+
+.paragraph.marginTop {
+  margin-top: 18px;
+  margin-bottom: 0px;
+}
+
+.paragraph.marginBottom {
+  margin-top: 0px;
+  margin-bottom: 18px;
+}
+
+.paragraph.marginTopBottom {
+  margin-top: 18px;
+  margin-bottom: 18px;
+}
+
+.paragraph.marginNone {
+  margin-top: 0px;
+  margin-bottom: 0px;
+}
+
+.paragraph.sizeNormal {
+  font-size: 16px;
+}
+
+.paragraph.sizeHelper {
+  font-size: 14px;
+}
+
+.paragraph.colorMain {
+  color: $color-main-text;
+}
+
+.paragraph.colorSecondary {
+  color: $color-secondary-text;
+}
+
+.paragraph.colorSuccess {
+  color: $color-correct;
+}
+
+.paragraph.colorError {
+  color: $color-incorrect;
+}
+
+.paragraph.center {
+  text-align: center;
+}

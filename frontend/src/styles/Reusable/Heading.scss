@@ -1,0 +1,49 @@
+@import "../colors.scss";
+
+.heading {
+  font-size: 18px;
+  font-family: "Nunito", sans-serif !important;
+  font-optical-sizing: auto;
+  font-weight: 600;
+  font-style: normal;
+}
+
+.heading.marginTop {
+  margin-top: 18px;
+  margin-bottom: 0px;
+}
+
+.heading.marginBottom {
+  margin-top: 0px;
+  margin-bottom: 18px;
+}
+
+.heading.marginTopBottom {
+  margin-top: 18px;
+  margin-bottom: 18px;
+}
+
+.heading.marginNone {
+  margin-top: 0px;
+  margin-bottom: 0px;
+}
+
+.heading.colorMain {
+  color: $color-main-text;
+}
+
+.heading.colorSecondary {
+  color: $color-secondary-text;
+}
+
+.heading.colorSuccess {
+  color: $color-correct;
+}
+
+.heading.colorError {
+  color: $color-incorrect;
+}
+
+.heading.center {
+  text-align: center;
+}
