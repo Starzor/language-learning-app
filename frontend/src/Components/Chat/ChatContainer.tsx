@@ -104,6 +104,7 @@ const ChatContainer: React.FC<ChatContainerProps> = ({
   };
 
   const handleLanguageTest = async () => {
+    onReformClick("");
     setIsTestModalOpen(false);
     resetChat();
     setIsTesting(true);
