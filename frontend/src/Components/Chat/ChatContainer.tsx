@@ -55,8 +55,7 @@ const ChatContainer: React.FC<ChatContainerProps> = ({
     const messageResponse = JSON.parse(response[0]);
     const correctionResponse = JSON.parse(response[1]);
     const newUserMessage = {
-      text: newMessage,
-      isUser: true,
+      ...messagesRef.current[messagesRef.current.length - 1],
       correction: correctionResponse.correction,
       incorrectText: correctionResponse.original,
     };
@@ -155,6 +154,7 @@ const ChatContainer: React.FC<ChatContainerProps> = ({
 
   const resetChat = () => {
     setMessages([]);
+    onReformClick("");
     onClickReset();
     setIsResetModalOpen(false);
   };
