@@ -13,7 +13,7 @@ import "../../styles/Chat.scss";
 import { TestData } from "../../models/TestData";
 import { LANGUAGE_MAP, TOPICS } from "../../constants";
 import { TestEvaluationRequest } from "../../models/TestEvaluationRequest";
-import ConfirmationModal from "../Modal/ConfirmationModal";
+import ConfirmationModal from "../ConfirmationModal/ConfirmationModal";
 import ChatSettings from "./ChatSettings";
 import ChatWelcome from "./ChatWelcome";
 import { TopicConversationRequest } from "../../models/TopicConversationRequest";

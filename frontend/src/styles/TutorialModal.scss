@@ -1,0 +1,88 @@
+@import "./colors.scss";
+
+.tutorialModalOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba($color-background, 0.8);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  .tutorialModal {
+    background-color: $color-secondary-background;
+    border: 2px solid $color-gray-border;
+    border-radius: 20px;
+    position: relative;
+    width: 60%;
+    height: 75%;
+    outline: none;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+
+    .xButtonContainer {
+      width: 100%;
+      height: 5%;
+      display: flex;
+      justify-content: end;
+
+      button {
+        margin: 10px;
+      }
+    }
+
+    .textContainer {
+      width: 90%;
+      height: 10%;
+    }
+
+    .imageContainer {
+      max-width: 80%;
+      height: 75%;
+      margin-top: 30px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      img {
+        max-width: 90%;
+        max-height: 90%;
+        border: 5px solid $color-gray-border;
+        border-radius: 20px;
+      }
+
+      .buttonContainer {
+        min-width: 100px;
+        display: flex;
+        justify-content: space-between;
+      }
+    }
+
+    button {
+      background-color: transparent;
+      margin: 30px;
+      margin-top: 20px;
+      border: none;
+      cursor: pointer;
+
+      span {
+        color: $color-main-text;
+      }
+    }
+
+    button:disabled {
+      cursor: default;
+      span {
+        color: $color-gray-border;
+      }
+    }
+
+    button:hover {
+      outline: none;
+    }
+  }
+}

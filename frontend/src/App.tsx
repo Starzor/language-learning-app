@@ -4,8 +4,9 @@ import TranslationPanel from "./Components/TranslationPanel/TranslationPanel";
 import { Message, WordPair } from "./models/Message";
 import { useEffect, useState } from "react";
 import Modal from "react-modal";
-import "./styles/Modal.scss";
 import "./styles/App.scss";
+import ConfirmationModal from "./Components/ConfirmationModal/ConfirmationModal";
+import TutorialModal from "./Components/TutorialModal/TutorialModal";
 
 const App = () => {
   const [translationMessage, setTranslationMessage] = useState<Message>();
@@ -14,6 +15,8 @@ const App = () => {
   const [controlMessage, setControlMessage] = useState<Message>();
   const [newWords, setNewWords] = useState<Array<WordPair>>([]);
   const [isLoadingReform, setIsLoadingReform] = useState<boolean>(false);
+  const [isPromptingTutorial, setIsPromptingTutorial] = useState<boolean>(true);
+  const [isViewingTutorial, setIsViewingTutorial] = useState<boolean>(false);
 
   const resetMessages = () => {
     setTranslationMessage(undefined);
@@ -44,12 +47,32 @@ const App = () => {
     setNewWords([...newWords, wordPair]);
   };
 
+  const handleRejectTutorialPrompt = () => {
+    setIsViewingTutorial(false);
+    setIsPromptingTutorial(false);
+  };
+
+  const handleAcceptTutorialPrompt = () => {
+    setIsViewingTutorial(true);
+    setIsPromptingTutorial(false);
+  };
+
   useEffect(() => {
     Modal.setAppElement(".App");
   }, []);
 
   return (
     <div className="App">
+      <ConfirmationModal
+        labelText="Chcete si projít tutoriál?"
+        isOpen={isPromptingTutorial}
+        onClickClose={handleRejectTutorialPrompt}
+        onClickConfirm={handleAcceptTutorialPrompt}
+      />
+      <TutorialModal
+        isOpen={isViewingTutorial}
+        setIsOpen={setIsViewingTutorial}
+      />
       <ControlPanel
         controlMessage={controlMessage}
         controlOrReform={controlOrReform}

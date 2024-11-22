@@ -26,3 +26,29 @@ export const TOPICS = [
   "Rezervace hotelu",
   "Překvap mě! (Náhodné téma)",
 ];
+
+export const IMAGE_NAMES = [
+  "00_home_screen.png",
+  "01_chat_input.png",
+  "02_topic_picker.png",
+  "03_settings_bar.png",
+  "04_message_buttons_check.png",
+  "05_message_check_tab.png",
+  "06_message_reform_tab.png",
+  "07_message_buttons_translate.png",
+  "08_translate_tab.png",
+  "09_vocabulary_tab.png",
+];
+
+export const IMAGE_NOTES = [
+  "Vítejte v tutoriálu pro Chatovací aplikaci pro výuku jazyků. Pro orientaci v tutoriálu použijte šipky v spodní části obrazovky nebo klávesy šipek. Tutoriál můžete kdykoliv zrušit křížkem v pravém horním rohu.",
+  "Pro začnutí konverzace napište zprávu do textového pole.",
+  "Můžete si také vybrat z pár přednastavených témat, na která stačí kliknout.",
+  "V panelu nastavení si můžete vybrat jazyk a úroveň jazyka. Můžete také spustit testm který vám dle vašich odpovědí na otázka určí úroveň automaticky. V levé straně panelu je tlačítko s ikonkou restartu, sloužící pro načetí nové konverzace.",
+  "Zprávy uživatele obsahují dvě tlačítka: \"Kontrola\" a \"Reformulovat\".",
+  "Tlačítko \"Kontrola\" v levém postranním panelu zobrazí případné chyby v uživatelově zprávě, potom co dostane odpověď od systému. Systém automaticky zobrazuje kontrolu pro každou novou zprávu od uživatele.",
+  "Při zmáčknutí tlačítka \"Reformulovat\" se v levém postranním panelu zobrazí nová verze uživatelovi zprávy, která by měla být více syntakticky správna a jednodušší na pochopení.",
+  "Zprávy systému obsahují tlačítka \"Přeložit\" a \"Slovník\".",
+  "Při zmáčknutí tlačítka \"Přeložit\" se v pravém postranním panelu objeví překlad zprávy systému.",
+  "Tlačítko slovník zobrazí v pravém postranním panelu seznam slov, které systém použil ve zprávě, spolu s překladem těchto slov. Při kliknutí checkboxu vedle slova jej označíte jako nové slovo. Systém se pak bude snažit tyto slova používat častěji."
+]

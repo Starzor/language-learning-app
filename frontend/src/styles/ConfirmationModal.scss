@@ -1,6 +1,6 @@
 @import "./colors.scss";
 
-.reactModalOverlay {
+.confirmationModalOverlay {
   position: fixed;
   top: 0;
   left: 0;
@@ -11,7 +11,7 @@
   align-items: center;
   justify-content: center;
 
-  .reactModal {
+  .confirmationModal {
     background-color: $color-secondary-background;
     border: 2px solid $color-gray-border;
     border-radius: 20px;

@@ -1,5 +1,6 @@
 import Modal from "react-modal";
 import Paragraph from "../Reusable/Paragraph";
+import "../../styles/ConfirmationModal.scss";
 
 interface ModalProps {
   labelText: string;
@@ -17,8 +18,8 @@ const ConfirmationModal: React.FC<ModalProps> = ({
   return (
     <Modal
       isOpen={isOpen}
-      className="reactModal"
-      overlayClassName="reactModalOverlay"
+      className="confirmationModal"
+      overlayClassName="confirmationModalOverlay"
     >
       <Paragraph center>{labelText}</Paragraph>
       <div>
