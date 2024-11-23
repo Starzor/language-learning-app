@@ -27,24 +27,6 @@ steps:
       - >-
         --set-secrets=GPT_API_KEY=projects/${_PROJECT_ID}/secrets/${_MY_SECRET}/versions/latest
     waitFor: ['Distributing shared components']
-  - id: Deploy gpt-explain-reply function
-    name: gcr.io/google.com/cloudsdktool/cloud-sdk
-    args:
-      - gcloud
-      - functions
-      - deploy
-      - gpt-explain-reply
-      - '--region=${_REGION}'
-      - '--source=backend/gpt-explain-reply/'
-      - '--trigger-http'
-      - '--max-instances=5'
-      - '--entry-point=main'
-      - '--runtime=python311'
-      - '--gen2'
-      - '--allow-unauthenticated'
-      - >-
-        --set-secrets=GPT_API_KEY=projects/${_PROJECT_ID}/secrets/${_MY_SECRET}/versions/latest
-    waitFor: ['Distributing shared components']
   - id: Deploy gpt-message-correction function
     name: gcr.io/google.com/cloudsdktool/cloud-sdk
     args:

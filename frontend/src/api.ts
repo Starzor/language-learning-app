@@ -88,20 +88,3 @@ export const getTestResults = async (request: TestEvaluationRequest): Promise<an
     throw error; 
   }
 };
-
-export const getReplyExplanation = async (request: ExplanationRequest): Promise<any> => {
-  try {
-    const response: AxiosResponse = await axios.get(`${url}/gpt-explain-reply`, {
-      params: request,
-    });
-    console.log(response.data);
-    return response.data;
-  } catch (error) {
-    if (axios.isAxiosError(error)) {
-      console.error("Error fetching reply explanation:", error.response?.data || error.message);
-    } else {
-      console.error("Unexpected error:", error);
-    }
-    throw error; 
-  }
-};
