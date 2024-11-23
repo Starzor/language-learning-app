@@ -20,6 +20,7 @@ const App = () => {
   const [isViewingTutorial, setIsViewingTutorial] = useState<boolean>(false);
 
   const resetMessages = () => {
+    setNewWords([]);
     setTranslationMessage(undefined);
     setTranslationOrVocab("");
     setControlMessage(undefined);
@@ -59,6 +60,7 @@ const App = () => {
   };
 
   const notifyError = (message: string) => toast.error(message);
+  const notifySuccess = (message: string) => toast.success(message);
 
   useEffect(() => {
     Modal.setAppElement(".App");
@@ -103,6 +105,7 @@ const App = () => {
         onClickReset={resetMessages}
         newWords={newWords}
         notifyError={notifyError}
+        notifySuccess={notifySuccess}
       />
       <TranslationPanel
         handleNewWordToggle={handleNewWordToggle}

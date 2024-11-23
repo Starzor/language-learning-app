@@ -28,6 +28,7 @@ interface ChatContainerProps {
   onClickReset?: any;
   newWords?: Array<WordPair>;
   notifyError: (arg0: string) => void;
+  notifySuccess: (arg0: string) => void;
 }
 
 const ChatContainer: React.FC<ChatContainerProps> = ({
@@ -39,6 +40,7 @@ const ChatContainer: React.FC<ChatContainerProps> = ({
   newWords,
   setReformMessage,
   notifyError,
+  notifySuccess,
 }) => {
   const [newMessage, setNewMessage] = useState<string>("");
   const [messages, setMessages] = useState<Array<Message>>([]);
@@ -157,7 +159,11 @@ const ChatContainer: React.FC<ChatContainerProps> = ({
       test: testData,
     };
     getTestResults(testEvaluationRequest)
-      .then((value) => setDifficulty(value))
+      .then((value) => {
+        const response = JSON.parse(value);
+        setDifficulty(response.CEFR);
+        notifySuccess(`Language level evaluated to ${response.CEFR}`);
+      })
       .catch((error) => {
         notifyError(`Error getting test results: ${error}`);
       });
