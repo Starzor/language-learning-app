@@ -10,6 +10,7 @@ interface ChatMessagesProps {
   onVocabularyClick?: any;
   onCorrectionClick?: any;
   onReformClick?: any;
+  retryResponseRequest: (isRetry: boolean) => void;
 }
 
 const ChatMessages: React.FC<ChatMessagesProps> = ({
@@ -18,7 +19,8 @@ const ChatMessages: React.FC<ChatMessagesProps> = ({
   onTranslateClick,
   onVocabularyClick,
   onCorrectionClick,
-  onReformClick
+  onReformClick,
+  retryResponseRequest,
 }) => {
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
@@ -40,7 +42,7 @@ const ChatMessages: React.FC<ChatMessagesProps> = ({
           className={message.isUser ? "user message" : "bot message"}
         >
           <Paragraph>{message.text}</Paragraph>
-          {!message.isUser && !isTesting && (
+          {!message.isUser && !isTesting && !message.isError && (
             <>
               <button
                 className="helperText"
@@ -57,6 +59,14 @@ const ChatMessages: React.FC<ChatMessagesProps> = ({
               </button>
             </>
           )}
+          {!message.isUser &&
+            !isTesting &&
+            message.isError &&
+            index == messages.length - 1 && (
+              <button className="helperText" onClick={() => retryResponseRequest(true)}>
+                Zkusit znovu
+              </button>
+            )}
           {message.isUser && !isTesting && (
             <>
               <button

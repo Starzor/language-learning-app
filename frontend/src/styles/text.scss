@@ -9,7 +9,7 @@
   font-style: normal;
 }
 
-.commonText {
+.commonText, .commonText * {
   color: $color-main-text;
   font-size: 16px;
   font-family: "Nunito", sans-serif !important;

@@ -1,7 +1,6 @@
 import axios, { AxiosResponse } from "axios";
 import pako from "pako";
 import { ReplyRequest }from "./models/ReplyRequest";
-import { ExplanationRequest } from "./models/ExplanationRequest";
 import { TestEvaluationRequest } from "./models/TestEvaluationRequest";
 import { TopicConversationRequest } from "./models/TopicConversationRequest";
 import { ReformTextRequest } from "./models/ReformTextRequest";

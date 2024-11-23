@@ -5,8 +5,10 @@ import { Message, WordPair } from "./models/Message";
 import { useEffect, useState } from "react";
 import Modal from "react-modal";
 import "./styles/App.scss";
+import "react-toastify/dist/ReactToastify.css";
 import ConfirmationModal from "./Components/ConfirmationModal/ConfirmationModal";
 import TutorialModal from "./Components/TutorialModal/TutorialModal";
+import { Bounce, toast, ToastContainer } from "react-toastify";
 
 const App = () => {
   const [translationMessage, setTranslationMessage] = useState<Message>();
@@ -57,12 +59,28 @@ const App = () => {
     setIsPromptingTutorial(false);
   };
 
+  const notifyError = (message: string) => toast.error(message);
+
   useEffect(() => {
     Modal.setAppElement(".App");
   }, []);
 
   return (
     <div className="App">
+      <ToastContainer
+        className="commonText"
+        position="bottom-center"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="dark"
+        transition={Bounce}
+      />
       <ConfirmationModal
         labelText="Chcete si projít tutoriál?"
         isOpen={isPromptingTutorial}
@@ -87,6 +105,7 @@ const App = () => {
         onClickReset={resetMessages}
         setIsLoadingReform={setIsLoadingReform}
         newWords={newWords}
+        notifyError={notifyError}
       />
       <TranslationPanel
         handleNewWordToggle={handleNewWordToggle}

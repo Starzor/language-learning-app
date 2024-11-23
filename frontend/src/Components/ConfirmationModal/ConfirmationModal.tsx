@@ -19,6 +19,7 @@ const ConfirmationModal: React.FC<ModalProps> = ({
     <Modal
       isOpen={isOpen}
       className="confirmationModal"
+      ariaHideApp={false}
       overlayClassName="confirmationModalOverlay"
     >
       <Paragraph center>{labelText}</Paragraph>

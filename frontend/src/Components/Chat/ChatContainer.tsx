@@ -28,6 +28,7 @@ interface ChatContainerProps {
   onClickReset?: any;
   newWords?: Array<WordPair>;
   setIsLoadingReform: React.Dispatch<SetStateAction<boolean>>;
+  notifyError: (arg0: string) => void;
 }
 
 const ChatContainer: React.FC<ChatContainerProps> = ({
@@ -39,6 +40,7 @@ const ChatContainer: React.FC<ChatContainerProps> = ({
   newWords,
   setReformMessage,
   setIsLoadingReform,
+  notifyError,
 }) => {
   const [newMessage, setNewMessage] = useState<string>("");
   const [messages, setMessages] = useState<Array<Message>>([]);
@@ -66,17 +68,39 @@ const ChatContainer: React.FC<ChatContainerProps> = ({
       translation: messageResponse.translation,
       language: language,
     };
-    setMessages([...messages, newUserMessage, newSystemMessage]);
+    const newMessages = messagesRef.current.slice(0, -1);
+    setMessages([...newMessages, newUserMessage, newSystemMessage]);
     onCorrectionClick(newUserMessage);
+    setLoading(false);
   };
 
-  const handleSendMessage = () => {
-    if (newMessage.trim() == "") {
+  const handleErrorReply = (error: any) => {
+    notifyError(`Error getting response ${error}`);
+
+    const errorSystemMessage: Message = {
+      text: "Error receiving response",
+      isUser: false,
+      isError: true,
+    };
+
+    setMessages([...messagesRef.current, errorSystemMessage]);
+    setLoading(false);
+  };
+
+  const handleSendMessage = (isRetry: boolean = false) => {
+    let messageValue = newMessage;
+    if (isRetry) {
+      messageValue = messagesRef.current[messagesRef.current.length - 2].text;
+      setMessages([...messagesRef.current.slice(0, -1)]);
+    }
+    if (messageValue.trim() == "") {
       return;
     }
-    setMessages([...messagesRef.current, { text: newMessage, isUser: true }]);
-    setNewMessage("");
+    if (!isRetry) {
+      setMessages([...messagesRef.current, { text: newMessage, isUser: true }]);
+    }
     // If is testing we don't need to run the next part of code which handles HTTP request to API
+    setNewMessage("");
     if (isTesting) {
       return;
     }
@@ -84,7 +108,7 @@ const ChatContainer: React.FC<ChatContainerProps> = ({
     const request: ReplyRequest = {
       language: language,
       difficulty: difficulty,
-      message: newMessage,
+      message: messageValue,
       topic: topic,
       words: newWords
         ? `[${newWords.map((pair) => pair.word).join(",")}]`
@@ -97,9 +121,13 @@ const ChatContainer: React.FC<ChatContainerProps> = ({
         })
         .join(),
     };
+    console.log(request);
     getChatReply(request)
       .then((response) => handleSuccessfulReply(response))
-      .then(() => setLoading(false));
+      .catch((error) => {
+        console.log(error);
+        handleErrorReply(error);
+      });
   };
 
   const handleLanguageTest = async () => {
@@ -247,6 +275,7 @@ const ChatContainer: React.FC<ChatContainerProps> = ({
           onVocabularyClick={onVocabularyClick}
           onCorrectionClick={onCorrectionClick}
           onReformClick={handleGetReformedText}
+          retryResponseRequest={handleSendMessage}
         />
       )}
       <ChatInput

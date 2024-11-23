@@ -58,6 +58,7 @@ const TutorialModal: React.FC<TutorialModalProps> = ({ isOpen, setIsOpen }) => {
     <Modal
       isOpen={isOpen}
       className="tutorialModal"
+      ariaHideApp={false}
       overlayClassName="tutorialModalOverlay"
     >
       <div className="xButtonContainer">
