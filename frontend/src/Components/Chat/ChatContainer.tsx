@@ -49,6 +49,7 @@ const ChatContainer: React.FC<ChatContainerProps> = ({
   const [isResetModalOpen, setIsResetModalOpen] = useState<boolean>(false);
   const [isTestModalOpen, setIsTestModalOpen] = useState<boolean>(false);
   const [isTesting, setIsTesting] = useState<boolean>(false);
+  const [isLoadingReform, setIsLoadingReform] = useState<boolean>(false);
   const messagesRef = useRef(messages);
 
   const handleSuccessfulReply = (response: Array<string>) => {
@@ -213,13 +214,15 @@ const ChatContainer: React.FC<ChatContainerProps> = ({
       })
       .catch((error) => {
         notifyError(`Error getting topic: ${error}`);
-      }).then(() => setLoading(false));
+      })
+      .then(() => setLoading(false));
   };
 
   const handleGetReformedText = (message: Message, id: number) => {
     onReformClick("Reformulace");
     setReformMessage(undefined);
     if (!message.reformed) {
+      setIsLoadingReform(true);
       const reformRequest: ReformTextRequest = {
         text: message.text,
       };
@@ -240,7 +243,8 @@ const ChatContainer: React.FC<ChatContainerProps> = ({
         .catch((error) => {
           notifyError(`Error getting reformed sentence: ${error}`);
           onReformClick("");
-        });
+        })
+        .then(() => setIsLoadingReform(false));
     } else {
       setReformMessage(message);
     }
@@ -286,6 +290,7 @@ const ChatContainer: React.FC<ChatContainerProps> = ({
           onCorrectionClick={onCorrectionClick}
           onReformClick={handleGetReformedText}
           retryResponseRequest={handleSendMessage}
+          isLoadingReform={isLoadingReform}
         />
       )}
       <ChatInput

@@ -46,20 +46,12 @@
         cursor: pointer;
       }
 
-      .testButton:hover {
+      .testButton:hover:not(:disabled) {
         outline: 1px solid $color-test-button-border;
       }
 
-      .testButton:active {
+      .testButton:active:not(:disabled) {
         background-color: $color-test-button-border;
-      }
-
-      .testButton:disabled:hover {
-        outline: none;
-      }
-
-      .testButton:disabled:active {
-        background-color: $color-test-button;
       }
 
       .difficultySelect:disabled,
@@ -186,12 +178,17 @@
         border: 1px solid $color-user-message-button-border;
       }
 
-      button:hover {
+      button:hover:not(:disabled) {
         outline: 1px solid $color-user-message-button-border;
       }
 
-      button:active {
+      button:active:not(:disabled) {
         background-color: $color-user-message-button-border;
+      }
+
+      button:disabled{
+        opacity: 0.4;
+        cursor: default;
       }
     }
   }

@@ -11,6 +11,7 @@ interface ChatMessagesProps {
   onCorrectionClick?: any;
   onReformClick?: any;
   retryResponseRequest: (isRetry: boolean) => void;
+  isLoadingReform: boolean;
 }
 
 const ChatMessages: React.FC<ChatMessagesProps> = ({
@@ -21,6 +22,7 @@ const ChatMessages: React.FC<ChatMessagesProps> = ({
   onCorrectionClick,
   onReformClick,
   retryResponseRequest,
+  isLoadingReform,
 }) => {
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
@@ -63,7 +65,10 @@ const ChatMessages: React.FC<ChatMessagesProps> = ({
             !isTesting &&
             message.isError &&
             index == messages.length - 1 && (
-              <button className="helperText" onClick={() => retryResponseRequest(true)}>
+              <button
+                className="helperText"
+                onClick={() => retryResponseRequest(true)}
+              >
                 Zkusit znovu
               </button>
             )}
@@ -80,6 +85,7 @@ const ChatMessages: React.FC<ChatMessagesProps> = ({
               </button>
               <button
                 className="helperText"
+                disabled={isLoadingReform}
                 onClick={() => {
                   onReformClick(message, index);
                   console.log(message);
