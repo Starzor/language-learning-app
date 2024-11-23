@@ -102,7 +102,7 @@ const ChatContainer: React.FC<ChatContainerProps> = ({
     }
     setLoading(true);
     const request: ReplyRequest = {
-      language: language,
+      language: LANGUAGE_MAP[language],
       difficulty: difficulty,
       message: messageValue,
       topic: topic,
@@ -192,7 +192,7 @@ const ChatContainer: React.FC<ChatContainerProps> = ({
     setTopic(topic);
     setLoading(true);
     const request: TopicConversationRequest = {
-      language: language,
+      language: LANGUAGE_MAP[language],
       difficulty: difficulty,
       topic: topic,
     };
