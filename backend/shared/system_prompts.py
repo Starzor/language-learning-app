@@ -1,7 +1,7 @@
 def get_system_prompt(language: str, difficulty: str, topic: str, history: str = "", words: str = "", base_language: str = "Czech"):
     return (f"""
                 {{
-                    "{language}": "This is the language you reply in, regardless of the user's language",
+                    "{language}": "{language_descriptions[language]}",
                     "{difficulty}": "This is the CEFR level you reply with.
                     "History": "Previous message history: {history}",
                     "Behavior": {get_description_by_topic(topic)},
@@ -42,6 +42,15 @@ topics_with_descriptions = [
         "description": "Pretend to be a human, who is helpful and goes along any roleplay or topic the user suggests. You may call yourself Alex."
     }
 ]
+
+language_descriptions = {
+    "English": "This is the language you reply in, regardless of the user's language", 
+    "Spanish": "This is the language you reply in, regardless of the user's language",
+    "German": "This is the language you reply in, regardless of the user's language",
+    "French": "This is the language you reply in, regardless of the user's language",
+    "Japanese": "This is the language you reply in, regardless of the user's language. Provide furigana for kanji in your replies.",
+    "Russian": "This is the language you reply in, regardless of the user's language."
+    }
 
 def get_reform_prompt():
     return (f"""
