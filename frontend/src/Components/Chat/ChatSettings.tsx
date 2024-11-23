@@ -9,6 +9,7 @@ interface ChatSettingsProps {
   onDifficultyChange: any;
   language: string;
   onLanguageChange: any;
+  loading: boolean;
 }
 
 const ChatSettings: React.FC<ChatSettingsProps> = ({
@@ -19,25 +20,31 @@ const ChatSettings: React.FC<ChatSettingsProps> = ({
   onDifficultyChange,
   language,
   onLanguageChange,
+  loading,
 }) => {
   return (
     <div className="chatSettings">
       {!isTesting && (
         <>
           <div className="chatSettingsLeft">
-            <button className="resetChat" onClick={onResetClick}>
+            <button className="resetChat" disabled={loading} onClick={onResetClick}>
               <img src={require("../../images/restart.png")} />
             </button>
           </div>
           <div className="chatSettingsRight">
-            <button className="testButton headingText" onClick={onTestClick}>
+            <button className="testButton headingText" disabled={loading} onClick={onTestClick}>
               Test jazyku
             </button>
             <ChatDifficulty
+            disabled={loading}
               difficulty={difficulty}
               onDifficultyChange={onDifficultyChange}
             />
-            <ChatLanguage language={language} onLanguageChange={onLanguageChange} />
+            <ChatLanguage
+            disabled={loading}
+              language={language}
+              onLanguageChange={onLanguageChange}
+            />
           </div>
         </>
       )}

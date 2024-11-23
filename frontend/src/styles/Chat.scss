@@ -53,6 +53,21 @@
       .testButton:active {
         background-color: $color-test-button-border;
       }
+
+      .testButton:disabled:hover {
+        outline: none;
+      }
+
+      .testButton:disabled:active {
+        background-color: $color-test-button;
+      }
+
+      .difficultySelect:disabled,
+      .languageSelect:disabled,
+      .testButton:disabled {
+        opacity: 0.4;
+        cursor: default;
+      }
     }
 
     .chatSettingsLeft {
@@ -63,6 +78,11 @@
         border: none;
         outline: none;
         cursor: pointer;
+      }
+
+      .resetChat:disabled {
+        opacity: 0.4;
+        cursor: default;
       }
     }
   }
@@ -91,7 +111,7 @@
         width: fit-content;
         cursor: pointer;
       }
-      
+
       button:hover {
         border: 2px solid $color-test-button-border;
       }

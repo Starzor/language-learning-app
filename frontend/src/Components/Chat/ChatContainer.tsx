@@ -265,6 +265,7 @@ const ChatContainer: React.FC<ChatContainerProps> = ({
         onClickClose={() => setIsTestModalOpen(false)}
       />
       <ChatSettings
+        loading={loading}
         language={language}
         isTesting={isTesting}
         difficulty={difficulty}
