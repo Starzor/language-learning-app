@@ -123,8 +123,8 @@ const ChatContainer: React.FC<ChatContainerProps> = ({
       .catch((error) => {
         console.log(error);
         handleErrorReply(error);
-      });
-    setLoading(false);
+      })
+      .then(() => setLoading(false));
   };
 
   const handleLanguageTest = async () => {
@@ -213,8 +213,7 @@ const ChatContainer: React.FC<ChatContainerProps> = ({
       })
       .catch((error) => {
         notifyError(`Error getting topic: ${error}`);
-      });
-    setLoading(false);
+      }).then(() => setLoading(false));
   };
 
   const handleGetReformedText = (message: Message, id: number) => {
@@ -274,7 +273,7 @@ const ChatContainer: React.FC<ChatContainerProps> = ({
         onTestClick={() => setIsTestModalOpen(true)}
         onResetClick={() => setIsResetModalOpen(true)}
       />
-      {messages.length == 0 && !loading && (
+      {!(messages.length > 0) && !loading && (
         <ChatWelcome topics={TOPICS} onTopicClick={handleClickTopic} />
       )}
       {(messages.length > 0 || loading) && (
