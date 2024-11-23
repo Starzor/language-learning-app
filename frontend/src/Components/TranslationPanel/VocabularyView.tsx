@@ -4,6 +4,7 @@ import "../../styles/SidePanel.scss";
 import CheckboxButton from "../Reusable/CheckboxButton";
 import Paragraph from "../Reusable/Paragraph";
 import Heading from "../Reusable/Heading";
+import { NON_LATIN_SCRIPT_LANGUAGES } from "../../constants";
 
 interface VocabularyViewProps {
   translationMessage: Message;
@@ -34,8 +35,14 @@ const VocabularyView: React.FC<VocabularyViewProps> = ({
               onClick={() => handleNewWordToggle(pair)}
             />
             <Paragraph margin="None">
-              <span className="highlightedText">{pair.word}</span> -{" "}
-              {pair.translated}
+              <span className="highlightedText">
+                {pair.word}{" "}
+                {translationMessage.language &&
+                NON_LATIN_SCRIPT_LANGUAGES.includes(translationMessage.language)
+                  ? `(${pair.latin})`
+                  : ""}
+              </span>{" "}
+              - {pair.translated}
             </Paragraph>
           </div>
         ))}
@@ -51,10 +58,16 @@ const VocabularyView: React.FC<VocabularyViewProps> = ({
                   .includes(pair.word)}
                 onClick={() => handleNewWordToggle(pair)}
               />
-              <Paragraph margin="None">
-                <span className="highlightedText">{pair.word}</span> -{" "}
-                {pair.translated}
-              </Paragraph>
+            <Paragraph margin="None">
+              <span className="highlightedText">
+                {pair.word}{" "}
+                {translationMessage.language &&
+                NON_LATIN_SCRIPT_LANGUAGES.includes(translationMessage.language)
+                  ? `(${pair.latin})`
+                  : ""}
+              </span>{" "}
+              - {pair.translated}
+            </Paragraph>
             </div>
           ))}
         </div>

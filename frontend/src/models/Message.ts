@@ -1,5 +1,6 @@
 export interface WordPair {
     word: string;
+    latin?: string;
     translated: string;
 }
 

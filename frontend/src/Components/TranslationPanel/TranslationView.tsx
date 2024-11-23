@@ -15,11 +15,11 @@ const TranslationView: React.FC<TranslationViewProps> = ({
     <div className="sidePanelInnerContainer">
       <Heading>Původní text v {translationMessage.language}:</Heading>
       <div className="sidePanelTextContainer">
-        <Paragraph>{translationMessage?.text}</Paragraph>
+        <Paragraph>{translationMessage.text}</Paragraph>
       </div>
       <Heading>Přeložený text v Češtině:</Heading>
       <div className="sidePanelTextContainer">
-        <Paragraph>{translationMessage?.translation}</Paragraph>
+        <Paragraph>{translationMessage.translation}</Paragraph>
       </div>
     </div>
   );

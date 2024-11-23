@@ -17,11 +17,14 @@ message_response_schema = {
                                 "word": {
                                     "type": "string"
                                 },
+                                "latin" : {
+                                    "type": "string"
+                                },
                                 "translated": {
                                     "type": "string"
                                 }
                             },
-                            "required" : ["word", "translated"],
+                            "required" : ["word", "latin", "translated"],
                             "additionalProperties": False
                         }                          
                     },
