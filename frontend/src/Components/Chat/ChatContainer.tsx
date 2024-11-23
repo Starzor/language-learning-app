@@ -27,7 +27,6 @@ interface ChatContainerProps {
   setReformMessage: React.Dispatch<SetStateAction<Message | undefined>>;
   onClickReset?: any;
   newWords?: Array<WordPair>;
-  setIsLoadingReform: React.Dispatch<SetStateAction<boolean>>;
   notifyError: (arg0: string) => void;
 }
 
@@ -39,7 +38,6 @@ const ChatContainer: React.FC<ChatContainerProps> = ({
   onClickReset,
   newWords,
   setReformMessage,
-  setIsLoadingReform,
   notifyError,
 }) => {
   const [newMessage, setNewMessage] = useState<string>("");
@@ -71,7 +69,6 @@ const ChatContainer: React.FC<ChatContainerProps> = ({
     const newMessages = messagesRef.current.slice(0, -1);
     setMessages([...newMessages, newUserMessage, newSystemMessage]);
     onCorrectionClick(newUserMessage);
-    setLoading(false);
   };
 
   const handleErrorReply = (error: any) => {
@@ -84,7 +81,6 @@ const ChatContainer: React.FC<ChatContainerProps> = ({
     };
 
     setMessages([...messagesRef.current, errorSystemMessage]);
-    setLoading(false);
   };
 
   const handleSendMessage = (isRetry: boolean = false) => {
@@ -128,6 +124,7 @@ const ChatContainer: React.FC<ChatContainerProps> = ({
         console.log(error);
         handleErrorReply(error);
       });
+    setLoading(false);
   };
 
   const handleLanguageTest = async () => {
@@ -158,7 +155,11 @@ const ChatContainer: React.FC<ChatContainerProps> = ({
       answers: answers,
       test: testData,
     };
-    getTestResults(testEvaluationRequest).then((value) => setDifficulty(value));
+    getTestResults(testEvaluationRequest)
+      .then((value) => setDifficulty(value))
+      .catch((error) => {
+        notifyError(`Error getting test results: ${error}`);
+      });
     setIsTesting(false);
     resetChat();
   };
@@ -210,28 +211,37 @@ const ChatContainer: React.FC<ChatContainerProps> = ({
           },
         ]);
       })
-      .then(() => setLoading(false));
+      .catch((error) => {
+        notifyError(`Error getting topic: ${error}`);
+      });
+    setLoading(false);
   };
 
   const handleGetReformedText = (message: Message, id: number) => {
     onReformClick("Reformulace");
     setReformMessage(undefined);
-    setIsLoadingReform(true);
     if (!message.reformed) {
       const reformRequest: ReformTextRequest = {
         text: message.text,
       };
-      getReformedText(reformRequest).then((response) => {
-        const reformedSentence = JSON.parse(response).reformed_sentence;
-        const newMessage: Message = {
-          ...message,
-          reformed: reformedSentence,
-        };
-        setMessages((prevMessages) =>
-          prevMessages.map((item, index) => (index === id ? newMessage : item))
-        );
-        setReformMessage(newMessage);
-      });
+      getReformedText(reformRequest)
+        .then((response) => {
+          const reformedSentence = JSON.parse(response).reformed_sentence;
+          const newMessage: Message = {
+            ...message,
+            reformed: reformedSentence,
+          };
+          setMessages((prevMessages) =>
+            prevMessages.map((item, index) =>
+              index === id ? newMessage : item
+            )
+          );
+          setReformMessage(newMessage);
+        })
+        .catch((error) => {
+          notifyError(`Error getting reformed sentence: ${error}`);
+          onReformClick("");
+        });
     } else {
       setReformMessage(message);
     }

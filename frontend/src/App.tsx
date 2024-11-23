@@ -16,7 +16,6 @@ const App = () => {
   const [controlOrReform, setControlOrReform] = useState<string>("");
   const [controlMessage, setControlMessage] = useState<Message>();
   const [newWords, setNewWords] = useState<Array<WordPair>>([]);
-  const [isLoadingReform, setIsLoadingReform] = useState<boolean>(false);
   const [isPromptingTutorial, setIsPromptingTutorial] = useState<boolean>(true);
   const [isViewingTutorial, setIsViewingTutorial] = useState<boolean>(false);
 
@@ -94,7 +93,6 @@ const App = () => {
       <ControlPanel
         controlMessage={controlMessage}
         controlOrReform={controlOrReform}
-        isLoadingReform={isLoadingReform}
       />
       <ChatContainer
         onTranslateClick={handleTranslationClick}
@@ -103,7 +101,6 @@ const App = () => {
         onReformClick={setControlOrReform}
         setReformMessage={setControlMessage}
         onClickReset={resetMessages}
-        setIsLoadingReform={setIsLoadingReform}
         newWords={newWords}
         notifyError={notifyError}
       />

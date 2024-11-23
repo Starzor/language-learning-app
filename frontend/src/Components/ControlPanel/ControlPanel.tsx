@@ -10,7 +10,6 @@ import Loading from "../Reusable/Loading";
 interface ControlPanelProps {
   controlMessage?: Message;
   controlOrReform?: string;
-  isLoadingReform: boolean;
 }
 
 const ControlPanel: React.FC<ControlPanelProps> = ({
