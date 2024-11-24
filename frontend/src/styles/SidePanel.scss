@@ -39,7 +39,10 @@
   }
 
   .sidePanelTextContainer {
-    word-break: break-all;
+    hyphens: auto !important;
+    -webkit-hyphens: auto !important; 
+    -moz-hyphens: auto !important;
+    -ms-hyphens: auto !important;
     max-height: 250px;
     width: 90%;
     margin-top: 20px;
