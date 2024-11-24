@@ -44,9 +44,9 @@ export const IMAGE_NAMES = [
 
 export const IMAGE_NOTES = [
   "Vítejte v tutoriálu pro Chatovací aplikaci pro výuku jazyků. Pro orientaci v tutoriálu použijte šipky v spodní části obrazovky nebo klávesy šipek. Tutoriál můžete kdykoliv zrušit křížkem v pravém horním rohu.",
-  "Pro začnutí konverzace napište zprávu do textového pole.",
+  "Pro spuštění konverzace napište zprávu do textového pole.",
   "Můžete si také vybrat z pár přednastavených témat, na která stačí kliknout.",
-  "V panelu nastavení si můžete vybrat jazyk a úroveň jazyka. Můžete také spustit testm který vám dle vašich odpovědí na otázka určí úroveň automaticky. V levé straně panelu je tlačítko s ikonkou restartu, sloužící pro načetí nové konverzace.",
+  "V panelu nastavení si můžete vybrat jazyk a úroveň jazyka. Můžete také spustit test, který vám dle vašich odpovědí na otázku určí úroveň automaticky. V levé straně panelu je tlačítko s ikonkou restartu, sloužící pro načetí nové konverzace.",
   'Zprávy uživatele obsahují dvě tlačítka: "Kontrola" a "Reformulovat".',
   'Tlačítko "Kontrola" v levém postranním panelu zobrazí případné chyby v uživatelově zprávě, potom co dostane odpověď od systému. Systém automaticky zobrazuje kontrolu pro každou novou zprávu od uživatele.',
   'Při zmáčknutí tlačítka "Reformulovat" se v levém postranním panelu zobrazí nová verze uživatelovi zprávy, která by měla být více syntakticky správna a jednodušší na pochopení.',
