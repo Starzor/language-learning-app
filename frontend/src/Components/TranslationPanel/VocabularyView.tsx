@@ -1,5 +1,5 @@
 import React from "react";
-import { Message, WordPair } from "../../models/Message";
+import { Message, WordTrio } from "../../models/Message";
 import "../../styles/SidePanel.scss";
 import CheckboxButton from "../Reusable/CheckboxButton";
 import Paragraph from "../Reusable/Paragraph";
@@ -8,8 +8,8 @@ import { NON_LATIN_SCRIPT_LANGUAGES } from "../../constants";
 
 interface VocabularyViewProps {
   translationMessage: Message;
-  handleNewWordToggle: (wordPair: WordPair) => void;
-  newWords: Array<WordPair>;
+  handleNewWordToggle: (wordPair: WordTrio) => void;
+  newWords: Array<WordTrio>;
 }
 
 const VocabularyView: React.FC<VocabularyViewProps> = ({

@@ -1,7 +1,7 @@
 import { SetStateAction, useEffect, useRef, useState } from "react";
 import ChatMessages from "./ChatMessages";
 import ChatInput from "./ChatInput";
-import { Message, WordPair } from "../../models/Message";
+import { Message, WordTrio } from "../../models/Message";
 import { ReplyRequest } from "../../models/ReplyRequest";
 import {
   getChatReply,
@@ -20,24 +20,24 @@ import { TopicConversationRequest } from "../../models/TopicConversationRequest"
 import { ReformTextRequest } from "../../models/ReformTextRequest";
 
 interface ChatContainerProps {
-  onTranslateClick?: any;
-  onVocabularyClick?: any;
-  onCorrectionClick?: any;
-  onReformClick?: any;
+  newWords: Array<WordTrio>;
+  onTranslateClick: (message: Message) => void;
+  onVocabularyClick: (message: Message) => void;
+  onCorrectionClick: (message: Message) => void;
+  setControlOrReform: React.Dispatch<SetStateAction<"Kontrola" | "Reformulace" | "">>;
   setReformMessage: React.Dispatch<SetStateAction<Message | undefined>>;
-  onClickReset?: any;
-  newWords?: Array<WordPair>;
+  onClickReset: () => void;
   notifyError: (arg0: string) => void;
   notifySuccess: (arg0: string) => void;
 }
 
 const ChatContainer: React.FC<ChatContainerProps> = ({
+  newWords,
   onTranslateClick,
   onVocabularyClick,
   onCorrectionClick,
-  onReformClick,
+  setControlOrReform,
   onClickReset,
-  newWords,
   setReformMessage,
   notifyError,
   notifySuccess,
@@ -131,7 +131,6 @@ const ChatContainer: React.FC<ChatContainerProps> = ({
   };
 
   const handleLanguageTest = async () => {
-    onReformClick("");
     setIsTestModalOpen(false);
     resetChat();
     setIsTesting(true);
@@ -190,7 +189,6 @@ const ChatContainer: React.FC<ChatContainerProps> = ({
 
   const resetChat = () => {
     setMessages([]);
-    onReformClick("");
     onClickReset();
     setIsResetModalOpen(false);
   };
@@ -225,7 +223,7 @@ const ChatContainer: React.FC<ChatContainerProps> = ({
   };
 
   const handleGetReformedText = (message: Message, id: number) => {
-    onReformClick("Reformulace");
+    setControlOrReform("Reformulace");
     setReformMessage(undefined);
     if (!message.reformed) {
       setIsLoadingReform(true);
@@ -248,7 +246,7 @@ const ChatContainer: React.FC<ChatContainerProps> = ({
         })
         .catch((error) => {
           notifyError(`Error getting reformed sentence: ${error}`);
-          onReformClick("");
+          setControlOrReform("");
         })
         .then(() => setIsLoadingReform(false));
     } else {

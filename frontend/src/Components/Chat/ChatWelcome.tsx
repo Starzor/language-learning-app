@@ -2,7 +2,7 @@ import Heading from "../Reusable/Heading";
 
 interface ChatWelcomeProps {
   topics: Array<string>;
-  onTopicClick: any;
+  onTopicClick: (topic: string) => void;
 }
 
 const ChatWelcome: React.FC<ChatWelcomeProps> = ({ topics, onTopicClick }) => {

@@ -2,7 +2,7 @@ import "../../styles/Reusable/CheckboxButton.scss";
 
 interface CheckboxButtonProps {
   active: boolean;
-  onClick: () => any;
+  onClick: () => void;
 }
 
 const CheckboxButton: React.FC<CheckboxButtonProps> = ({ active, onClick }) => {

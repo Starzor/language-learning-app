@@ -6,23 +6,23 @@ import Paragraph from "../Reusable/Paragraph";
 interface ChatMessagesProps {
   messages: Array<Message>;
   isTesting: boolean;
-  onTranslateClick?: any;
-  onVocabularyClick?: any;
-  onCorrectionClick?: any;
-  onReformClick?: any;
-  retryResponseRequest: (isRetry: boolean) => void;
   isLoadingReform: boolean;
+  onTranslateClick: (message: Message) => void;
+  onVocabularyClick: (message: Message) => void;
+  onCorrectionClick: (message: Message) => void;
+  onReformClick: (message: Message, id: number) => void;
+  retryResponseRequest: (isRetry: boolean) => void;
 }
 
 const ChatMessages: React.FC<ChatMessagesProps> = ({
   messages,
   isTesting,
+  isLoadingReform,
   onTranslateClick,
   onVocabularyClick,
   onCorrectionClick,
   onReformClick,
   retryResponseRequest,
-  isLoadingReform,
 }) => {
   const messagesEndRef = useRef<HTMLDivElement>(null);
 

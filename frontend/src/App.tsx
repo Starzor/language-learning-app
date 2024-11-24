@@ -1,7 +1,7 @@
 import ChatContainer from "./Components/Chat/ChatContainer";
 import ControlPanel from "./Components/ControlPanel/ControlPanel";
 import TranslationPanel from "./Components/TranslationPanel/TranslationPanel";
-import { Message, WordPair } from "./models/Message";
+import { Message, WordTrio } from "./models/Message";
 import { useEffect, useState } from "react";
 import Modal from "react-modal";
 import "./styles/App.scss";
@@ -12,18 +12,19 @@ import { Bounce, toast, ToastContainer } from "react-toastify";
 
 const App = () => {
   const [translationMessage, setTranslationMessage] = useState<Message>();
-  const [translationOrVocab, setTranslationOrVocab] = useState<string>("");
-  const [controlOrReform, setControlOrReform] = useState<string>("");
+  const [translationOrVocab, setTranslationOrVocab] = useState<"Překlad" | "Slovník" | "">("");
+  const [controlOrReform, setControlOrReform] = useState<"Kontrola" | "Reformulace" | "">("");
   const [controlMessage, setControlMessage] = useState<Message>();
-  const [newWords, setNewWords] = useState<Array<WordPair>>([]);
+  const [newWords, setNewWords] = useState<Array<WordTrio>>([]);
   const [isPromptingTutorial, setIsPromptingTutorial] = useState<boolean>(true);
   const [isViewingTutorial, setIsViewingTutorial] = useState<boolean>(false);
 
   const resetMessages = () => {
-    setNewWords([]);
     setTranslationMessage(undefined);
     setTranslationOrVocab("");
+    setControlOrReform("");
     setControlMessage(undefined);
+    setNewWords([]);
   };
 
   const handleTranslationClick = (message: Message) => {
@@ -41,7 +42,7 @@ const App = () => {
     setControlMessage(message);
   };
 
-  const handleNewWordToggle = (wordPair: WordPair) => {
+  const handleNewWordToggle = (wordPair: WordTrio) => {
     if (newWords.map((entry) => entry.word).includes(wordPair.word)) {
       setNewWords(newWords.filter((entry) => entry.word != wordPair.word));
       return;
@@ -100,7 +101,7 @@ const App = () => {
         onTranslateClick={handleTranslationClick}
         onVocabularyClick={handleVocabularyClick}
         onCorrectionClick={handleControlClick}
-        onReformClick={setControlOrReform}
+        setControlOrReform={setControlOrReform}
         setReformMessage={setControlMessage}
         onClickReset={resetMessages}
         newWords={newWords}

@@ -5,8 +5,8 @@ import "../../styles/ConfirmationModal.scss";
 interface ModalProps {
   labelText: string;
   isOpen: boolean;
-  onClickClose: any;
-  onClickConfirm: any;
+  onClickClose: () => void;
+  onClickConfirm: () => void;
 }
 
 const ConfirmationModal: React.FC<ModalProps> = ({

@@ -1,26 +1,27 @@
+import { SetStateAction } from "react";
 import ChatDifficulty from "./ChatDifficulty";
 import ChatLanguage from "./ChatLanguage";
 
 interface ChatSettingsProps {
-  isTesting: boolean;
-  onResetClick: any;
-  onTestClick: any;
   difficulty: string;
-  onDifficultyChange: any;
   language: string;
-  onLanguageChange: any;
   loading: boolean;
+  isTesting: boolean;
+  onResetClick: () => void;
+  onTestClick: () => void;
+  onDifficultyChange: React.Dispatch<SetStateAction<string>>;
+  onLanguageChange: React.Dispatch<SetStateAction<string>>;
 }
 
 const ChatSettings: React.FC<ChatSettingsProps> = ({
   isTesting,
+  difficulty,
+  language,
+  loading,
   onResetClick,
   onTestClick,
-  difficulty,
   onDifficultyChange,
-  language,
   onLanguageChange,
-  loading,
 }) => {
   return (
     <div className="chatSettings">

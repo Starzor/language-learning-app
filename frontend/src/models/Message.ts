@@ -1,4 +1,4 @@
-export interface WordPair {
+export interface WordTrio {
     word: string;
     latin?: string;
     translated: string;
@@ -7,7 +7,7 @@ export interface WordPair {
 export interface Message {
     text: string;
     isUser: boolean;
-    vocabulary?: Array<WordPair>;
+    vocabulary?: Array<WordTrio>;
     translation?: string;
     language?: string;
     correction?: string;

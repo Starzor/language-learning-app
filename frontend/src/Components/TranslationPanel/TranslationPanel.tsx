@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Message, WordPair } from "../../models/Message";
+import { Message, WordTrio } from "../../models/Message";
 import TranslationView from "./TranslationView";
 import VocabularyView from "./VocabularyView";
 import "../../styles/SidePanel.scss";
@@ -8,8 +8,8 @@ import TabList from "../Reusable/TabList";
 interface TranslationPanelProps {
   translationMessage?: Message;
   translationOrVocab?: string;
-  handleNewWordToggle: (wordPair: WordPair) => void;
-  newWords: Array<WordPair>;
+  handleNewWordToggle: (wordPair: WordTrio) => void;
+  newWords: Array<WordTrio>;
 }
 
 const TranslationPanel: React.FC<TranslationPanelProps> = ({

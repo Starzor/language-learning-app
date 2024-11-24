@@ -6,7 +6,7 @@ interface ChatInputProps {
   loading: boolean;
   newMessage: string;
   setNewMessage: React.Dispatch<SetStateAction<string>>;
-  handleSendMessage: any;
+  handleSendMessage: (isRetry?: boolean) => void;
 }
 
 const ChatInput: React.FC<ChatInputProps> = ({
@@ -44,7 +44,7 @@ const ChatInput: React.FC<ChatInputProps> = ({
             onChange={handleInput}
             onKeyDown={(event) => handleEnterPress(event.key)}
           />
-          <button onClick={handleSendMessage} className="sendButton">
+          <button onClick={() => handleSendMessage()} className="sendButton">
             <img src={require("../../images/send_icon.png")} />
           </button>
         </div>
