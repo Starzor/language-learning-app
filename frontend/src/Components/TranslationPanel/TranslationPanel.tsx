@@ -3,26 +3,41 @@ import { Message, WordTrio } from "../../models/Message";
 import TranslationView from "./TranslationView";
 import VocabularyView from "./VocabularyView";
 import "../../styles/SidePanel.scss";
-import TabList from "../Reusable/TabList";
+import TabList, { Tab } from "../Reusable/TabList";
 
 interface TranslationPanelProps {
   translationMessage?: Message;
   translationOrVocab?: string;
-  handleNewWordToggle: (wordPair: WordTrio) => void;
   newWords: Array<WordTrio>;
+  handleNewWordToggle: (wordPair: WordTrio) => void;
+  onVocabularyTabClick: (message?: Message) => void;
+  onTranslationTabClick: (message?: Message) => void;
 }
 
 const TranslationPanel: React.FC<TranslationPanelProps> = ({
   translationMessage,
   translationOrVocab,
-  handleNewWordToggle,
   newWords,
+  handleNewWordToggle,
+  onVocabularyTabClick,
+  onTranslationTabClick,
 }) => {
   const [activeId, setActiveId] = useState<number>();
-  const tabs: Array<string> = ["Překlad", "Slovník"];
+  const tabs: Array<Tab> = [
+    {
+      name: "Překlad",
+      onClick: () => onTranslationTabClick(translationMessage),
+      disabled: translationMessage ? false : true,
+    },
+    {
+      name: "Slovník",
+      onClick: () => onVocabularyTabClick(translationMessage),
+      disabled: translationMessage ? false : true,
+    },
+  ];
 
   useEffect(() => {
-    setActiveId(tabs.findIndex((tab) => tab == translationOrVocab));
+    setActiveId(tabs.findIndex((tab) => tab.name == translationOrVocab));
   }, [translationOrVocab]);
 
   return (

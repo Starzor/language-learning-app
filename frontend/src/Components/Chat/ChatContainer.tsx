@@ -3,12 +3,7 @@ import ChatMessages from "./ChatMessages";
 import ChatInput from "./ChatInput";
 import { Message, WordTrio } from "../../models/Message";
 import { ReplyRequest } from "../../models/ReplyRequest";
-import {
-  getChatReply,
-  getReformedText,
-  getTestResults,
-  getTopicConversation,
-} from "../../api";
+import { getChatReply, getTestResults, getTopicConversation } from "../../api";
 import "../../styles/Chat.scss";
 import { TestData } from "../../models/TestData";
 import { LANGUAGE_MAP, TOPICS } from "../../constants";
@@ -17,15 +12,16 @@ import ConfirmationModal from "../ConfirmationModal/ConfirmationModal";
 import ChatSettings from "./ChatSettings";
 import ChatWelcome from "./ChatWelcome";
 import { TopicConversationRequest } from "../../models/TopicConversationRequest";
-import { ReformTextRequest } from "../../models/ReformTextRequest";
 
 interface ChatContainerProps {
   newWords: Array<WordTrio>;
+  messages: Array<Message>;
+  isLoadingReform: boolean;
+  handleGetReformedText: (message: Message, id: number) => void;
+  setMessages: React.Dispatch<SetStateAction<Array<Message>>>;
   onTranslateClick: (message: Message) => void;
   onVocabularyClick: (message: Message) => void;
   onCorrectionClick: (message: Message) => void;
-  setControlOrReform: React.Dispatch<SetStateAction<"Kontrola" | "Reformulace" | "">>;
-  setReformMessage: React.Dispatch<SetStateAction<Message | undefined>>;
   onClickReset: () => void;
   notifyError: (arg0: string) => void;
   notifySuccess: (arg0: string) => void;
@@ -33,17 +29,19 @@ interface ChatContainerProps {
 
 const ChatContainer: React.FC<ChatContainerProps> = ({
   newWords,
+  messages,
+  isLoadingReform,
+  handleGetReformedText,
+  setMessages,
   onTranslateClick,
   onVocabularyClick,
   onCorrectionClick,
-  setControlOrReform,
   onClickReset,
-  setReformMessage,
   notifyError,
   notifySuccess,
 }) => {
   const [newMessage, setNewMessage] = useState<string>("");
-  const [messages, setMessages] = useState<Array<Message>>([]);
+
   const [language, setLanguage] = useState<string>("Angličtina");
   const [difficulty, setDifficulty] = useState<string>("A1");
   const [topic, setTopic] = useState<string>("empty");
@@ -51,18 +49,18 @@ const ChatContainer: React.FC<ChatContainerProps> = ({
   const [isResetModalOpen, setIsResetModalOpen] = useState<boolean>(false);
   const [isTestModalOpen, setIsTestModalOpen] = useState<boolean>(false);
   const [isTesting, setIsTesting] = useState<boolean>(false);
-  const [isLoadingReform, setIsLoadingReform] = useState<boolean>(false);
   const messagesRef = useRef(messages);
 
   const handleSuccessfulReply = (response: Array<string>) => {
     const messageResponse = JSON.parse(response[0]);
     const correctionResponse = JSON.parse(response[1]);
-    const newUserMessage = {
+    const newUserMessage: Message = {
       ...messagesRef.current[messagesRef.current.length - 1],
       correction: correctionResponse.correction,
       incorrectText: correctionResponse.original,
     };
-    const newSystemMessage = {
+    const newSystemMessage: Message = {
+      id: messagesRef.current.length,
       text: messageResponse.response,
       isUser: false,
       vocabulary: messageResponse.words,
@@ -72,12 +70,14 @@ const ChatContainer: React.FC<ChatContainerProps> = ({
     const newMessages = messagesRef.current.slice(0, -1);
     setMessages([...newMessages, newUserMessage, newSystemMessage]);
     onCorrectionClick(newUserMessage);
+    onVocabularyClick(newSystemMessage);
   };
 
   const handleErrorReply = (error: any) => {
     notifyError(`Error getting response ${error}`);
 
     const errorSystemMessage: Message = {
+      id: messagesRef.current.length,
       text: "Error receiving response",
       isUser: false,
       isError: true,
@@ -96,7 +96,10 @@ const ChatContainer: React.FC<ChatContainerProps> = ({
       return;
     }
     if (!isRetry) {
-      setMessages([...messagesRef.current, { text: newMessage, isUser: true }]);
+      setMessages([
+        ...messagesRef.current,
+        { text: newMessage, isUser: true, id: messagesRef.current.length },
+      ]);
     }
     // If is testing we don't need to run the next part of code which handles HTTP request to API
     setNewMessage("");
@@ -143,6 +146,7 @@ const ChatContainer: React.FC<ChatContainerProps> = ({
         {
           text: question.question,
           isUser: false,
+          id: messagesRef.current.length
         },
       ]);
 
@@ -205,53 +209,22 @@ const ChatContainer: React.FC<ChatContainerProps> = ({
     getTopicConversation(request)
       .then((data) => {
         const parsedData = JSON.parse(data);
-        setMessages([
-          ...messagesRef.current,
-          {
-            text: parsedData.response,
-            isUser: false,
-            vocabulary: parsedData.words,
-            translation: parsedData.translation,
-            language: language,
-          },
-        ]);
+        const newSystemMessage: Message = {
+          id: messagesRef.current.length,
+          text: parsedData.response,
+          isUser: false,
+          vocabulary: parsedData.words,
+          translation: parsedData.translation,
+          language: language,
+        };
+        setMessages([...messagesRef.current, newSystemMessage]);
+        onVocabularyClick(newSystemMessage);
+        
       })
       .catch((error) => {
         notifyError(`Error getting topic: ${error}`);
       })
       .then(() => setLoading(false));
-  };
-
-  const handleGetReformedText = (message: Message, id: number) => {
-    setControlOrReform("Reformulace");
-    setReformMessage(undefined);
-    if (!message.reformed) {
-      setIsLoadingReform(true);
-      const reformRequest: ReformTextRequest = {
-        text: message.text,
-      };
-      getReformedText(reformRequest)
-        .then((response) => {
-          const reformedSentence = JSON.parse(response).reformed_sentence;
-          const newMessage: Message = {
-            ...message,
-            reformed: reformedSentence,
-          };
-          setMessages((prevMessages) =>
-            prevMessages.map((item, index) =>
-              index === id ? newMessage : item
-            )
-          );
-          setReformMessage(newMessage);
-        })
-        .catch((error) => {
-          notifyError(`Error getting reformed sentence: ${error}`);
-          setControlOrReform("");
-        })
-        .then(() => setIsLoadingReform(false));
-    } else {
-      setReformMessage(message);
-    }
   };
 
   useEffect(() => {

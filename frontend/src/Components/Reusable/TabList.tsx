@@ -1,5 +1,11 @@
+export interface Tab {
+  name: string;
+  disabled?: boolean;
+  onClick: (...args: any) => void;
+}
+
 interface TabListProps {
-  tabs: Array<string>;
+  tabs: Array<Tab>;
   activeId?: number;
 }
 
@@ -7,9 +13,9 @@ const TabList: React.FC<TabListProps> = ({ tabs, activeId }) => {
   return (
     <div className="tabList">
       {tabs.map((tab, index) => (
-        <h2 key={index} className={`tab ${activeId == index ? "active" : ""}`}>
-          {tab}
-        </h2>
+        <button onClick={tab.onClick} disabled={tab.disabled} key={index} className={`tab ${activeId == index ? "active" : ""}`}>
+          {tab.name}
+        </button>
       ))}
     </div>
   );
