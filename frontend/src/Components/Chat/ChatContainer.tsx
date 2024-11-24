@@ -49,6 +49,7 @@ const ChatContainer: React.FC<ChatContainerProps> = ({
   const [isResetModalOpen, setIsResetModalOpen] = useState<boolean>(false);
   const [isTestModalOpen, setIsTestModalOpen] = useState<boolean>(false);
   const [isTesting, setIsTesting] = useState<boolean>(false);
+  const [currentQuestion, setCurrentQuestion] = useState<number>(0);
   const messagesRef = useRef(messages);
 
   const handleSuccessfulReply = (response: Array<string>) => {
@@ -141,12 +142,13 @@ const ChatContainer: React.FC<ChatContainerProps> = ({
       `../../tests/${LANGUAGE_MAP[language]}.json`
     );
     for (let question of testData.test) {
+      setCurrentQuestion((prevValue) => prevValue + 1);
       setMessages([
         ...messagesRef.current,
         {
           text: question.question,
           isUser: false,
-          id: messagesRef.current.length
+          id: messagesRef.current.length,
         },
       ]);
 
@@ -171,6 +173,7 @@ const ChatContainer: React.FC<ChatContainerProps> = ({
         notifyError(`Error getting test results: ${error}`);
       });
     setIsTesting(false);
+    setCurrentQuestion(0);
     resetChat();
   };
 
@@ -219,7 +222,6 @@ const ChatContainer: React.FC<ChatContainerProps> = ({
         };
         setMessages([...messagesRef.current, newSystemMessage]);
         onVocabularyClick(newSystemMessage);
-        
       })
       .catch((error) => {
         notifyError(`Error getting topic: ${error}`);
@@ -254,6 +256,7 @@ const ChatContainer: React.FC<ChatContainerProps> = ({
         onDifficultyChange={setDifficulty}
         onTestClick={() => setIsTestModalOpen(true)}
         onResetClick={() => setIsResetModalOpen(true)}
+        currentQuestion={currentQuestion}
       />
       {!(messages.length > 0) && !loading && (
         <ChatWelcome topics={TOPICS} onTopicClick={handleClickTopic} />
