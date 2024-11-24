@@ -195,6 +195,7 @@ const ChatContainer: React.FC<ChatContainerProps> = ({
   };
 
   const resetChat = () => {
+    setTopic("empty");
     setMessages([]);
     onClickReset();
     setIsResetModalOpen(false);
