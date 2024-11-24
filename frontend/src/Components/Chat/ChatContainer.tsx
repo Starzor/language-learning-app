@@ -243,7 +243,7 @@ const ChatContainer: React.FC<ChatContainerProps> = ({
         onClickClose={() => setIsResetModalOpen(false)}
       />
       <ConfirmationModal
-        labelText="Opravdu chcete provést test pro určení úrovně jazyku?"
+        labelText="Opravdu chcete provést test pro určení úrovně jazyka?"
         isOpen={isTestModalOpen}
         onClickConfirm={handleLanguageTest}
         onClickClose={() => setIsTestModalOpen(false)}

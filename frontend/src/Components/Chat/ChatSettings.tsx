@@ -45,7 +45,7 @@ const ChatSettings: React.FC<ChatSettingsProps> = ({
               disabled={loading}
               onClick={onTestClick}
             >
-              Test jazyku
+              Test jazyka
             </button>
             <ChatDifficulty
               disabled={loading}

@@ -1,4 +1,4 @@
-import { SetStateAction, useRef } from "react";
+import { KeyboardEvent, SetStateAction, useRef } from "react";
 import "../../styles/Chat.scss";
 import Loading from "../Reusable/Loading";
 
@@ -16,8 +16,10 @@ const ChatInput: React.FC<ChatInputProps> = ({
   handleSendMessage,
 }) => {
   const textareaRef = useRef<HTMLTextAreaElement>(null);
-  const handleEnterPress = (key: any) => {
-    if (key == "Enter") {
+  const handleCtrlEnterPress = (event: KeyboardEvent<HTMLTextAreaElement>) => {
+    if (event.ctrlKey && event.key === "Enter") {
+      setNewMessage(prevMessage => prevMessage + "\n");
+    } else if (event.key == "Enter") {
       handleSendMessage();
     }
   };
@@ -42,7 +44,7 @@ const ChatInput: React.FC<ChatInputProps> = ({
             placeholder="Napište zprávu a stiskněte Enter..."
             value={newMessage}
             onChange={handleInput}
-            onKeyDown={(event) => handleEnterPress(event.key)}
+            onKeyDown={(event) => handleCtrlEnterPress(event)}
           />
           <button onClick={() => handleSendMessage()} className="sendButton">
             <img src={require("../../images/send_icon.png")} />
