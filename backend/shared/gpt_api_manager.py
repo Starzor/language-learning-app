@@ -7,7 +7,7 @@ def generate_response(prompt, system_instructions, response_schema) -> str:
     print(prompt)
     print(system_instructions)
     chat_completion = client.chat.completions.create(
-        model="gpt-4o-mini",
+        model="gpt-4o",
         messages=[
             {
                 "role": "system",
