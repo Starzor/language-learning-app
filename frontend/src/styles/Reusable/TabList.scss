@@ -25,4 +25,8 @@
     color: $color-main-text;
     border-top: 5px solid $color-main-purple;
   }
+
+  .tab:not(:disabled) {
+    cursor: pointer;
+  }
 }

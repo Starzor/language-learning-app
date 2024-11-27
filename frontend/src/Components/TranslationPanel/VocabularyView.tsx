@@ -22,8 +22,7 @@ const VocabularyView: React.FC<VocabularyViewProps> = ({
     <div className="sidePanelInnerContainer">
       <Heading margin="None">Slovník:</Heading>
       <Paragraph margin="None" textSize="Helper" textColor="Secondary">
-        Stisknutím checkboxu vedle slova jej přidáte do Nových slov (slova, co
-        neznáte, systém se bude snažit používat je častěji)
+        Stisknutím checkboxu vedle slova jej přidáte do Nových slov (systém se tyto slova pokusí používat častěji)
       </Paragraph>
       <div className="sidePanelTextContainer">
         {translationMessage.vocabulary?.map((pair, index) => (
