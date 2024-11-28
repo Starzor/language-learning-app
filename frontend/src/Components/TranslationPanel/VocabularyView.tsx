@@ -1,4 +1,4 @@
-import React from "react";
+import React, { SetStateAction } from "react";
 import { Message, WordTrio } from "../../models/Message";
 import "../../styles/SidePanel.scss";
 import CheckboxButton from "../Reusable/CheckboxButton";
@@ -9,12 +9,16 @@ import { NON_LATIN_SCRIPT_LANGUAGES } from "../../constants";
 interface VocabularyViewProps {
   translationMessage: Message;
   handleNewWordToggle: (wordPair: WordTrio) => void;
+  setSaveWords: React.Dispatch<SetStateAction<boolean>>;
+  saveWords: boolean;
   newWords: Array<WordTrio>;
 }
 
 const VocabularyView: React.FC<VocabularyViewProps> = ({
   translationMessage,
   handleNewWordToggle,
+  setSaveWords,
+  saveWords,
   newWords,
 }) => {
   const hello = "hello";
@@ -22,7 +26,8 @@ const VocabularyView: React.FC<VocabularyViewProps> = ({
     <div className="sidePanelInnerContainer">
       <Heading margin="None">Slovník:</Heading>
       <Paragraph margin="None" textSize="Helper" textColor="Secondary">
-        Stisknutím checkboxu vedle slova jej přidáte do Nových slov (systém se tyto slova pokusí používat častěji)
+        Stisknutím checkboxu vedle slova jej přidáte do Nových slov (systém se
+        tyto slova pokusí používat častěji)
       </Paragraph>
       <div className="sidePanelTextContainer">
         {translationMessage.vocabulary?.map((pair, index) => (
@@ -46,7 +51,17 @@ const VocabularyView: React.FC<VocabularyViewProps> = ({
           </div>
         ))}
       </div>
+
       <Heading margin="None">Nová slova:</Heading>
+      <div className="flexRow">
+        <Paragraph margin="None" textSize="Helper" textColor="Secondary">
+          Stisknutím checkboxu zapnete ukládání dat slovníku
+        </Paragraph>
+        <CheckboxButton
+          active={saveWords}
+          onClick={() => setSaveWords((prevValue) => !prevValue)}
+        ></CheckboxButton>
+      </div>
       {newWords.length > 0 && (
         <div className="sidePanelTextContainer">
           {newWords.map((pair, index) => (
@@ -57,16 +72,18 @@ const VocabularyView: React.FC<VocabularyViewProps> = ({
                   .includes(pair.word)}
                 onClick={() => handleNewWordToggle(pair)}
               />
-            <Paragraph margin="None">
-              <span className="highlightedText">
-                {pair.word}{" "}
-                {translationMessage.language &&
-                NON_LATIN_SCRIPT_LANGUAGES.includes(translationMessage.language)
-                  ? `(${pair.latin})`
-                  : ""}
-              </span>{" "}
-              - {pair.translated}
-            </Paragraph>
+              <Paragraph margin="None">
+                <span className="highlightedText">
+                  {pair.word}{" "}
+                  {translationMessage.language &&
+                  NON_LATIN_SCRIPT_LANGUAGES.includes(
+                    translationMessage.language
+                  )
+                    ? `(${pair.latin})`
+                    : ""}
+                </span>{" "}
+                - {pair.translated}
+              </Paragraph>
             </div>
           ))}
         </div>

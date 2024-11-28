@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { SetStateAction, useEffect, useState } from "react";
 import { Message, WordTrio } from "../../models/Message";
 import TranslationView from "./TranslationView";
 import VocabularyView from "./VocabularyView";
@@ -9,6 +9,8 @@ interface TranslationPanelProps {
   translationMessage?: Message;
   translationOrVocab?: string;
   newWords: Array<WordTrio>;
+  saveWords: boolean;
+  setSaveWords: React.Dispatch<SetStateAction<boolean>>;
   handleNewWordToggle: (wordPair: WordTrio) => void;
   onVocabularyTabClick: (message?: Message) => void;
   onTranslationTabClick: (message?: Message) => void;
@@ -18,6 +20,8 @@ const TranslationPanel: React.FC<TranslationPanelProps> = ({
   translationMessage,
   translationOrVocab,
   newWords,
+  saveWords,
+  setSaveWords,
   handleNewWordToggle,
   onVocabularyTabClick,
   onTranslationTabClick,
@@ -52,6 +56,8 @@ const TranslationPanel: React.FC<TranslationPanelProps> = ({
               translationMessage={translationMessage}
               handleNewWordToggle={handleNewWordToggle}
               newWords={newWords}
+              saveWords={saveWords}
+              setSaveWords={setSaveWords}
             />
           )))}
     </div>

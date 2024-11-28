@@ -18,7 +18,7 @@
 
   .sidePanelTextContainer {
     hyphens: auto !important;
-    -webkit-hyphens: auto !important; 
+    -webkit-hyphens: auto !important;
     -moz-hyphens: auto !important;
     -ms-hyphens: auto !important;
     max-height: 250px;
@@ -38,5 +38,14 @@
     display: flex;
     align-items: center;
     justify-content: center;
+  }
+
+  .flexRow {
+    display: flex;
+    flex-direction: row;
+
+    .paragraph {
+      margin-right: 10px;
+    }
   }
 }

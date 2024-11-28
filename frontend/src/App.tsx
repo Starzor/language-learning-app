@@ -26,6 +26,7 @@ const App = () => {
   const [isViewingTutorial, setIsViewingTutorial] = useState<boolean>(false);
   const [messages, setMessages] = useState<Array<Message>>([]);
   const [isLoadingReform, setIsLoadingReform] = useState<boolean>(false);
+  const [saveWords, setSaveWords] = useState<boolean>(false);
 
   const resetMessages = () => {
     setTranslationMessage(undefined);
@@ -106,8 +107,21 @@ const App = () => {
   };
 
   useEffect(() => {
-    Modal.setAppElement(".App");
-  }, []);
+    const retrievedWords: string| null = localStorage.getItem("newWords");
+    const parsedWords: Array<WordTrio> = retrievedWords ? JSON.parse(retrievedWords) : null;
+    if(parsedWords && parsedWords.length > 0) {
+      setNewWords(parsedWords);
+      setSaveWords(true);
+    }
+  }, [])
+
+  useEffect(() => {
+    if (saveWords) {
+      localStorage.setItem("newWords", JSON.stringify(newWords))
+      return;
+    }
+    localStorage.setItem("newWords", JSON.stringify([]))
+  }, [newWords])
 
   return (
     <div className="App">
@@ -161,6 +175,8 @@ const App = () => {
         onVocabularyTabClick={handleVocabularyClick}
         onTranslationTabClick={handleTranslationClick}
         newWords={newWords}
+        saveWords={saveWords}
+        setSaveWords={setSaveWords}
       />
     </div>
   );
