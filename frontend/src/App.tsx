@@ -3,7 +3,6 @@ import ControlPanel from "./Components/ControlPanel/ControlPanel";
 import TranslationPanel from "./Components/TranslationPanel/TranslationPanel";
 import { Message, WordTrio } from "./models/Message";
 import { useEffect, useState } from "react";
-import Modal from "react-modal";
 import "./styles/App.scss";
 import "react-toastify/dist/ReactToastify.css";
 import ConfirmationModal from "./Components/ConfirmationModal/ConfirmationModal";
@@ -62,6 +61,7 @@ const App = () => {
   const handleRejectTutorialPrompt = () => {
     setIsViewingTutorial(false);
     setIsPromptingTutorial(false);
+    localStorage.setItem("viewTutorial", "false");
   };
 
   const handleAcceptTutorialPrompt = () => {
@@ -107,11 +107,15 @@ const App = () => {
   };
 
   useEffect(() => {
-    const retrievedWords: string| null = localStorage.getItem("newWords");
+    const retrievedWords: string | null = localStorage.getItem("newWords");
     const parsedWords: Array<WordTrio> = retrievedWords ? JSON.parse(retrievedWords) : null;
     if(parsedWords && parsedWords.length > 0) {
       setNewWords(parsedWords);
       setSaveWords(true);
+    }
+    const viewTutorial: string | null = localStorage.getItem("viewTutorial");
+    if(viewTutorial == "false") {
+      setIsPromptingTutorial(false);
     }
   }, [])
 
