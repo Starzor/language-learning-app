@@ -33,7 +33,7 @@ const App = () => {
     setTranslationOrVocab("");
     setControlOrReform("");
     setControlMessage(undefined);
-    setNewWords([]);
+    if(!saveWords) setNewWords([]);
   };
 
   const handleTranslationClick = (message?: Message) => {

@@ -163,18 +163,20 @@ const ChatContainer: React.FC<ChatContainerProps> = ({
       answers: answers,
       test: testData,
     };
+    setLoading(true);
     getTestResults(testEvaluationRequest)
       .then((value) => {
         const response = JSON.parse(value);
         setDifficulty(response.CEFR);
-        notifySuccess(`Language level evaluated to ${response.CEFR}`);
+        notifySuccess(`Úroveň jazyka: ${response.CEFR}`);
+        setIsTesting(false);
+        setLoading(false);
+        setCurrentQuestion(0);
+        resetChat();
       })
       .catch((error) => {
         notifyError(`Error getting test results: ${error}`);
       });
-    setIsTesting(false);
-    setCurrentQuestion(0);
-    resetChat();
   };
 
   const waitForUserResponse = () => {
